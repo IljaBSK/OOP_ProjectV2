@@ -1,0 +1,558 @@
+Type,Point,Salary
+President,1,240716
+Vice President,1,184171
+Full Professor,1,140068
+Full Professor,2,148055
+Full Professor,3,156042
+Full Professor,4,164028
+Full Professor,5,172016
+Full Professor,6,177078
+Professor,1,101447
+Professor,2,108276
+Professor,3,115107
+Professor,4,121935
+Professor,5,128770
+Professor,6,135598
+Associate Professor A,1,87548
+Associate Professor A,2,91018
+Associate Professor A,3,94492
+Associate Professor A,4,97988
+Associate Professor A,5,101461
+Associate Professor A,6,104948
+Associate Professor A,7,108430
+Associate Professor A,8,111916
+Associate Professor A,9,115395
+Associate Professor B,1,62069
+Associate Professor B,2,73093
+Associate Professor B,3,77006
+Associate Professor B,4,79703
+Associate Professor B,5,83634
+Associate Professor B,6,87604
+Associate Professor B,7,91563
+Associate Professor B,8,95514
+Associate Professor B,9,99471
+Assistant Professor,1,46955
+Assistant Professor,2,49543
+Assistant Professor,3,51676
+Assistant Professor,4,53644
+Assistant Professor,5,55689
+Assistant Professor,6,57323
+Assistant Professor,7,58990
+Assistant Professor,8,60654
+Assistant Professor,9,62314
+Assistant Professor,10,63965
+Teaching Assistant,1,37010
+Teaching Assistant,2,40061
+Senior Administrative Officer III,1,106800
+Senior Administrative Officer III,2,113990
+Senior Administrative Officer III,3,121181
+Senior Administrative Officer III,4,128369
+Senior Administrative Officer III,5,135565
+Senior Administrative Officer III,6,142758
+Senior Administrative Officer II,1,94941
+Senior Administrative Officer II,2,98703
+Senior Administrative Officer II,3,102487
+Senior Administrative Officer II,4,106270
+Senior Administrative Officer II,5,110030
+Senior Administrative Officer II,6,113810
+Senior Administrative Officer II,7,117589
+Senior Administrative Officer II,8,121368
+Senior Administrative Officer II,9,125140
+Senior Administrative Officer I,1,67132
+Senior Administrative Officer I,2,69712
+Senior Administrative Officer I,3,72480
+Senior Administrative Officer I,4,75725
+Senior Administrative Officer I,5,79088
+Senior Administrative Officer I,6,82103
+Senior Administrative Officer I,7,86389
+Senior Administrative Officer I,8,90697
+Senior Administrative Officer I,9,95004
+Senior Administrative Officer I,10,99296
+Senior Administrative Officer I,11,103583
+Senior Administrative Officer I,12,107875
+Senior Executive Administrator,1,58657
+Senior Executive Administrator,2,60174
+Senior Executive Administrator,3,61704
+Senior Executive Administrator,4,63240
+Senior Executive Administrator,5,64776
+Senior Executive Administrator,6,66317
+Senior Executive Administrator,7,68510
+Senior Executive Administrator,8,72779
+Senior Executive Administrator,9,77291
+Senior Executive Administrator,10,79691
+Senior Executive Administrator,11,83397
+Executive Administrator,1,44752
+Executive Administrator,2,47050
+Executive Administrator,3,49360
+Executive Administrator,4,51268
+Executive Administrator,5,53218
+Executive Administrator,6,55306
+Executive Administrator,7,57462
+Executive Administrator,8,59557
+Executive Administrator,9,61263
+Executive Administrator,10,62840
+Executive Administrator,11,64409
+Senior Administrator,1,39893
+Senior Administrator,2,40785
+Senior Administrator,3,42037
+Senior Administrator,4,43282
+Senior Administrator,5,44546
+Senior Administrator,6,45799
+Senior Administrator,7,47069
+Senior Administrator,8,48336
+Senior Administrator,9,49613
+Senior Administrator,10,50660
+Senior Administrator,11,51944
+Senior Administrator,12,53265
+Administrator,1,26572
+Administrator,2,27495
+Administrator,3,28629
+Administrator,4,29397
+Administrator,5,30060
+Administrator,6,30830
+Administrator,7,31616
+Administrator,8,32491
+Administrator,9,33224
+Administrator,10,34378
+Administrator,11,35541
+Administrator,12,36715
+Administrator,13,37403
+Administrator,14,38396
+Administrator,15,39212
+Administrator,16,39926
+Administrator,17,40912
+Administrator,18,41892
+EPS Portfolio Manager,1,86389
+EPS Portfolio Manager,2,90698
+EPS Portfolio Manager,3,95005
+EPS Portfolio Manager,4,99296
+EPS Portfolio Manager,5,103583
+EPS Portfolio Manager,6,107874
+EPS Category Manager,1,67131
+EPS Category Manager,2,69712
+EPS Category Manager,3,72480
+EPS Category Manager,4,75725
+EPS Category Manager,5,79087
+EPS Category Manager,6,82103
+EPS Category Manager,7,86389
+EPS Category Manager,8,90698
+EPS Category Specialist Higher,1,58656
+EPS Category Specialist Higher,2,60174
+EPS Category Specialist Higher,3,61704
+EPS Category Specialist Higher,4,63240
+EPS Category Specialist Higher,5,64775
+EPS Category Specialist Higher,6,66318
+EPS Category Specialist Higher,7,68510
+EPS Category Specialist Higher,8,72779
+EPS Category Specialist,1,44752
+EPS Category Specialist,2,47047
+EPS Category Specialist,3,49360
+EPS Category Specialist,4,51269
+EPS Category Specialist,5,53219
+EPS Category Specialist,6,55306
+EPS Category Specialist,7,57462
+EPS Category Specialist,8,59558
+Library Sub Librarian,1,64830
+Library Sub Librarian,2,68413
+Library Sub Librarian,3,71505
+Library Sub Librarian,4,74734
+Library Sub Librarian,5,77824
+Library Sub Librarian,6,80106
+Library Sub Librarian,7,83065
+Library Sub Librarian,8,86613
+Library Sub Librarian,9,90308
+Library Sub Librarian,10,93715
+Library Sub Librarian,11,97127
+Library Sub Librarian,12,100531
+Library Sub Librarian,13,102234
+Library Sub Librarian,14,104052
+Library Sub Librarian,15,106850
+Assistant Librarian 2,1,58657
+Assistant Librarian 2,2,60174
+Assistant Librarian 2,3,61704
+Assistant Librarian 2,4,63240
+Assistant Librarian 2,5,64776
+Assistant Librarian 2,6,66317
+Assistant Librarian 2,7,68510
+Assistant Librarian 2,8,72779
+Assistant Librarian 2,9,77291
+Assistant Librarian 2,10,79691
+Assistant Librarian 2,11,83397
+Assistant Librarian 1,1,44751
+Assistant Librarian 1,2,47050
+Assistant Librarian 1,3,49364
+Assistant Librarian 1,4,51269
+Assistant Librarian 1,5,53605
+Assistant Librarian 1,6,55126
+Assistant Librarian 1,7,56632
+Assistant Librarian 1,8,57745
+Assistant Librarian 1,9,59104
+Assistant Librarian 1,10,60468
+Assistant Librarian 1,11,61415
+Assistant Librarian 1,12,62371
+Assistant Librarian 1,13,64409
+Assistant Librarian 1,14,66805
+Assistant Librarian 1,15,69293
+Senior Library Assistant,1,39337
+Senior Library Assistant,2,39808
+Senior Library Assistant,3,40882
+Senior Library Assistant,4,41881
+Senior Library Assistant,5,42439
+Senior Library Assistant,6,44325
+Senior Library Assistant,7,45156
+Senior Library Assistant,8,46242
+Senior Library Assistant,9,47587
+Senior Library Assistant,10,48932
+Senior Library Assistant,11,50539
+Senior Library Assistant,12,51945
+Senior Library Assistant,13,53657
+Library Assistant,1,33703
+Library Assistant,2,35429
+Library Assistant,3,36934
+Library Assistant,4,37881
+Library Assistant,5,39133
+Library Assistant,6,40055
+Library Assistant,7,41318
+Library Assistant,8,43868
+Library Assistant,9,45138
+Library Assistant,10,45798
+Library Attendant,1,33403
+Library Attendant,2,34054
+Library Attendant,3,36605
+Library Attendant,4,36966
+Library Attendant,5,36989
+Library Attendant,6,37352
+Library Attendant,7,37714
+Library Attendant,8,38072
+Library Attendant,9,38428
+Library Attendant,10,38443
+Library Attendant,11,38970
+Library Attendant,12,39512
+Library Attendant,13,40039
+Library Attendant,14,40230
+Information Technology Analyst Programmer 3,1,67132
+Information Technology Analyst Programmer 3,2,79088
+Information Technology Analyst Programmer 3,3,82103
+Information Technology Analyst Programmer 3,4,86389
+Information Technology Analyst Programmer 3,5,90697
+Information Technology Analyst Programmer 3,6,95004
+Information Technology Analyst Programmer 3,7,99296
+Information Technology Analyst Programmer 3,8,103583
+Information Technology Analyst Programmer 3,9,107875
+Information Technology Analyst Programmer 2,1,53677
+Information Technology Analyst Programmer 2,2,55287
+Information Technology Analyst Programmer 2,3,56903
+Information Technology Analyst Programmer 2,4,58501
+Information Technology Analyst Programmer 2,5,60116
+Information Technology Analyst Programmer 2,6,61717
+Information Technology Analyst Programmer 2,7,64375
+Information Technology Analyst Programmer 2,8,66805
+Information Technology Analyst Programmer 2,9,69293
+Information Technology Analyst Programmer 1,1,42012
+Information Technology Analyst Programmer 1,2,44629
+Information Technology Analyst Programmer 1,3,46172
+Information Technology Analyst Programmer 1,4,47611
+Information Technology Analyst Programmer 1,5,49079
+Information Technology Analyst Programmer 1,6,50543
+Information Technology Analyst Programmer 1,7,52039
+Information Technology Analyst Programmer 1,8,53562
+Information Technology Analyst Programmer 1,9,56116
+Information Technology Analyst Programmer 1,10,58164
+Senior Computer Operator,1,42214
+Senior Computer Operator,2,43823
+Senior Computer Operator,3,45475
+Senior Computer Operator,4,46768
+Senior Computer Operator,5,48067
+Senior Computer Operator,6,49369
+Senior Computer Operator,7,50686
+Senior Computer Operator,8,51968
+Senior Computer Operator,9,53657
+Senior Computer Operator,10,55570
+Computer Operator,1,33403
+Computer Operator,2,35114
+Computer Operator,3,36604
+Computer Operator,4,37881
+Computer Operator,5,39133
+Computer Operator,6,40054
+Computer Operator,7,41318
+Computer Operator,8,42586
+Computer Operator,9,43868
+Computer Operator,10,45138
+Print Operator 2,1,31238
+Print Operator 2,2,32320
+Print Operator 2,3,33844
+Print Operator 2,4,35403
+Print Operator 2,5,36946
+Print Operator 2,6,38331
+Print Operator 2,7,39365
+Print Operator 2,8,40749
+Print Operator 2,9,42093
+Print Operator 2,10,43223
+Print Operator 1,1,29021
+Print Operator 1,2,30996
+Print Operator 1,3,31738
+Print Operator 1,4,32768
+Print Operator 1,5,34232
+Print Operator 1,6,35719
+Print Operator 1,7,37208
+Print Operator 1,8,38553
+Computer Lab Attendant,1,33403
+Computer Lab Attendant,2,34543
+Computer Lab Attendant,3,36605
+Computer Lab Attendant,4,36967
+Computer Lab Attendant,5,36987
+Computer Lab Attendant,6,37353
+Computer Lab Attendant,7,37714
+Computer Lab Attendant,8,38072
+Computer Lab Attendant,9,38428
+Temporary Computer Assistant,1,33403
+Temporary Computer Assistant,2,34543
+Temporary Computer Assistant,3,36605
+Temporary Computer Assistant,4,36967
+Temporary Computer Assistant,5,36987
+Temporary Computer Assistant,6,37353
+Temporary Computer Assistant,7,37714
+Temporary Computer Assistant,8,38072
+Temporary Computer Assistant,9,38428
+Chief Technical Officer,1,64838
+Chief Technical Officer,2,67536
+Chief Technical Officer,3,70205
+Chief Technical Officer,4,72948
+Chief Technical Officer,5,75821
+Chief Technical Officer,6,78621
+Technical Officer,1,39828
+Technical Officer,2,41606
+Technical Officer,3,43745
+Technical Officer,4,45033
+Technical Officer,5,46408
+Technical Officer,6,49325
+Technical Officer,7,51251
+Technical Officer,8,53228
+Technical Officer,9,55376
+Technical Officer,10,57459
+Senior Technical Officer,11,60654
+Senior Technical Officer,12,62799
+Senior Technical Officer,13,65107
+Senior Technical Officer,14,67470
+Senior Technical Officer,15,69827
+Senior Technical Officer,16,71290
+Senior Lab Attendant,1,38443
+Senior Lab Attendant,2,38970
+Senior Lab Attendant,3,39512
+Senior Lab Attendant,4,40040
+Senior Lab Attendant,5,40229
+Laboratory Attendant,1,33403
+Laboratory Attendant,2,34543
+Laboratory Attendant,3,36604
+Laboratory Attendant,4,36966
+Laboratory Attendant,5,36989
+Laboratory Attendant,6,37352
+Laboratory Attendant,7,37714
+Laboratory Attendant,8,38072
+Laboratory Attendant,9,38429
+Service Staff,1,41472
+Service Staff,2,41678
+Service Staff,3,41873
+Service Staff,4,41984
+Service Staff,5,42103
+Service Staff,6,42213
+Service Staff,7,42325
+Service Staff,8,42445
+Service Staff,9,42563
+Service Staff,10,42689
+Service Staff,11,42813
+Service Staff,12,42936
+Service Staff,13,43069
+Porter/Attendant,1,36456
+Porter/Attendant,2,37227
+Porter/Attendant,3,39454
+Porter/Attendant,4,39644
+Porter/Attendant,5,39821
+Porter/Attendant,6,39919
+Porter/Attendant,7,40032
+Porter/Attendant,8,40032
+Porter/Attendant,9,40032
+Porter/Attendant,10,40032
+Porter/Attendant,11,40099
+Porter/Attendant,12,40214
+Porter/Attendant,13,40327
+Porter/Attendant,14,40440
+Porter/Attendant,15,40552
+Grounds Supervisor,1,40712
+Grounds Supervisor,2,40895
+Grounds Supervisor,3,41086
+Grounds Supervisor,4,41188
+Grounds Supervisor,5,41295
+Grounds Supervisor,6,41402
+Grounds Supervisor,7,41498
+Grounds Supervisor,8,41609
+Grounds Supervisor,9,41720
+Grounds Supervisor,10,41828
+Grounds Supervisor,11,41944
+Grounds Supervisor,12,42060
+Grounds Supervisor,13,42165
+Grounds Workperson,1,35063
+Grounds Workperson,2,35795
+Grounds Workperson,3,38451
+Grounds Workperson,4,38637
+Grounds Workperson,5,38810
+Grounds Workperson,6,38906
+Grounds Workperson,7,39009
+Grounds Workperson,8,39104
+Grounds Workperson,9,39206
+Grounds Workperson,10,39304
+Grounds Workperson,11,39415
+Grounds Workperson,12,39522
+Grounds Workperson,13,39632
+Grounds Workperson,14,39744
+Grounds Workperson,15,39861
+Senior Aide,1,40827
+Senior Aide,2,41026
+Senior Aide,3,41209
+Senior Aide,4,41317
+Senior Aide,5,41420
+Senior Aide,6,41534
+Senior Aide,7,41635
+Senior Aide,8,41745
+Senior Aide,9,41859
+Senior Aide,10,41975
+Senior Aide,11,42089
+Senior Aide,12,42206
+Senior Aide,13,42318
+Machine Attendant,1,35829
+Machine Attendant,2,36585
+Machine Attendant,3,39300
+Machine Attendant,4,39493
+Machine Attendant,5,39671
+Machine Attendant,6,39864
+Machine Attendant,7,39874
+Machine Attendant,8,39979
+Service Staff,1,35974
+Service Staff,2,36736
+Service Staff,3,39461
+Service Staff,4,39657
+Service Staff,5,39836
+Service Staff,6,39933
+Service Staff,7,40040
+Service Staff,8,40040
+Service Staff,9,40040
+Service Staff,10,40040
+Service Staff,11,40113
+Service Staff,12,40226
+Service Staff,13,40336
+Service Staff,14,40451
+Service Staff,15,40566
+Service Staff Shift,1,37129
+Service Staff Shift,2,37898
+Service Staff Shift,3,40388
+Service Staff Shift,4,40578
+Service Staff Shift,5,40761
+Service Staff Shift,6,40861
+Service Staff Shift,7,40973
+Service Staff Shift,8,41074
+Service Staff Shift,9,41179
+Service Staff Shift,10,41284
+Service Staff Shift,11,41392
+Service Staff Shift,12,41506
+Service Staff Shift,13,41613
+Service Staff Shift,14,41733
+Service Staff Shift,15,41846
+Plant Maintenance Aide,1,40053
+Plant Maintenance Aide,2,43995
+Grounds Foreperson,1,49333
+Grounds Foreperson,2,50369
+Grounds Foreperson,3,51204
+Grounds Foreperson,4,52137
+Grounds Foreperson,5,53117
+Grounds Foreperson,6,54078
+Teaching Fellow,1,62069
+Teaching Fellow,2,73092
+Teaching Fellow,3,77007
+Teaching Fellow,4,79703
+Teaching Fellow,5,83634
+Teaching Fellow,6,87605
+Teaching Fellow,7,91562
+Teaching Fellow,8,95514
+Teaching Fellow,9,99471
+University Teacher,1,46955
+University Teacher,2,49543
+University Teacher,3,51676
+University Teacher,4,53644
+University Teacher,5,55689
+University Teacher,6,57323
+University Teacher,7,58990
+University Teacher,8,60654
+University Teacher,9,62314
+University Teacher,10,63965
+Associate Teacher,1,37008
+Associate Teacher,2,39126
+Associate Teacher,3,40060
+Associate Teacher,4,41945
+Associate Teacher,5,43130
+Associate Teacher,6,44464
+Associate Teacher,7,45716
+Associate Teacher,8,46978
+Associate Teacher,9,47948
+Associate Teacher,10,50419
+Clinical Therapies Regional Supervisors,1,62038
+Regional Placement Facilitator,2,63360
+Regional Placement Facilitator,3,64724
+Regional Placement Facilitator,4,66076
+Regional Placement Facilitator,5,67430
+Regional Placement Facilitator,6,68853
+Regional Placement Facilitator,7,70352
+Regional Placement Facilitator,8,71848
+Regional Placement Facilitator,9,73048
+Clinical Tutor,1,66452
+Clinical Tutor,2,69009
+Clinical Tutor,3,71509
+Clinical Tutor,4,73344
+Clinical Tutor,5,75794
+Clinical Tutor,6,78252
+Clinical Fellow,1,74499
+Clinical Fellow,2,76258
+Clinical Fellow,3,78804
+Clinical Fellow,4,81095
+Clinical Fellow,5,84824
+Clinical Fellow,6,88562
+Clinical Fellow,7,92294
+Assistant Senior Instructor,1,31099
+Lead Instructor,1,29370
+Multi Activity Instructor Grade 1,1,25334
+Multi Activity Instructor Grade 1,2,27639
+Multi Activity Instructor Grade 2,1,25910
+Assistant Instructor,1,23363
+Assistant Instructor,2,25576
+Co-Op Students,1,25306
+Co-Op Students,2,25350
+Research Assistant ,1,41918
+Research Assistant ,2,42994
+Research Assistant ,3,43545
+Research Assistant ,4,44673
+Research Assistant ,5,45831
+Research Assistant ,6,47025
+Research Assistant ,7,48258
+Research Assistant ,8,49075
+Research Assistant ,9,50333
+Research Assistant ,10,51395
+Research Assistant ,11,52260
+Research Assistant ,12,53614
+Research Assistant ,13,55008
+Post-Doctoral Researcher PD1 ,1,58817
+Post-Doctoral Researcher PD1 ,2,59596
+Post-Doctoral Researcher PD1 ,3,62181
+Post-Doctoral Researcher PD1 ,4,63833
+Post-Doctoral Researcher PD1 ,5,65533
+Post-Doctoral Researcher PD1 ,6,67297
+Post-Doctoral Researcher  ,1,69136
+Post-Doctoral Researcher  ,2,71080
+Post-Doctoral Researcher  ,3,73103
+Post-Doctoral Researcher  ,4,75191
+Research Fellow ,1,83881
+Research Fellow ,2,86314
+Research Fellow ,3,88820
+Research Fellow ,4,91401
+Senior Research Fellow ,1,102034
+Senior Research Fellow ,2,105012
+Senior Research Fellow ,3,106426
+Senior Research Fellow ,4,109500
