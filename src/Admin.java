@@ -45,4 +45,6 @@ public class Admin extends User {
         Admin admin = new Admin("adminUsername", "adminPassword", "admin");
         admin.addEmployee();
     }
+
+    //branch test
 }
