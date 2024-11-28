@@ -24,7 +24,7 @@ public class LoginSystem {
             if (validUser.getPassword().equals(passwordIn)) {
                 if (command.equalsIgnoreCase("A") && validUser instanceof Admin) {
                     System.out.println("Login successful as Admin.");
-                    this.adminLoggedIn();
+                    this.adminLoggedIn((Admin) validUser);
                 } else if (command.equalsIgnoreCase("E") && validUser instanceof Employee) {
                     System.out.println("Login successful as Employee.");
                 } else if (command.equalsIgnoreCase("H") && validUser instanceof HR) {
@@ -45,7 +45,7 @@ public class LoginSystem {
     }
 
 
-    public void adminLoggedIn(){
+    public void adminLoggedIn(Admin adminUser){
 
         System.out.println("-------------------------------------------");
         System.out.println("        Welcome to the UL Admin Menu       ");
@@ -58,6 +58,7 @@ public class LoginSystem {
         String command = input.nextLine().trim();
 
         if(command.equalsIgnoreCase("C")){
+            adminUser.createEmployee("FullTimeSalaryScales.csv");
         }else if(command.equalsIgnoreCase("L")){
 
         }
