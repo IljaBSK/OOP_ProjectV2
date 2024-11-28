@@ -1,3 +1,2 @@
-username,password,job
-bri,12345,Admin
-ilja,sigma,Admin
+username,password,jobType
+iljaBSK,Skywalker,Admin
