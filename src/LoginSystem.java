@@ -58,7 +58,7 @@ public class LoginSystem {
         String command = input.nextLine().trim();
 
         if(command.equalsIgnoreCase("C")){
-            adminUser.createEmployee("FullTimeSalaryScales.csv" );
+            adminUser.createEmployee("FulltimeSalaryScales.csv", "ValidLogins.csv", "EmployeeInfo.csv");
         }else if(command.equalsIgnoreCase("L")){
 
         }
