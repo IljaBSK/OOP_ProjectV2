@@ -8,6 +8,23 @@ import java.util.HashMap;
 public class CSVManager {
     private static final String filename = "ValidLogins.csv";
 
+    public static boolean isValidJobTitle(String jobTitle) {
+        String filename = "FulltimeSalaryScales.csv";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line = reader.readLine(); // Skip the header
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length >= 1 && details[0].trim().equalsIgnoreCase(jobTitle)) {
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filename);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading the file: " + filename, e);
+        }
+        return false;
+    }
 
     public static HashMap<String, User> readValidUsers() {
         HashMap<String, User> users = new HashMap<>();
@@ -145,5 +162,6 @@ public class CSVManager {
             System.out.println("Employee ID not found. Update failed.");
         }
     }
+
 
 }
