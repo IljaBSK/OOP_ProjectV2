@@ -95,15 +95,15 @@ public class CSVManager {
                 if (details[0].trim().equals(empID)) {
                     // Assuming the CSV structure is: ID,Name,DoB,PPSNo,Username,Password,JobType,ScalePoint
                     String id = details[0].trim();
-                    String name = details[1].trim();
-                    String dob = details[2].trim();
-                    int ppsNo = Integer.parseInt(details[3].trim());
-                    String username = details[4].trim();
+                    String username = details[1].trim();
+                    String name = details[2].trim();
+                    String dob = details[3].trim();
+                    String ppsNo = details[4].trim();
                     String password = details[5].trim();
                     String jobType = details[6].trim();
                     int scalePoint = Integer.parseInt(details[7].trim());
 
-                    return new Employee(username, password, jobType, name, dob, ppsNo, Integer.parseInt(id), jobType, scalePoint);
+                    return new Employee(username, jobType, name, dob,password, ppsNo, Integer.parseInt(id), jobType, scalePoint);
                 }
             }
         } catch (IOException e) {

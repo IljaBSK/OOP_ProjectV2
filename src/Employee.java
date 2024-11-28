@@ -2,7 +2,7 @@ public class Employee extends User {
 
     private String name;
     private String doB;
-    private int ppsNo;
+    private String ppsNo;
     private int id;
     private String jobTitle;
     private int scalePoint;
@@ -11,7 +11,7 @@ public class Employee extends User {
     private String pendingPromotion;
     private boolean hasPendingPromotion;
 
-    public Employee(String username, String password, String jobType, String name, String doB, int pps, int id, String jobTitle, int scalePoint) {
+    public Employee(String username, String password, String jobType, String name, String doB,String pps, int id, String jobTitle, int scalePoint) {
         super(username, password, jobType);
         this.name = name;
         this.doB = doB;
