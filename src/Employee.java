@@ -23,6 +23,10 @@ public class Employee extends User {
         this.hasPendingPromotion = false;
     }
 
+    public Employee(String userName, String userPassword, String userJob) {
+        super(userName, userPassword, userJob);
+    }
+
     public String getName() {
         return name;
     }

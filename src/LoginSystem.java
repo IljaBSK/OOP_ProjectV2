@@ -22,13 +22,14 @@ public class LoginSystem {
         if (users.containsKey(usernameIn)) {
             User validUser = users.get(usernameIn); // retrieves the user from the hashmap
             if (validUser.getPassword().equals(passwordIn)) {
-                if (command.equalsIgnoreCase("A") && validUser.getJobType().equalsIgnoreCase("Admin")) {
+                if (command.equalsIgnoreCase("A") && validUser instanceof Admin) {
                     System.out.println("Login successful as Admin.");
                     this.adminLoggedIn();
-                } else if (command.equalsIgnoreCase("E") && validUser.getJobType().equalsIgnoreCase("Employee")) {
+                } else if (command.equalsIgnoreCase("E") && validUser instanceof Employee) {
                     System.out.println("Login successful as Employee.");
-                } else if (command.equalsIgnoreCase("H") && validUser.getJobType().equalsIgnoreCase("HR")) {
+                } else if (command.equalsIgnoreCase("H") && validUser instanceof HR) {
                     System.out.println("Login successful as HR.");
+                    this.hrLoggedIn((HR) validUser);
                 } else {
                     System.out.println("Incorrect User Type. Please Try Again!");
                 }
@@ -57,13 +58,12 @@ public class LoginSystem {
         String command = input.nextLine().trim();
 
         if(command.equalsIgnoreCase("C")){
-
         }else if(command.equalsIgnoreCase("L")){
 
         }
     }
 
-    public void hrLoggedIn(){
+    public void hrLoggedIn(HR hrUser){
 
         System.out.println("-------------------------------------------");
         System.out.println("        Welcome to the UL HR Menu       ");
@@ -74,6 +74,12 @@ public class LoginSystem {
 
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
+
+        if(command.equalsIgnoreCase("P")){
+            hrUser.promoteEmployee();
+        }else if(command.equalsIgnoreCase("L")){
+
+        }
     }
 
     public void employeeLoggedIn(){

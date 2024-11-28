@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 
 public class CSVManager {
-    private static final String filename = "JavaModule/src/ValidLogins.csv";
+    private static final String filename = "ValidLogins.csv";
 
 
     public static HashMap<String, User> readValidUsers() {
@@ -24,7 +24,17 @@ public class CSVManager {
                     String userPassword = details[1].trim();
                     String userJob = details[2].trim();
 
-                    User newUser = new User(userName, userPassword, userJob);
+                    User newUser;
+                    if (userJob.equalsIgnoreCase("HR")) {
+                        newUser = new HR(userName, userPassword, userJob);
+                    } else if (userJob.equalsIgnoreCase("Admin")) {
+                        newUser = new Admin(userName, userPassword, userJob);
+                    } else if (userJob.equalsIgnoreCase("Employee")) {
+                        newUser = new Employee(userName, userPassword, userJob);
+                    } else {
+                        continue;
+                    }
+
                     users.put(userName, newUser);
                 }else{
                     System.out.println("Too many details input");
@@ -44,7 +54,7 @@ public class CSVManager {
         List<String> lines = new ArrayList<>();
         boolean updated = false;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("JavaModule/src/EmployeesExample.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
@@ -62,7 +72,7 @@ public class CSVManager {
         }
 
         if (updated) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("JavaModule/src/EmployeesExample.csv"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
                 for (String line : lines) {
                     writer.write(line);
                     writer.newLine();
@@ -77,7 +87,7 @@ public class CSVManager {
     }
 
     public static Employee getEmployeeByID(String empID) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("JavaModule/src/EmployeesExample.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
             reader.readLine(); // Skip the header
             while ((line = reader.readLine()) != null) {
@@ -106,7 +116,7 @@ public class CSVManager {
         List<String> lines = new ArrayList<>();
         boolean updated = false;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("JavaModule/src/EmployeesExample.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
@@ -123,7 +133,7 @@ public class CSVManager {
         }
 
         if (updated) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeesExample.csv"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeesInfo.csv"))) {
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();

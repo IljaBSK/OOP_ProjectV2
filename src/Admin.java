@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Admin {
+public class Admin extends User {
     // Array to store login data: username, password, and job type
     private String[] loginData;
     // Array to store employee data: ID, username, name, DOB, PPS number, job title, and scale point
     private String[] employeeData;
+
+    public Admin(String username, String password, String jobType) {
+        super(username, password, jobType);
+    }
 
     /**
      * This method collects all necessary data for login and employee details.
@@ -17,7 +21,7 @@ public class Admin {
      *
      * @param salaryScalesFilePath Path to the CSV file containing job titles and their scale points.
      */
-    public void collectData(String salaryScalesFilePath) {
+    public void createEmployee(String salaryScalesFilePath) {
         Scanner scanner = new Scanner(System.in); // Create a scanner to take input from the user
 
         // Collect Login Information
