@@ -1,3 +1,3 @@
-﻿id,username,name,dob,ppsNo,password,jobTitle,ScalePoint
-0001,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,was,Senior Administrative Officer III,6
-24457,joe,Joe Biden,01-01-1950,12345678,wa1,Senior Research Fellow,1
+﻿id,username,name,dob,ppsNo,password,jobTitle,ScalePoint,PendingPromotionFlag
+23521,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,was,Senior Administrative Officer III,3,0
+24457,joe,Joe Biden,01-01-1950,12345678,wa1,Senior Administrative Officer III,7,0

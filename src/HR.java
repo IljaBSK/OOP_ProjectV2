@@ -12,7 +12,7 @@ public class HR extends User {
         System.out.println("Enter the Employee ID to promote:");
         String empID = input.nextLine().trim();
 
-        //Fetch employee data from CSV
+        // Fetch employee data from CSV
         Employee employee = CSVManager.getEmployeeByID(empID);
 
         if (employee != null) {
@@ -21,31 +21,21 @@ public class HR extends User {
             System.out.println("Job Title: " + employee.getJobTitle());
             System.out.println("Scale Point: " + employee.getScalePoint());
 
-            String newJobTitle;
-            do {
-                System.out.println("Enter new job title:");
-                newJobTitle = input.nextLine().trim();
+            System.out.println("Enter new job title:");
+            String newJobTitle = input.nextLine().trim();
 
-                if (!CSVManager.isValidJobTitle(newJobTitle)) {
-                    System.out.println("Invalid job title. Please try again.");
-                } else {
-                    break;
-                }
-            } while (true);
-
-            //Update scale point
             System.out.println("Enter new scale point:");
             int newScalePoint = input.nextInt();
             input.nextLine(); // Consume the leftover newline
 
-            //Update the employee details
+            // Update the job title and scale point
             employee.setJobTitle(newJobTitle);
             employee.setScalePoint(newScalePoint);
 
-            //Write updated details back to CSV
-            CSVManager.updateEmployee(employee);
+            // Save updated role and set flag to 1 in CSV
+            CSVManager.updateEmployeeDetails(employee, 1);
 
-            System.out.println("Employee promoted successfully.");
+            System.out.println("Employee's role updated successfully.");
         } else {
             System.out.println("Employee not found with ID: " + empID);
         }

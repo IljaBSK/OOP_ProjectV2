@@ -27,6 +27,7 @@ public class LoginSystem {
                     this.adminLoggedIn((Admin) validUser);
                 } else if (command.equalsIgnoreCase("E") && validUser instanceof Employee) {
                     System.out.println("Login successful as Employee.");
+                    this.employeeLoggedIn((Employee) validUser);
                 } else if (command.equalsIgnoreCase("H") && validUser instanceof HR) {
                     System.out.println("Login successful as HR.");
                     this.hrLoggedIn((HR) validUser);
@@ -83,16 +84,33 @@ public class LoginSystem {
         }
     }
 
-    public void employeeLoggedIn(){
+    public void employeeLoggedIn(Employee employee) {
+        System.out.println("-------------------------------------------");
+        System.out.println("        Welcome to the Employee Menu       ");
+        System.out.println("-------------------------------------------");
 
-        System.out.println("-------------------------------------------");
-        System.out.println("        Welcome to the UL Employee Menu       ");
-        System.out.println("-------------------------------------------");
-        System.out.println("Please select what you would like to do:");
-        System.out.println("V)iew my Payslips");
-        System.out.println("L)og Out");
+        // Fetch updated employee details from EmployeeInfo.csv
+        Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
+
+        if (updatedEmployee != null && updatedEmployee.hasPendingPromotionFlag()) {
+            updatedEmployee.confirmPromotion(); // Handle promotion acknowledgment
+            // Update the flag in the CSV after acknowledgment
+            CSVManager.updatePromotionFlag(updatedEmployee.getId(), 0);
+        }
+
+        System.out.println("Please select an option:");
+        System.out.println("V) View Payslips");
+        System.out.println("L) Log Out");
 
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
+
+        if (command.equalsIgnoreCase("V")) {
+            // Payslip logic
+        }
     }
+
+
+
+
 }

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Employee extends User {
 
     private String name;
@@ -10,8 +12,9 @@ public class Employee extends User {
     //Fields to track the promotion status
     private String pendingPromotion;
     private boolean hasPendingPromotion;
+    private int pendingPromotionFlag;
 
-    public Employee(String username, String password, String jobType, String name, String doB,String pps, int id, String jobTitle, int scalePoint) {
+    public Employee(String username, String password, String name, String jobType, String doB,String pps, int id, String jobTitle, int scalePoint) {
         super(username, password, jobType);
         this.name = name;
         this.doB = doB;
@@ -45,6 +48,9 @@ public class Employee extends User {
         this.jobTitle=jobTitle;
     }
 
+    public String getPendingPromotion() {return pendingPromotion;}
+
+
     public void setScalePoint(int scalePoint){
         this.scalePoint=scalePoint;
     }
@@ -54,25 +60,30 @@ public class Employee extends User {
         this.hasPendingPromotion = true;
     }
 
-    //Method to get the pending promotion title
-    public String getPendingPromotion() {
-        return pendingPromotion;
-    }
-
-    //Check if there is a pending promotion
-    public boolean hasPendingPromotion() {
+    public boolean hasPendingPromotion(){
         return hasPendingPromotion;
     }
+    public boolean hasPendingPromotionFlag() {
+        return this.pendingPromotionFlag == 1;
+    }
 
-    //Method for the employee to confirm they have seen the promotion
-    public void confirmPromotionSeen() {
-        if (hasPendingPromotion) {
-            System.out.println(name + " has seen the promotion to " + pendingPromotion + ".");
-            // Clear the pending promotion after confirmation
-            this.pendingPromotion = null;
-            this.hasPendingPromotion = false;
+    public void setPendingPromotionFlag(int flag) {
+        this.pendingPromotionFlag = flag;
+    }
+
+    public void confirmPromotion() {
+        if (hasPendingPromotionFlag()) {
+            System.out.println("Your role has been updated to: " + getJobTitle());
+            System.out.println("Press Enter to acknowledge your promotion.");
+            Scanner input = new Scanner(System.in);
+            input.nextLine(); // Wait for acknowledgment
+
+            // Reset the promotion flag in the CSV
+            CSVManager.updatePromotionFlag(this.getId(), 0);
+
+            System.out.println("Promotion acknowledged. Thank you!");
         } else {
-            System.out.println("No pending promotion for " + name + ".");
+            System.out.println("No promotion to confirm.");
         }
     }
 }
