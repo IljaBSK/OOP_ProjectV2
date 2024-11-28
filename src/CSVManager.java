@@ -68,7 +68,7 @@ public class CSVManager {
                 lines.add(String.join(",", details));
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading from file: EmployeesExample.csv", e);
+            throw new RuntimeException("Error reading from file: EmployeeInfo.csv", e);
         }
 
         if (updated) {
@@ -79,7 +79,7 @@ public class CSVManager {
                 }
                 System.out.println("Employee details updated successfully.");
             } catch (IOException e) {
-                throw new RuntimeException("Error writing to file: EmployeesExample.csv", e);
+                throw new RuntimeException("Error writing to file: EmployeeInfo.csv", e);
             }
         } else {
             System.out.println("Employee not found.");
@@ -107,7 +107,7 @@ public class CSVManager {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: EmployeesExample.csv", e);
+            throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
         }
         return null;
     }
@@ -129,17 +129,17 @@ public class CSVManager {
                 lines.add(String.join(",", details));
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: EmployeesExample.csv", e);
+            throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
         }
 
         if (updated) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeesInfo.csv"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();
                 }
             } catch (IOException e) {
-                throw new RuntimeException("Error writing to the file: EmployeesExample.csv", e);
+                throw new RuntimeException("Error writing to the file: EmployeeInfo.csv", e);
             }
         } else {
             System.out.println("Employee ID not found. Update failed.");
