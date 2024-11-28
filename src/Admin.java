@@ -23,7 +23,7 @@ public class Admin extends User {
      */
     public void createEmployee(String salaryScalesFilePath) {
         Scanner scanner = new Scanner(System.in); // Create a scanner to take input from the user
-
+        String flag = "0";
         // Collect Login Information
         System.out.println("Enter Username: ");
         String username = scanner.nextLine();
@@ -140,9 +140,27 @@ public class Admin extends User {
         }
 
         // Step 6: Store Employee Data
-        employeeData = new String[]{id, username, name, dob, ppsNo, jobTitle, scalePoint};
+        employeeData = new String[]{id, username, name, dob, ppsNo, password, jobTitle, scalePoint, flag};
 
         System.out.println("Data collected successfully.");
+
+        CSVWriter csvWriter = new CSVWriter();
+
+        try {
+            if (getLoginData() != null) {
+                // Write login data to ValidLogins.csv
+                csvWriter.writeToCSV(getLoginData(), "ValidLogins.csv");
+            }
+
+            if (getEmployeeData() != null) {
+                // Write employee data to EmployeeInfo.csv
+                csvWriter.writeToCSV(getEmployeeData(), "EmployeeInfo.csv");
+            }
+
+            System.out.println("Employee data saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving employee data: " + e.getMessage());
+        }
     }
 
     /**
@@ -187,4 +205,6 @@ public class Admin extends User {
     public String[] getEmployeeData() {
         return employeeData;
     }
+
 }
+
