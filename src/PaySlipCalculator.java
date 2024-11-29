@@ -18,11 +18,12 @@ public class PaySlipCalculator {
         double incomeTax = calculateIncomeTax(grossSalary);
         double prsi = calculatePRSI(grossSalary);
         double usc = calculateUSC(grossSalary);
+        double unionFee = 0.008;
 
         double totalDeductions = incomeTax + prsi + usc;
         double netSalary = grossSalary - totalDeductions;
 
-        printPaySlip(employee, grossSalary, incomeTax, prsi, usc, netSalary);
+        printPaySlip(employee, grossSalary, incomeTax, prsi, usc, unionFee, netSalary);
 
         return netSalary;
     }
@@ -60,7 +61,7 @@ public class PaySlipCalculator {
     }
 
     // Print a payslip breakdown
-    private void printPaySlip(Employee employee, double grossSalary, double incomeTax, double prsi, double usc, double netSalary) {
+    private void printPaySlip(Employee employee, double grossSalary, double incomeTax, double prsi, double usc, double unionFee, double netSalary) {
         System.out.println("Payslip for Employee: " + employee.getUsername());
         System.out.println("Job Type: " + employee.getJobType());
         System.out.println("Gross Salary: " + grossSalary);
@@ -68,6 +69,7 @@ public class PaySlipCalculator {
         System.out.println("  Income Tax: " + incomeTax);
         System.out.println("  PRSI: " + prsi);
         System.out.println("  USC: " + usc);
+        System.out.println("  Union Fee: " + unionFee);
         System.out.println("Net Salary: " + netSalary);
     }
 }
