@@ -10,8 +10,6 @@ public class Employee extends User {
     private int scalePoint;
 
     //Fields to track the promotion status
-    private String pendingPromotion;
-    private boolean hasPendingPromotion;
     private int pendingPromotionFlag;
 
     public Employee(String username, String password, String name, String jobType, String doB,String pps, int id, String jobTitle, int scalePoint) {
@@ -22,8 +20,6 @@ public class Employee extends User {
         this.id = id;
         this.jobTitle = jobTitle;
         this.scalePoint = scalePoint;
-        this.pendingPromotion = null;
-        this.hasPendingPromotion = false;
     }
 
     public Employee(String userName, String userPassword, String userJob) {
@@ -48,21 +44,10 @@ public class Employee extends User {
         this.jobTitle=jobTitle;
     }
 
-    public String getPendingPromotion() {return pendingPromotion;}
-
-
     public void setScalePoint(int scalePoint){
         this.scalePoint=scalePoint;
     }
-    //Method to set a pending promotion
-    public void setPendingPromotion(String newJobTitle) {
-        this.pendingPromotion = newJobTitle;
-        this.hasPendingPromotion = true;
-    }
 
-    public boolean hasPendingPromotion(){
-        return hasPendingPromotion;
-    }
     public boolean hasPendingPromotionFlag() {
         return this.pendingPromotionFlag == 1;
     }

@@ -65,4 +65,57 @@ public class SalaryScales {
             System.out.println("Job Type: " + entry[0] + ", Scale Point: " + entry[1] + ", Salary: " + entry[2]);
         }
     }
+    public void updateSalaryScales() {
+        try {
+            List<String[]> employeeData = readEmployeeInfo(); // Read current data
+
+            // Update salary scale points
+            for (String[] employee : employeeData) {
+                int currentScalePoint = Integer.parseInt(employee[7]); // Scale point column
+                employee[7] = String.valueOf(currentScalePoint + 1);   // Increment scale point
+            }
+
+            // Write updated data back to the file
+            writeEmployeeInfo(employeeData);
+        } catch (IOException e) {
+            System.err.println("Error updating salary scales: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing scale point: " + e.getMessage());
+        }
+    }
+
+    private List<String[]> readEmployeeInfo() throws IOException {
+        List<String[]> employeeData = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
+            String line;
+
+            // Skip the header row
+            if ((line = reader.readLine()) != null && line.toLowerCase().contains("id")) {
+                // Header detected, move to the next line
+                line = reader.readLine();
+            }
+
+            while (line != null) {
+                employeeData.add(line.split(",")); // Split each line into an array
+                line = reader.readLine();
+            }
+        }
+        return employeeData;
+    }
+    private void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
+            // Write the header
+            writer.write("id,username,name,dob,ppsNumber,jobType,scalePoint");
+            writer.newLine();
+
+            // Write each employee's data
+            for (String[] employee : employeeData) {
+                writer.write(String.join(",", employee));
+                writer.newLine();
+            }
+
+            // Debugging message to confirm data is written
+            System.out.println("EmployeeInfo.csv updated successfully!");
+        }
+    }
 }
