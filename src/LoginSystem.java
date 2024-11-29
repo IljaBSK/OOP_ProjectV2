@@ -3,7 +3,7 @@ import java.time.Month;
 import java.util.*;
 
 public class LoginSystem {
-    private HashMap<String, User> users = new HashMap<>();
+    private HashMap<String, User> users;
     public LoginSystem() {
         users = CSVManager.readValidUsers();
     }
