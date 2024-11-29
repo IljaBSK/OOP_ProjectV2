@@ -6,6 +6,5 @@ public class MenuSimulation {
             LoginSystem login = new LoginSystem();
            PaySlipMenu menu = new PaySlipMenu();
           menu.run(login);
-
     }
 }

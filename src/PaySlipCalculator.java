@@ -1,75 +1,110 @@
-public class PaySlipCalculator {
-    private SalaryScales salaryScales;
+import java.io.IOException;
+import java.time.LocalDate;
 
-    // Constructor
-    public PaySlipCalculator(SalaryScales salaryScales) {
-        this.salaryScales = salaryScales;
+public class PaySlipCalculator {
+    private FulltimeSalaryScalesReader salaryReader; // Reads salary data
+    private PaySlipWriter writer; // Writes payslip data to file
+
+    /**
+     * Constructor to initialize Salary Reader and Payslip Writer.
+     *
+     * @param salaryReader The reader for FulltimeSalaryScales.csv.
+     * @param writer       The writer for PaySlips.csv.
+     */
+    public PaySlipCalculator(FulltimeSalaryScalesReader salaryReader, PaySlipWriter writer) {
+        this.salaryReader = salaryReader;
+        this.writer = writer;
     }
 
-    // Calculate net salary
-    public double calculateNetSalary(Employee employee) {
-        double grossSalary = salaryScales.getSalary(employee);
-        if (grossSalary <= 0) {
-            System.err.println("Error: Unable to calculate salary for employee " + employee.getUsername());
+    /**
+     * Calculates and writes a payslip for an employee.
+     *
+     * @param employeeId     The ID of the employee.
+     * @param employeeReader The reader for EmployeeInfo.csv.
+     * @return The net salary of the employee.
+     */
+    public double calculateAndWritePayslip(String employeeId, EmployeeInfoReader employeeReader) {
+        try {
+            // Step 1: Get job title and scale point from EmployeeInfo.csv
+            String jobTitle = employeeReader.getJobTitle(employeeId);
+            String scalePoint = employeeReader.getScalePoint(employeeId);
+
+            // Step 2: Get gross salary from FulltimeSalaryScales.csv
+            double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
+
+            // Step 3: Calculate deductions
+            double incomeTax = calculateIncomeTax(grossSalary);
+            double prsi = calculatePRSI(grossSalary);
+            double usc = calculateUSC(grossSalary);
+            double unionFee = grossSalary * 0.08; // 8% union fee
+            double totalDeductions = incomeTax + prsi + usc + unionFee;
+            double netSalary = grossSalary - totalDeductions;
+
+            // Step 4: Prepare payslip data
+            String[] payslipData = {
+                    employeeId, // Employee ID
+                    jobTitle,   // Job Title
+                    scalePoint, // Scale Point
+                    String.valueOf(grossSalary),
+                    String.valueOf(incomeTax),
+                    String.valueOf(prsi),
+                    String.valueOf(usc),
+                    String.valueOf(unionFee),
+                    String.valueOf(netSalary),
+                    LocalDate.now().toString() // Current date
+            };
+
+            // Step 5: Write payslip to PaySlips.csv
+            writer.writePayslip(payslipData);
+
+            System.out.println("Payslip successfully generated for Employee ID: " + employeeId);
+            return netSalary;
+
+        } catch (IOException e) {
+            System.err.println("Error processing payslip for Employee ID " + employeeId + ": " + e.getMessage());
             return 0.0;
         }
-
-        // Deductions
-        double incomeTax = calculateIncomeTax(grossSalary);
-        double prsi = calculatePRSI(grossSalary);
-        double usc = calculateUSC(grossSalary);
-        double unionFee = 0.008;
-
-        double totalDeductions = incomeTax + prsi + usc;
-        double netSalary = grossSalary - totalDeductions;
-
-        printPaySlip(employee, grossSalary, incomeTax, prsi, usc, unionFee, netSalary);
-
-        return netSalary;
     }
 
-    // Calculate income tax
+    /**
+     * Calculate income tax (20% for first 42k, 40% for the rest).
+     *
+     * @param grossSalary The gross salary.
+     * @return The income tax amount.
+     */
     private double calculateIncomeTax(double grossSalary) {
-        double tax = 0.0;
         if (grossSalary <= 42000) {
-            tax = grossSalary * 0.20; // 20% tax
+            return grossSalary * 0.20;
         } else {
-            tax = 42000 * 0.20 + (grossSalary - 42000) * 0.40; // 20% on first 42k, 40% on remaining
+            return 42000 * 0.20 + (grossSalary - 42000) * 0.40;
         }
-        return tax;
     }
 
-    // Calculate PRSI
+    /**
+     * Calculate PRSI (4.1% of gross salary).
+     *
+     * @param grossSalary The gross salary.
+     * @return The PRSI amount.
+     */
     private double calculatePRSI(double grossSalary) {
-        return grossSalary * 0.041; // 4.1% PRSI
+        return grossSalary * 0.041;
     }
 
-    // Calculate USC
+    /**
+     * Calculate USC based on income thresholds.
+     *
+     * @param grossSalary The gross salary.
+     * @return The USC amount.
+     */
     private double calculateUSC(double grossSalary) {
-        double usc = 0.0;
-
         if (grossSalary <= 12012) {
-            usc = grossSalary * 0.005; // 0.5% for income <= 12,012
+            return grossSalary * 0.005;
         } else if (grossSalary <= 25760) {
-            usc = 12012 * 0.005 + (grossSalary - 12012) * 0.02; // 2% for income between 12,012 and 25,760
+            return 12012 * 0.005 + (grossSalary - 12012) * 0.02;
         } else if (grossSalary <= 70044) {
-            usc = 12012 * 0.005 + (25760 - 12012) * 0.02 + (grossSalary - 25760) * 0.04; // 4% for income between 25,760 and 70,044
+            return 12012 * 0.005 + (25760 - 12012) * 0.02 + (grossSalary - 25760) * 0.04;
         } else {
-            usc = 12012 * 0.005 + (25760 - 12012) * 0.02 + (70044 - 25760) * 0.04 + (grossSalary - 70044) * 0.08; // 8% for income above 70,044
+            return 12012 * 0.005 + (25760 - 12012) * 0.02 + (70044 - 25760) * 0.04 + (grossSalary - 70044) * 0.08;
         }
-        return usc;
-    }
-
-    // Print a payslip breakdown
-    private void printPaySlip(Employee employee, double grossSalary, double incomeTax, double prsi, double usc, double unionFee, double netSalary) {
-        System.out.println("Payslip for Employee: " + employee.getUsername());
-        System.out.println("Job Type: " + employee.getJobType());
-        System.out.println("Gross Salary: " + grossSalary);
-        System.out.println("Deductions:");
-        System.out.println("  Income Tax: " + incomeTax);
-        System.out.println("  PRSI: " + prsi);
-        System.out.println("  USC: " + usc);
-        System.out.println("  Union Fee: " + unionFee);
-        System.out.println("Net Salary: " + netSalary);
     }
 }
