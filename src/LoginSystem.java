@@ -1,10 +1,12 @@
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.MonthDay;
 import java.util.*;
 
 public class LoginSystem {
-    private HashMap<String, User> users;
+    private HashMap<String, User> users = new HashMap<>();
+    public LoginSystem() {
+        users = CSVManager.readValidUsers();
+    }
 
     public void loginFunction() {
         Scanner input = new Scanner(System.in);
