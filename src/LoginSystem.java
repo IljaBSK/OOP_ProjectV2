@@ -1,39 +1,43 @@
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.MonthDay;
 import java.util.*;
 
 public class LoginSystem {
     private HashMap<String, User> users;
 
-    public LoginSystem(){
-        users = CSVManager.readValidUsers();
-    }
-
     public void loginFunction() {
         Scanner input = new Scanner(System.in);
         boolean loggedIn = false;
 
-        // Initialize the current month
+        // Initialize the current date
         LocalDate today = LocalDate.now();
-        Month currentMonth = today.getMonth();
 
         SalaryScales salaryScales = new SalaryScales();
 
         while (!loggedIn) {
-            // Display the current month
+            // Display the current date and day of the week
             System.out.println("-------------------------------------------");
             System.out.println("       Welcome to the UL System");
-            System.out.println("       Current Month: " + currentMonth);
+            System.out.println("       Current Date: " + today + " (" + today.getDayOfWeek() + ")");
             System.out.println("-------------------------------------------");
-            System.out.println("Enter N)ext to move to the next month or press Enter to proceed with login:");
+            System.out.println("Enter D)ay, W)eek, or M)onth to move forward or press Enter to proceed with login:");
 
             // Get user input
             String command = input.nextLine().trim();
 
-            if (command.equalsIgnoreCase("N") || command.equalsIgnoreCase("N)ext")) {
-                // Move to the next month
-                currentMonth = currentMonth.plus(1);
-                if (currentMonth == Month.OCTOBER) {
+            if (command.equalsIgnoreCase("D") || command.equalsIgnoreCase("D)ay")) {
+                // Move forward by 1 day
+                today = today.plusDays(1);
+            } else if (command.equalsIgnoreCase("W") || command.equalsIgnoreCase("W)eek")) {
+                // Move forward by 1 week
+                today = today.plusWeeks(1);
+            } else if (command.equalsIgnoreCase("M") || command.equalsIgnoreCase("M)onth")) {
+                // Move forward by 1 month
+                today = today.plusMonths(1);
+
+                // Check if it's October
+                if (today.getMonth() == Month.OCTOBER) {
                     System.out.println("It's October! Updating everyone's salary scale...");
                     salaryScales.updateSalaryScales();
                 }
@@ -74,7 +78,6 @@ public class LoginSystem {
         }
         input.close();
     }
-
 
     public void adminLoggedIn(Admin adminUser){
 
