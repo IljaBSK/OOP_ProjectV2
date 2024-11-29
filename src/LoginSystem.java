@@ -40,7 +40,7 @@ public class LoginSystem {
             } else {
                 // Proceed with login
                 System.out.println("Select your role: A)dmin E)mployee H)R");
-                String roleCommand = command; // Assume command is role selection
+                String roleCommand = input.nextLine().trim();
                 System.out.println("Enter your username:");
                 String usernameIn = input.nextLine().trim();
                 System.out.println("Enter your password:");

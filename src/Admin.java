@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.*;
 
 public class Admin extends User {
     // Array to store login data: username, password, and job type
@@ -87,28 +88,52 @@ public class Admin extends User {
         // Step 4: Select Job Title
         String jobTitle = ""; // Variable to store the selected job title
         List<Integer> validScalePoints = new ArrayList<>(); // List of valid scale points for the selected job title
+
         if (!jobTitleData.isEmpty()) { // Ensure there are job titles available
             while (true) { // Loop until a valid job title is selected
                 System.out.println("Select Job Title:");
-                for (int i = 0; i < jobTitleData.size(); i++) {
-                    System.out.println((i + 1) + ") " + jobTitleData.get(i)[0]); // Display job titles with numbers
+                Set<String> displayedTitles = new HashSet<>(); // Track displayed job titles
+                int displayIndex = 1; // Counter for options
+
+                // Display unique job titles
+                for (String[] data : jobTitleData) {
+                    String currentJobTitle = data[0]; // Get job title
+                    if (!displayedTitles.contains(currentJobTitle)) {
+                        displayedTitles.add(currentJobTitle); // Mark job title as displayed
+                        System.out.println(displayIndex + ") " + currentJobTitle); // Print unique job title
+                        displayIndex++;
+                    }
                 }
+
                 System.out.print("Enter the number corresponding to the job title: ");
                 String command = scanner.nextLine(); // Read the user's choice
 
                 try {
                     int choice = Integer.parseInt(command); // Convert input to a number
-                    if (choice >= 1 && choice <= jobTitleData.size()) {
-                        jobTitle = jobTitleData.get(choice - 1)[0]; // Get the selected job title
-                        validScalePoints.clear(); // Clear the scale points list
+                    if (choice >= 1 && choice < displayIndex) { // Check valid range
+                        // Find the job title based on display order
+                        displayedTitles.clear();
+                        int selectedIndex = 1; // Counter to match the displayed order
+                        for (String[] data : jobTitleData) {
+                            String currentJobTitle = data[0];
+                            if (!displayedTitles.contains(currentJobTitle)) {
+                                if (selectedIndex == choice) {
+                                    jobTitle = currentJobTitle; // Assign the selected job title
+                                    break;
+                                }
+                                displayedTitles.add(currentJobTitle);
+                                selectedIndex++;
+                            }
+                        }
 
-                        // Populate the valid scale points for the selected job title
+                        validScalePoints.clear(); // Clear scale points
+                        // Populate scale points for the selected job title
                         for (String[] data : jobTitleData) {
                             if (data[0].equals(jobTitle)) {
                                 validScalePoints.add(Integer.parseInt(data[1])); // Add scale points
                             }
                         }
-                        break; // Exit the loop after a valid selection
+                        break; // Exit loop after valid selection
                     } else {
                         System.out.println("Invalid choice. Please select a number from the list."); // Handle invalid input
                     }
@@ -120,6 +145,7 @@ public class Admin extends User {
             System.out.println("No job titles available in the file."); // Exit if the file is empty
             return; // Exit the method
         }
+
 
         // Step 5: Validate Scale Point
         String scalePoint = ""; // Variable to store the scale point
