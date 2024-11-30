@@ -58,15 +58,30 @@ public class Admin extends User {
         // Store the login data into the array
         loginData = new String[]{username, password, jobType};
 
-        // Collect Employee-Specific Data
-        System.out.println("Enter Employee ID: ");
-        String id = scanner.nextLine();
+        String id;
+        while (true) {
+            System.out.println("Enter Employee ID (5 digits, cannot start with 0): ");
+            id = scanner.nextLine();
+            if (id.matches("^[1-9][0-9]{4}$") && isUniqueID(id)) {
+                break;
+            } else {
+                System.out.println("Invalid or duplicate Employee ID. Please enter a valid 5-digit ID.");
+            }
+        }
 
         System.out.println("Enter Name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Enter Date of Birth (DD/MM/YYYY): ");
-        String dob = scanner.nextLine();
+        String dob;
+        while (true) {
+            System.out.println("Enter Date of Birth (DD/MM/YYYY): ");
+            dob = scanner.nextLine();
+            if (isValidDate(dob)) {
+                break;
+            } else {
+                System.out.println("Invalid date format. Please enter a valid date in DD/MM/YYYY format.");
+            }
+        }
 
         // Validate PPS number (must be 7 or 8 characters long)
         String ppsNo;
@@ -231,6 +246,49 @@ public class Admin extends User {
     public String[] getEmployeeData() {
         return employeeData;
     }
+    private boolean isValidDate(String date) {
+        try {
+            String[] parts = date.split("/");
+            if (parts.length != 3) {
+                return false;
+            }
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int year = Integer.parseInt(parts[2]);
+
+            if (month < 1 || month > 12) {
+                return false;
+            }
+
+            int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            if (month == 2 && isLeapYear(year)) {
+                daysInMonth[1] = 29;
+            }
+
+            return day >= 1 && day <= daysInMonth[month - 1];
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+    private boolean isUniqueID(String id) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length > 0 && parts[0].equals(id)) {
+                    return false; // ID already exists
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading EmployeeInfo.csv: " + e.getMessage());
+        }
+        return true; // ID is unique
+    }
+
 
 }
 
