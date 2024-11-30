@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 
 public class CSVManager {
-    private static final String filename = "ValidLogins.csv";
+
 
     public static boolean isValidJobTitle(String jobTitle) {
         String filename = "FulltimeSalaryScales.csv";
@@ -27,6 +27,7 @@ public class CSVManager {
     }
 
     public static HashMap<String, User> readValidUsers() {
+        String filename = "ValidLogins.csv";
         HashMap<String, User> users = new HashMap<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
