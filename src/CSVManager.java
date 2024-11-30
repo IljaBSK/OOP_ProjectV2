@@ -26,6 +26,7 @@ public class CSVManager {
         }
         return false;
     }
+
     public static boolean isValidScalePoint(String jobTitle, int scalePoint) {
         try (BufferedReader reader = new BufferedReader(new FileReader("FulltimeSalaryScales.csv"))) {
             String line;
@@ -62,9 +63,9 @@ public class CSVManager {
 
             String line;
 
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
-                if(details.length == 3){
+                if (details.length == 3) {
                     String userName = details[0].trim();
                     String userPassword = details[1].trim();
                     String userJob = details[2].trim();
@@ -81,7 +82,7 @@ public class CSVManager {
                     }
 
                     users.put(userName, newUser);
-                }else{
+                } else {
                     System.out.println("Too many details input");
                 }
             }
@@ -161,6 +162,7 @@ public class CSVManager {
             System.err.println("Error updating employee details: " + e.getMessage());
         }
     }
+
     public static String[] revertPromotion(Employee employee) {
         try {
             List<String[]> employeeData = readEmployeeInfo();
@@ -280,6 +282,7 @@ public class CSVManager {
         }
         return null;
     }
+
     private static void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
             // Write the header
@@ -300,4 +303,35 @@ public class CSVManager {
         }
     }
 
+
+
+
+
+    public static HashMap<String, String> readEmployeeStatus() {
+        String filename = "src/EmployeeStatus.csv"; // Ensure this matches your file name and location
+        HashMap<String, String> employeeStatusMap = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            reader.readLine(); // Skip the header row
+
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length == 2) {
+                    String username = details[0].trim();
+                    String workStatus = details[1].trim();
+                    employeeStatusMap.put(username, workStatus);
+                } else {
+                    System.err.println("Invalid line format in EmployeeStatus.csv: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading EmployeeStatus.csv: " + e.getMessage());
+        }
+
+        return employeeStatusMap;
+    }
 }
+
+
+
