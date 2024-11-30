@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.io.*;
 import java.util.HashMap;
@@ -24,6 +25,32 @@ public class CSVManager {
             throw new RuntimeException("Error reading the file: " + filename, e);
         }
         return false;
+    }
+    public static boolean isValidScalePoint(String jobTitle, int scalePoint) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("FulltimeSalaryScales.csv"))) {
+            String line;
+            int maxScalePoint = Integer.MIN_VALUE;
+
+            // Read each line
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+
+                // Check if the job title matches
+                if (details[0].trim().equalsIgnoreCase(jobTitle)) {
+                    int currentScalePoint = Integer.parseInt(details[1].trim());
+                    maxScalePoint = Math.max(maxScalePoint, currentScalePoint); // Track the max scale point
+                }
+            }
+
+            // Validate the scale point
+            return scalePoint > 0 && scalePoint <= maxScalePoint;
+        } catch (IOException e) {
+            System.err.println("Error reading FulltimeSalaryScales.csv: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid number format in FulltimeSalaryScales.csv.");
+        }
+
+        return false; // Return false if an error occurs or no matching job title is found
     }
 
     public static HashMap<String, User> readValidUsers() {
@@ -71,61 +98,132 @@ public class CSVManager {
     public static Employee getEmployeeByID(String empID) {
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
-            reader.readLine(); // Skip the header
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
-                if (details[0].trim().equals(empID)) {
-                    // Assuming the CSV structure is: ID,userName,,DoB,PPSNo,Username,Password,JobType,ScalePoint
+
+                if (details.length >= 9 && details[0].trim().equals(empID)) {
                     String id = details[0].trim();
                     String username = details[1].trim();
                     String name = details[2].trim();
                     String dob = details[3].trim();
                     String ppsNo = details[4].trim();
                     String password = details[5].trim();
-                    String jobType = details[6].trim();
+                    String jobTitle = details[6].trim();
                     int scalePoint = Integer.parseInt(details[7].trim());
+                    int promotionFlag = Integer.parseInt(details[8].trim());
 
-                    return new Employee(username, jobType, dob, name, password, ppsNo, Integer.parseInt(id), jobType, scalePoint);
+                    Employee employee = new Employee(username, password, name, jobTitle, dob, ppsNo, Integer.parseInt(id), jobTitle, scalePoint);
+                    employee.setPreviousJobTitle(details.length > 9 ? details[9].trim() : "");
+                    employee.setPreviousScalePoint(details.length > 10 ? Integer.parseInt(details[10].trim()) : 0);
+                    return employee;
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
+            System.err.println("Error reading EmployeeInfo.csv: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid number format in EmployeeInfo.csv.");
         }
         return null;
     }
 
-    public static void updateEmployeeDetails(Employee employee, int flag) {
-        List<String> lines = new ArrayList<>();
+    public static void updateEmployeeDetails(Employee employee, int promotionFlag) {
+        try {
+            List<String[]> employeeData = readEmployeeInfo();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] details = line.split(",");
+            for (int i = 0; i < employeeData.size(); i++) {
+                String[] record = employeeData.get(i);
 
-                if (details[0].trim().equals(String.valueOf(employee.getId()))) {
-                    // Update job title, scale point, and promotion flag
-                    details[6] = employee.getJobTitle(); // Job title column
-                    details[7] = String.valueOf(employee.getScalePoint()); // Scale point column
-                    details[8] = String.valueOf(flag); // Promotion flag
+                if (record[0].equals(String.valueOf(employee.getId()))) {
+                    // Ensure the record has all required fields
+                    if (record.length < 11) {
+                        record = Arrays.copyOf(record, 11);
+                    }
+
+                    // Update job title and scale point
+                    record[6] = employee.getJobTitle(); // Current job title
+                    record[7] = String.valueOf(employee.getScalePoint()); // Current scale point
+                    record[8] = String.valueOf(promotionFlag); // Promotion flag
+
+                    // Save previous job title and scale point
+                    record[9] = employee.getPreviousJobTitle(); // Previous job title
+                    record[10] = String.valueOf(employee.getPreviousScalePoint()); // Previous scale point
+
+                    // Replace the updated record in the list
+                    employeeData.set(i, record);
+                    break;
                 }
-
-                lines.add(String.join(",", details));
             }
+
+            // Write back to the CSV
+            writeEmployeeInfo(employeeData);
+            System.out.println("Employee details written to CSV.");
         } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
+            System.err.println("Error updating employee details: " + e.getMessage());
         }
+    }
+    public static String[] revertPromotion(Employee employee) {
+        try {
+            List<String[]> employeeData = readEmployeeInfo();
+            String revertedJobTitle = "";
+            String revertedScalePoint = "";
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
-            for (String updatedLine : lines) {
-                writer.write(updatedLine);
-                writer.newLine();
+            for (int i = 0; i < employeeData.size(); i++) {
+                String[] record = employeeData.get(i);
+
+                if (record[0].equals(String.valueOf(employee.getId()))) {
+                    // Ensure the record has all required fields
+                    if (record.length < 11) {
+                        record = Arrays.copyOf(record, 11);
+                    }
+
+                    // Fetch previous job title and scale point
+                    revertedJobTitle = record[9];
+                    revertedScalePoint = record[10];
+
+                    // Revert current job title and scale point
+                    record[6] = revertedJobTitle; // Revert job title
+                    record[7] = revertedScalePoint; // Revert scale point
+                    record[8] = "0"; // Reset promotion flag
+
+                    // Clear previous job title and scale point
+                    record[9] = ""; // Clear previous job title
+                    record[10] = "0"; // Clear previous scale point
+
+                    // Update the record in the list
+                    employeeData.set(i, record);
+                    break;
+                }
             }
+
+            writeEmployeeInfo(employeeData);
+            System.out.println("Promotion reverted and employee details written to CSV.");
+
+            return new String[]{revertedJobTitle, revertedScalePoint};
         } catch (IOException e) {
-            throw new RuntimeException("Error writing to the file: EmployeeInfo.csv", e);
+            System.err.println("Error reverting promotion: " + e.getMessage());
+            return new String[]{"", "0"}; // Return empty details on error
         }
     }
 
 
+    public static List<String[]> readEmployeeInfo() throws IOException {
+        List<String[]> employeeData = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
+            String line;
+
+            // Skip the header row
+            if ((line = reader.readLine()) != null && line.toLowerCase().contains("id")) {
+                line = reader.readLine(); // Move to the first data row
+            }
+
+            // Read each row and split into columns
+            while (line != null) {
+                employeeData.add(line.split(","));
+                line = reader.readLine();
+            }
+        }
+        return employeeData;
+    }
 
     public static void updatePromotionFlag(int employeeId, int flag) {
         List<String> lines = new ArrayList<>();
@@ -181,6 +279,25 @@ public class CSVManager {
             throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
         }
         return null;
+    }
+    private static void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
+            // Write the header
+            String header = "id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint";
+            writer.write(header);
+            writer.newLine();
+
+            // Write each record
+            for (String[] record : employeeData) {
+                String line = String.join(",", record);
+                writer.write(line);
+                writer.newLine();
+            }
+
+            System.out.println("CSV file updated successfully.");
+        } catch (IOException e) {
+            System.err.println("Error writing to EmployeeInfo.csv: " + e.getMessage());
+        }
     }
 
 }

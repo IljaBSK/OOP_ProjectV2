@@ -1,7 +1,7 @@
-id,username,name,dob,ppsNumber,password,jobType,scalepoint,PendingFlag
-23521,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,was,Senior Administrative Officer III,8,0
-24457,joe,Joe Biden,01-01-1950,12345678,wa1,Senior Administrative Officer III,8,0
+id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint
+23521,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,Skywalker,Senior Administrative Officer II,2,1
+24457,joe,Joe Biden,01-01-1950,12345678,joePW,Senior Administrative Officer III,4,0,,0
 23563,mikeit,Mike Jones,12/10/2000,412356V,calmy,Senior Administrative Officer III,8,0
 25213,sam,Sam Micheals,12/01/2002,241353G,gahdamn,Clinical Tutor,3,0
-25624,dezaremydudes,James Gray,30/05/2000,362478V,myguy,Associate Professor B,4,0
+25624,dezaremydudes,James Gray,30/05/2000,362478V,myguy,Associate Professor B,4,0,,0
 13456,samsmith,Sam Smith,31/12/1955,2135345G,wakanada,Full Professor,3,0

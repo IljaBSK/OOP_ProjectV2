@@ -128,9 +128,20 @@ public class LoginSystem {
         Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
 
         if (updatedEmployee != null && updatedEmployee.hasPendingPromotionFlag()) {
-            updatedEmployee.confirmPromotion(); // Handle promotion acknowledgment
-            // Update the flag in the CSV after acknowledgment
-            CSVManager.updatePromotionFlag(updatedEmployee.getId(), 0);
+            System.out.println("You have a pending promotion to: " + updatedEmployee.getJobTitle() + " (Scale Point: " + updatedEmployee.getScalePoint() + ")");
+            System.out.println("Do you want to accept or reject the promotion?");
+            System.out.println("A) Accept    R) Reject");
+
+            Scanner input = new Scanner(System.in);
+            String command = input.nextLine().trim();
+
+            if (command.equalsIgnoreCase("A")) {
+                updatedEmployee.confirmPromotion(); // Accept promotion
+            } else if (command.equalsIgnoreCase("R")) {
+                updatedEmployee.rejectPromotion(); // Reject promotion
+            } else {
+                System.out.println("Invalid input. No action taken.");
+            }
         }
 
         System.out.println("Please select an option:");
@@ -144,4 +155,5 @@ public class LoginSystem {
             // Payslip logic
         }
     }
+
 }
