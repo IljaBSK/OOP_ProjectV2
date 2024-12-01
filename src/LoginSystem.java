@@ -55,6 +55,9 @@ public class LoginSystem {
             } else if (command.equalsIgnoreCase("M") || command.equalsIgnoreCase("M)onth")) {
                 // Move forward by 1 month
                 today = today.plusMonths(1);
+            } else if (command.equalsIgnoreCase("Y") || command.equalsIgnoreCase("Y)ear")) {
+                // Move forward by 1 month
+                today = today.plusYears(1);
 
                 // Check if it's October
                 if (today.getMonth() == Month.OCTOBER) {
