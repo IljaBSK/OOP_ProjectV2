@@ -186,6 +186,24 @@ public class Admin extends User {
             }
         }
 
+        String workStatus = "";
+        while (true) {
+            System.out.println("Select Work Status:");
+            System.out.println("1) Full-Time   2) Part-Time");
+            System.out.print("Enter corresponding number: ");
+            String command = scanner.nextLine();
+
+            if (command.equals("1")) {
+                workStatus = "Full-Time";
+                break;
+            } else if (command.equals("2")) {
+                workStatus = "Part-Time";
+                break;
+            } else {
+                System.out.println("Invalid input. Enter 1 or 2.");
+            }
+        }
+
         // Step 6: Store Employee Data
         employeeData = new String[]{id, username, name, dob, ppsNo, password, jobTitle, scalePoint, flag};
 
@@ -203,7 +221,7 @@ public class Admin extends User {
                 // Write employee data to EmployeeInfo.csv
                 csvWriter.writeToCSV(getEmployeeData(), "EmployeeInfo.csv");
             }
-
+            csvWriter.writeToCSV(new String[]{username, workStatus}, "PayClaims.csv");
             System.out.println("Employee data saved successfully.");
         } catch (IOException e) {
             System.out.println("Error saving employee data: " + e.getMessage());
