@@ -83,11 +83,13 @@ public class LoginSystem {
                             String status = employeeStatuses.getOrDefault(usernameIn, "Unknown");
                             if (status.equalsIgnoreCase("Full-Time")) {
                                 System.out.println("Login successful as Full-Time Employee.");
-                                this.FulltimeemployeeLoggedIn((Employee) validUser);
+                                Employee employee = CSVManager.getEmployeeByUsername(validUser.getUsername());
+                                this.FulltimeemployeeLoggedIn((Employee) employee);
                                 loggedIn = true;
                             } else if (status.equalsIgnoreCase("Part-Time")) {
                                 System.out.println("Login successful as Part-Time Employee.");
-                                this.ParttimeemployeeLoggedIn((Employee) validUser);
+                                Employee employee = CSVManager.getEmployeeByUsername(validUser.getUsername());
+                                this.ParttimeemployeeLoggedIn((Employee) employee);
                                 loggedIn = true;
                             } else {
                                 System.out.println("Unknown Employee Status. Please contact Admin.");
@@ -218,8 +220,7 @@ public class LoginSystem {
         String command = input.nextLine().trim();
 
         if (command.equalsIgnoreCase("V")) {
-            // Payslip logic
-
+            employee.viewPayslips();
         }
 
     }

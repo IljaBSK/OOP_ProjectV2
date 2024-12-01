@@ -8,15 +8,7 @@ import java.util.HashMap;
 
 public class CSVManager {
 
-    /**
-     * Checks if the given job title is valid by verifying it against the entries in a CSV file.
-     *
-     * <p>This method reads the "FulltimeSalaryScales.csv" file and compares the given job title
-     * to the entries in the first column. If a match is found, the job title is considered valid.</p>
-     *
-     * @param jobTitle the job title to validate
-     * @return <code>true</code> if the job title is valid, <code>false</code> otherwise
-     */
+
     public static boolean isValidJobTitle(String jobTitle) {
         String filename = "FulltimeSalaryScales.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -35,17 +27,6 @@ public class CSVManager {
         return false;
     }
 
-
-    /**
-     * Validates if a scale point is valid for a given job title.
-     *
-     * <p>This method checks the "FulltimeSalaryScales.csv" file to ensure the scale point
-     * is within the allowed range for the specified job title.</p>
-     *
-     * @param jobTitle the job title to validate the scale point against
-     * @param scalePoint the scale point to validate
-     * @return <code>true</code> if the scale point is valid, <code>false</code> otherwise
-     */
     public static boolean isValidScalePoint(String jobTitle, int scalePoint) {
         try (BufferedReader reader = new BufferedReader(new FileReader("FulltimeSalaryScales.csv"))) {
             String line;
@@ -72,16 +53,7 @@ public class CSVManager {
 
         return false; // Return false if an error occurs or no matching job title is found
     }
-    /**
-     * Reads valid user details from the "ValidLogins.csv" file and creates a map of users.
-     *
-     * <p>This method parses a CSV file containing user credentials and job roles. It creates
-     * and returns a `HashMap` where the keys are usernames, and the values are user objects
-     * (`HR`, `Admin`, or `Employee`) based on their job type.</p>
-     *
-     * @return a `HashMap` containing valid users, with usernames as keys and user objects as values
-     * @throws RuntimeException if the file is not found or an error occurs while reading the file
-     */
+
     public static HashMap<String, User> readValidUsers() {
         String filename = "ValidLogins.csv";
         HashMap<String, User> users = new HashMap<>();
@@ -123,18 +95,7 @@ public class CSVManager {
             throw new RuntimeException(e);
         }
     }
-    /**
-     * Retrieves an employee's details by their employee ID from the "EmployeeInfo.csv" file.
-     *
-     * <p>This method searches the CSV file for a matching employee ID and constructs an
-     * `Employee` object with the retrieved details. If no match is found or an error occurs,
-     * it returns <code>null</code>.</p>
-     *
-     * @param empID the ID of the employee to retrieve
-     * @return an `Employee` object if the ID is found, or <code>null</code> if not found
-     * @throws IOException if an error occurs while reading the file
-     * @throws NumberFormatException if numeric fields in the file are invalid
-     */
+
     public static Employee getEmployeeByID(String empID) {
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
@@ -166,17 +127,6 @@ public class CSVManager {
         return null;
     }
 
-    /**
-     * Updates the details of an employee in the "EmployeeInfo.csv" file.
-     *
-     * <p>This method modifies the employee's job title, scale point, promotion flag,
-     * and previous job details in the CSV file. If the employee's record is found,
-     * it updates the corresponding fields and writes the changes back to the file.</p>
-     *
-     * @param employee the employee whose details need to be updated
-     * @param promotionFlag the promotion flag value to set (e.g., 1 for pending, 0 for none)
-     * @throws IOException if an error occurs while reading or writing the file
-     */
     public static void updateEmployeeDetails(Employee employee, int promotionFlag) {
         try {
             List<String[]> employeeData = readEmployeeInfo();
@@ -213,18 +163,6 @@ public class CSVManager {
         }
     }
 
-    /**
-     * Reverts the promotion of an employee, restoring their previous job title and scale point.
-     *
-     * <p>This method updates the employee's record in the "EmployeeInfo.csv" file by setting
-     * their current job title and scale point to the previous values, resetting the promotion
-     * flag, and clearing the previous job details.</p>
-     *
-     * @param employee the employee whose promotion is being reverted
-     * @return a `String[]` containing the reverted job title and scale point
-     *         (e.g., `{"JobTitle", "ScalePoint"}`)
-     * @throws IOException if an error occurs while reading or writing the file
-     */
     public static String[] revertPromotion(Employee employee) {
         try {
             List<String[]> employeeData = readEmployeeInfo();
@@ -269,15 +207,7 @@ public class CSVManager {
         }
     }
 
-    /**
-     * Reads employee information from the "EmployeeInfo.csv" file.
-     *
-     * <p>This method reads all the rows from the CSV file, skipping the header row,
-     * and returns a list of string arrays where each array represents an employee's record.</p>
-     *
-     * @return a list of string arrays, where each array contains the data of one employee
-     * @throws IOException if an error occurs while reading the file
-     */
+
     public static List<String[]> readEmployeeInfo() throws IOException {
         List<String[]> employeeData = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
@@ -325,15 +255,6 @@ public class CSVManager {
         }
     }
 
-    /**
-     * Updates the promotion flag of an employee in the "EmployeeInfo.csv" file.
-     *
-     * <p>This method searches for an employee record by ID and updates the promotion flag
-     * to the specified value. The updated records are written back to the file.</p>
-     *
-     * @param username the ID of the employee whose promotion flag needs to be updated
-     * @throws RuntimeException if an error occurs while reading or writing the file
-     */
     public static Employee getEmployeeByUsername(String username) {
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
@@ -362,15 +283,6 @@ public class CSVManager {
         return null;
     }
 
-    /**
-     * Writes employee information to the "EmployeeInfo.csv" file.
-     *
-     * <p>This method overwrites the file with updated employee data, including
-     * the header row and all records provided in the list.</p>
-     *
-     * @param employeeData a list of string arrays, where each array represents an employee's record
-     * @throws IOException if an error occurs while writing to the file
-     */
     private static void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
             // Write the header
@@ -394,15 +306,7 @@ public class CSVManager {
 
 
 
-    /**
-     * Reads the work status of employees from the "EmployeeStatus.csv" file.
-     *
-     * <p>This method parses the CSV file and creates a map where each key is a username
-     * and each value is the corresponding work status.</p>
-     *
-     * @return a `HashMap` containing usernames as keys and work statuses as values
-     * @throws IOException if an error occurs while reading the file
-     */
+
     public static HashMap<String, String> readEmployeeStatus() {
         String filename = "EmployeeStatus.csv";
         HashMap<String, String> employeeStatusMap = new HashMap<>();
@@ -428,6 +332,6 @@ public class CSVManager {
         return employeeStatusMap;
     }
 }
-
+//test for commit attempt since mine is not workingwq dqwd qw
 
 
