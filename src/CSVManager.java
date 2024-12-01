@@ -308,7 +308,7 @@ public class CSVManager {
 
 
     public static HashMap<String, String> readEmployeeStatus() {
-        String filename = "src/EmployeeStatus.csv"; // Ensure this matches your file name and location
+        String filename = "EmployeeStatus.csv";
         HashMap<String, String> employeeStatusMap = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {

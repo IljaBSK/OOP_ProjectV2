@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
@@ -190,11 +191,11 @@ public class LoginSystem {
             System.out.println("A) Accept    R) Reject");
 
             Scanner input = new Scanner(System.in);
-            String command = input.nextLine().trim();
+            String promotionCommand = input.nextLine().trim();
 
-            if (command.equalsIgnoreCase("A")) {
+            if (promotionCommand.equalsIgnoreCase("A")) {
                 updatedEmployee.confirmPromotion(); // Accept promotion
-            } else if (command.equalsIgnoreCase("R")) {
+            } else if (promotionCommand.equalsIgnoreCase("R")) {
                 updatedEmployee.rejectPromotion(); // Reject promotion
             } else {
                 System.out.println("Invalid input. No action taken.");
@@ -209,13 +210,32 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
 
-        if (command.equalsIgnoreCase("V")) {
-            // Payslip logic
-        }
-        if(command.equalsIgnoreCase("S")){
-           //Submit Claim form logic
-        }
+        if (command.equalsIgnoreCase("S")) {
+            // Initialize dependencies
+            String employeeInfoFile = "EmployeeInfo.csv";
+            String salaryScalesFile = "FulltimeSalaryScales.csv";
 
+            try {
+                EmployeeInfoReader employeeReader = new EmployeeInfoReader(employeeInfoFile);
+                FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader(salaryScalesFile);
+                PaySlipWriter writer = new PaySlipWriter("PayClaim.csv");
+
+                // Initialize PaySlipCalculator
+                PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, writer);
+
+                // Call the submit pay claim method
+                calculator.submitPayClaim(employee.getUsername(), employeeReader);
+            } catch (IOException e) {
+                System.err.println("Error during pay claim submission: " + e.getMessage());
+            }
+        } else if (command.equalsIgnoreCase("V")) {
+            // View Payslips logic (not implemented yet)
+            System.out.println("Feature not implemented yet.");
+        } else if (command.equalsIgnoreCase("L")) {
+            System.out.println("Logging out...");
+        } else {
+            System.out.println("Invalid option. Please try again.");
+        }
     }
 
 }
