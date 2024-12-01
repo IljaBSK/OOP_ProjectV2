@@ -170,8 +170,7 @@ public class LoginSystem {
         String command = input.nextLine().trim();
 
         if (command.equalsIgnoreCase("V")) {
-            // Payslip logic
-
+            employee.viewPayslips();
         }
 
     }

@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Employee extends User {
@@ -108,6 +113,72 @@ public class Employee extends User {
     }
 
     public void viewPayslips(){
+        int employeeId = this.getId();
 
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input Payslip Month: (1-12)");
+        String month = input.nextLine().trim();
+        System.out.println("Input Payslip Year:");
+        String year = input.nextLine().trim();
+
+        String inputDate = month + "/" + year;
+
+        String filename = "PaySlips.csv";
+        HashMap<String, String> payslipInfo = new HashMap<>();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            boolean payslipFound = false;
+            reader.readLine();
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length == 11) {
+                    int id = Integer.parseInt(details[0].trim());
+                    String date = details[2].trim();
+
+                    if(id==employeeId && date.equals(inputDate)){
+                        String name = details[1].trim();
+                        String jobTitle = details[3].trim();
+                        String scalePoint = details[4].trim();
+                        String grossPay = details[5].trim();
+                        String incomeTax = details[6].trim();
+                        String prsi = details[7].trim();
+                        String usc = details[8].trim();
+                        String unionFee = details[9].trim();
+                        String netPay = details[10].trim();
+
+                        System.out.println("------------------------------------------------------------------");
+                        System.out.println("Company Name: University Of Limerick    Employee ID: " + id);
+                        System.out.println("Emp. Name: " + name + "     Date Payslip Created: 25/" + inputDate);
+                        System.out.println("Emp. Title: " + jobTitle + "    Emp. Scale Point: " + scalePoint);
+                        System.out.println("------------------------------------------------------------------");
+                        System.out.println("--------Payments---------------------------------Deductions-------");
+                        System.out.println("Gross Pay: " + grossPay + "                     Tax: "+ incomeTax);
+                        System.out.println("                                                    PRSI: " + prsi);
+                        System.out.println("                                                    USC: " + usc);
+                        System.out.println("------------------------------------------------------------------");
+                        System.out.println("Net Pay This Month: " + netPay);
+                        System.out.println("------------------------------------------------------------------");
+
+                        payslipFound = true;
+                    }
+
+
+                }
+            }
+
+            reader.close();
+
+            if(!payslipFound){
+                System.out.println("No payslip was found for this date");
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
