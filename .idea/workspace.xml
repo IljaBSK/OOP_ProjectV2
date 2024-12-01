@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EmployeeInfo.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EmployeeInfo.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PayClaims.csv" beforeDir="false" afterPath="$PROJECT_DIR$/PayClaims.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CSVManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSVManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EmployeeInfoReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EmployeeInfoReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EmployeeStatus.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuSimulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PaySlipCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PaySlipMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SalaryScales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SalaryScales.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +43,12 @@
     &quot;assignee&quot;: &quot;BriEnright&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2.git&quot;,
-    &quot;accountId&quot;: &quot;a8d251c6-9856-4993-b866-d0e541dc1921&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IljaBSK/OOP_ProjectV2.git",
+    "accountId": "a8d251c6-9856-4993-b866-d0e541dc1921"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
