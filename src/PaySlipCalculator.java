@@ -34,26 +34,27 @@ public class PaySlipCalculator {
 
             // Step 2: Get gross salary from FulltimeSalaryScales.csv
             double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
+            double grossPay = grossSalary / 52; // Divide salary for weekly payslips
 
             // Step 3: Calculate deductions
-            double incomeTax = calculateIncomeTax(grossSalary);
-            double prsi = calculatePRSI(grossSalary);
-            double usc = calculateUSC(grossSalary);
-            double unionFee = grossSalary * 0.08; // 8% union fee
+            double incomeTax = calculateIncomeTax(grossPay);
+            double prsi = calculatePRSI(grossPay);
+            double usc = calculateUSC(grossPay);
+            double unionFee = grossPay * 0.08; // 8% union fee
             double totalDeductions = incomeTax + prsi + usc + unionFee;
-            double netSalary = grossSalary - totalDeductions;
+            double netPay = grossPay - totalDeductions;
 
             // Step 4: Prepare payslip data
             String[] payslipData = {
                     employeeId, // Employee ID
                     jobTitle,   // Job Title
                     scalePoint, // Scale Point
-                    String.valueOf(grossSalary),
+                    String.valueOf(grossPay),
                     String.valueOf(incomeTax),
                     String.valueOf(prsi),
                     String.valueOf(usc),
                     String.valueOf(unionFee),
-                    String.valueOf(netSalary),
+                    String.valueOf(netPay),
                     LocalDate.now().toString() // Current date
             };
 
@@ -61,7 +62,7 @@ public class PaySlipCalculator {
             writer.writePayslip(payslipData);
 
             System.out.println("Payslip successfully generated for Employee ID: " + employeeId);
-            return netSalary;
+            return netPay;
 
         } catch (IOException e) {
             System.err.println("Error processing payslip for Employee ID " + employeeId + ": " + e.getMessage());
