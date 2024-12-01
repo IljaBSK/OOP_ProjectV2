@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="Javadoc and Error Handling &#10;&#10;1.Added JavaDoc to all existing methods that dont have a Javadoc comment yet which includes classes like:&#10;Admin.java&#10;CSVManager.java&#10;Employee.java&#10;EmployeeInfoReader.java&#10;FulltimeSalaryScalesReader.java&#10;FulltimeSalaryScalesReader.java&#10;HR.java&#10;LoginSystem.java&#10;MenuSimulation.java&#10;PaySlipCalculator.java&#10;PaySlipMenu.java&#10;SalaryScales.java&#10;User.java&#10;&#10;2.In the PaySlipCalculator.java added this line of code:   Scanner input = new Scanner(System.in);&#10;                                                                  int hoursWorked = -1;&#10;                                                                  while (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                      System.out.println(&quot;Enter the number of hours worked (0-160):&quot;);&#10;                                                                      try {&#10;                                                                          hoursWorked = input.nextInt();&#10;                                                                          if (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                              System.out.println(&quot;Invalid hours worked. Please enter a value between 0 and 160. If you want to get Paid&quot;);&#10;                                                                          }&#10;                                                                      } catch (InputMismatchException e) {&#10;                                                                          System.out.println(&quot;Invalid input. Please enter a numeric value.&quot;);&#10;                                                                          input.next(); // Clear the invalid input&#10;                                                                      }&#10;                                                                  } &#10;                                                         To make sure the part-time Employee cannot input more or less than the possbile amount.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EmployeeInfo.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EmployeeInfo.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PayClaims.csv" beforeDir="false" afterPath="$PROJECT_DIR$/PayClaims.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CSVManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSVManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EmployeeInfoReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EmployeeInfoReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EmployeeStatus.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuSimulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PaySlipCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PaySlipMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SalaryScales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SalaryScales.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +30,12 @@
     &quot;assignee&quot;: &quot;BriEnright&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/IljaBSK/OOP_ProjectV2.git",
-    "accountId": "a8d251c6-9856-4993-b866-d0e541dc1921"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2.git&quot;,
+    &quot;accountId&quot;: &quot;a8d251c6-9856-4993-b866-d0e541dc1921&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -150,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733014348452</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Javadoc and Error Handling &#10;&#10;1.Added JavaDoc to all existing methods that dont have a Javadoc comment yet which includes classes like:&#10;Admin.java&#10;CSVManager.java&#10;Employee.java&#10;EmployeeInfoReader.java&#10;FulltimeSalaryScalesReader.java&#10;FulltimeSalaryScalesReader.java&#10;HR.java&#10;LoginSystem.java&#10;MenuSimulation.java&#10;PaySlipCalculator.java&#10;PaySlipMenu.java&#10;SalaryScales.java&#10;User.java&#10;&#10;2.In the PaySlipCalculator.java added this line of code:   Scanner input = new Scanner(System.in);&#10;                                                                  int hoursWorked = -1;&#10;                                                                  while (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                      System.out.println(&quot;Enter the number of hours worked (0-160):&quot;);&#10;                                                                      try {&#10;                                                                          hoursWorked = input.nextInt();&#10;                                                                          if (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                              System.out.println(&quot;Invalid hours worked. Please enter a value between 0 and 160. If you want to get Paid&quot;);&#10;                                                                          }&#10;                                                                      } catch (InputMismatchException e) {&#10;                                                                          System.out.println(&quot;Invalid input. Please enter a numeric value.&quot;);&#10;                                                                          input.next(); // Clear the invalid input&#10;                                                                      }&#10;                                                                  } &#10;                                                         To make sure the part-time Employee cannot input more or less than the possbile amount.">
+      <option name="closed" value="true" />
+      <created>1733058381541</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733058381541</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +154,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TESTING IF ITS COMMITING" />
     <MESSAGE value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
-    <option name="LAST_COMMIT_MESSAGE" value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
+    <MESSAGE value="Javadoc and Error Handling &#10;&#10;1.Added JavaDoc to all existing methods that dont have a Javadoc comment yet which includes classes like:&#10;Admin.java&#10;CSVManager.java&#10;Employee.java&#10;EmployeeInfoReader.java&#10;FulltimeSalaryScalesReader.java&#10;FulltimeSalaryScalesReader.java&#10;HR.java&#10;LoginSystem.java&#10;MenuSimulation.java&#10;PaySlipCalculator.java&#10;PaySlipMenu.java&#10;SalaryScales.java&#10;User.java&#10;&#10;2.In the PaySlipCalculator.java added this line of code:   Scanner input = new Scanner(System.in);&#10;                                                                  int hoursWorked = -1;&#10;                                                                  while (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                      System.out.println(&quot;Enter the number of hours worked (0-160):&quot;);&#10;                                                                      try {&#10;                                                                          hoursWorked = input.nextInt();&#10;                                                                          if (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                              System.out.println(&quot;Invalid hours worked. Please enter a value between 0 and 160. If you want to get Paid&quot;);&#10;                                                                          }&#10;                                                                      } catch (InputMismatchException e) {&#10;                                                                          System.out.println(&quot;Invalid input. Please enter a numeric value.&quot;);&#10;                                                                          input.next(); // Clear the invalid input&#10;                                                                      }&#10;                                                                  } &#10;                                                         To make sure the part-time Employee cannot input more or less than the possbile amount." />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc and Error Handling &#10;&#10;1.Added JavaDoc to all existing methods that dont have a Javadoc comment yet which includes classes like:&#10;Admin.java&#10;CSVManager.java&#10;Employee.java&#10;EmployeeInfoReader.java&#10;FulltimeSalaryScalesReader.java&#10;FulltimeSalaryScalesReader.java&#10;HR.java&#10;LoginSystem.java&#10;MenuSimulation.java&#10;PaySlipCalculator.java&#10;PaySlipMenu.java&#10;SalaryScales.java&#10;User.java&#10;&#10;2.In the PaySlipCalculator.java added this line of code:   Scanner input = new Scanner(System.in);&#10;                                                                  int hoursWorked = -1;&#10;                                                                  while (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                      System.out.println(&quot;Enter the number of hours worked (0-160):&quot;);&#10;                                                                      try {&#10;                                                                          hoursWorked = input.nextInt();&#10;                                                                          if (hoursWorked &lt; 0 || hoursWorked &gt; 160) {&#10;                                                                              System.out.println(&quot;Invalid hours worked. Please enter a value between 0 and 160. If you want to get Paid&quot;);&#10;                                                                          }&#10;                                                                      } catch (InputMismatchException e) {&#10;                                                                          System.out.println(&quot;Invalid input. Please enter a numeric value.&quot;);&#10;                                                                          input.next(); // Clear the invalid input&#10;                                                                      }&#10;                                                                  } &#10;                                                         To make sure the part-time Employee cannot input more or less than the possbile amount." />
   </component>
 </project>
