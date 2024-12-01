@@ -34,7 +34,7 @@ public class PaySlipCalculator {
 
             // Step 2: Get gross salary from FulltimeSalaryScales.csv
             double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
-            double grossPay = grossSalary / 52; // Divide salary for weekly payslips
+            double grossPay = grossSalary / 12; // Divide salary for monthly payslips
 
 
             // Step 3: Calculate deductions
@@ -44,6 +44,7 @@ public class PaySlipCalculator {
             double unionFee = grossPay * 0.08; // 8% union fee
             double totalDeductions = incomeTax + prsi + usc + unionFee;
             double netPay = grossPay - totalDeductions;
+            double healthInsurance = 0.001;
 
             // Step 4: Prepare payslip data
             String[] payslipData = {
@@ -55,6 +56,7 @@ public class PaySlipCalculator {
                     String.valueOf(prsi),
                     String.valueOf(usc),
                     String.valueOf(unionFee),
+                    String.valueOf(healthInsurance),
                     String.valueOf(netPay),
                     LocalDate.now().toString() // Current date
             };
