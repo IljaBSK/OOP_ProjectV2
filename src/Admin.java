@@ -221,7 +221,8 @@ public class Admin extends User {
                 // Write employee data to EmployeeInfo.csv
                 csvWriter.writeToCSV(getEmployeeData(), "EmployeeInfo.csv");
             }
-            csvWriter.writeToCSV(new String[]{username, workStatus}, "PayClaims.csv");
+            csvWriter.writeToCSV(new String[]{username, workStatus}, "EmployeeStatus.csv");
+
             System.out.println("Employee data saved successfully.");
         } catch (IOException e) {
             System.out.println("Error saving employee data: " + e.getMessage());
