@@ -41,7 +41,7 @@ public class LoginSystem {
             System.out.println("       Welcome to the UL System");
             System.out.println("       Current Date: " + today + " (" + today.getDayOfWeek() + ")");
             System.out.println("-------------------------------------------");
-            System.out.println("Enter D)ay, W)eek, or M)onth to move forward or press Enter to proceed with login:");
+            System.out.println("Enter D)ay, W)eek, M)onth, or Y)ear to move forward or press Enter to proceed with login:");
 
             // Get user input
             String command = input.nextLine().trim();
