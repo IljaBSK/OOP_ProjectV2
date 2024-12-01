@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="TESTING IF ITS COMMITING" />
+    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EmployeeInfo.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EmployeeInfo.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PayClaims.csv" beforeDir="false" afterPath="$PROJECT_DIR$/PayClaims.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CSVManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSVManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EmployeeInfoReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EmployeeInfoReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EmployeeStatus.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FulltimeSalaryScalesReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuSimulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PaySlipCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PaySlipMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SalaryScales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SalaryScales.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +43,12 @@
     &quot;assignee&quot;: &quot;BriEnright&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2&quot;,
-    &quot;accountId&quot;: &quot;8ca0b801-ff71-4f0d-bde0-a4d54576fd7a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IljaBSK/OOP_ProjectV2.git",
+    "accountId": "a8d251c6-9856-4993-b866-d0e541dc1921"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -43,31 +60,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.MenuSimulation.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Project/OOP_ProjectV2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.MenuSimulation.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project/OOP_ProjectV2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\iljab\My Documents\OOPProjectV2" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MenuSimulation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MenuSimulation" />
+      <module name="OOPProjectV2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MenuSimulation" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -95,7 +126,31 @@
       <option name="project" value="LOCAL" />
       <updated>1733012916489</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+      <option name="closed" value="true" />
+      <created>1733013536888</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733013536888</updated>
+    </task>
+    <task id="LOCAL-00004" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+      <option name="closed" value="true" />
+      <created>1733013698716</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733013698716</updated>
+    </task>
+    <task id="LOCAL-00005" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
+      <option name="closed" value="true" />
+      <created>1733014348452</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733014348452</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +158,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TESTING IF ITS COMMITING" />
-    <option name="LAST_COMMIT_MESSAGE" value="TESTING IF ITS COMMITING" />
+    <MESSAGE value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
+    <option name="LAST_COMMIT_MESSAGE" value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
   </component>
 </project>
