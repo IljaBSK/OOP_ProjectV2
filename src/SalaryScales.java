@@ -88,33 +88,6 @@ public class SalaryScales {
         }
     }
     /**
-     * Updates the salary scales by incrementing the scale point for all employees.
-     *
-     * <p>This method reads employee data from the "EmployeeInfo.csv" file, increments
-     * the scale point for each employee, and writes the updated data back to the file.</p>
-     *
-     * @throws IOException if an error occurs while reading or writing the file
-     * @throws NumberFormatException if a scale point cannot be parsed as an integer
-     */
-    public void updateSalaryScales() {
-        try {
-            List<String[]> employeeData = readEmployeeInfo(); // Read current data
-
-            // Update salary scale points
-            for (String[] employee : employeeData) {
-                int currentScalePoint = Integer.parseInt(employee[7]); // Scale point column
-                employee[7] = String.valueOf(currentScalePoint + 1);   // Increment scale point
-            }
-
-            // Write updated data back to the file
-            writeEmployeeInfo(employeeData);
-        } catch (IOException e) {
-            System.err.println("Error updating salary scales: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            System.err.println("Error parsing scale point: " + e.getMessage());
-        }
-    }
-    /**
      * Reads employee information from the "EmployeeInfo.csv" file.
      *
      * <p>This method reads all rows from the file, skipping the header row, and

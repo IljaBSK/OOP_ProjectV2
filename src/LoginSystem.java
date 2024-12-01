@@ -33,7 +33,7 @@ public class LoginSystem {
         // Initialize the current date
         LocalDate today = LocalDate.now();
 
-        SalaryScales salaryScales = new SalaryScales();
+        CSVManager CSVManger = new CSVManager();
 
         while (!loggedIn) {
             // Display the current date and day of the week
@@ -59,7 +59,7 @@ public class LoginSystem {
                 // Check if it's October
                 if (today.getMonth() == Month.OCTOBER) {
                     System.out.println("It's October! Updating everyone's salary scale...");
-                    salaryScales.updateSalaryScales();
+                    CSVManager.updateSalaryScales();
                 }
             } else {
                 // Proceed with login

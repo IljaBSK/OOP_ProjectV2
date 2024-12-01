@@ -266,6 +266,88 @@ public class CSVManager {
         }
     }
 
+    public static void updateSalaryScales() {
+        try {
+            List<String[]> employeeData = readEmployeeInfo(); // Read employee data
+
+            for (String[] employee : employeeData) {
+                String jobType = employee[6]; // Job title
+                int currentScalePoint = Integer.parseInt(employee[7]); // Scale point
+
+                // Get the maximum scale point for the job type
+                int maxScalePoint = getMaxScalePoint(jobType);
+
+                if (maxScalePoint == -1) {
+                    System.err.println("No salary scales found for job type: " + jobType);
+                    continue; // Skip this employee if no valid scale is found
+                }
+
+                // Increment scale point if it's within the limit
+                if (currentScalePoint < maxScalePoint) {
+                    employee[7] = String.valueOf(currentScalePoint + 1); // Increment scale point
+                } else {
+                    System.out.println("Employee ID " + employee[0] + " has reached the maximum scale point for " + jobType);
+                }
+            }
+
+            // Write updated data back to the CSV
+            writeEmployeeInfo(employeeData);
+            System.out.println("EmployeeInfo.csv updated successfully!");
+        } catch (IOException e) {
+            System.err.println("Error updating salary scales: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing scale point in EmployeeInfo.csv.");
+        }
+    }
+    /**
+     * Retrieves the maximum scale point for a specific job type from the salary scales data.
+     *
+     * <p>This method iterates through the salary scales file to find the highest scale point
+     * associated with the given job type. If no matching job type is found, an error message
+     * is logged, and the method returns {@code -1}.</p>
+     *
+     * @param jobType the job type to look up in the salary scales (e.g., "Senior Administrative Officer II").
+     * @return the maximum scale point for the given job type, or {@code -1} if no match is found.
+     */
+    public static int getMaxScalePoint(String jobType) {
+        int maxScalePoint = Integer.MIN_VALUE;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("FulltimeSalaryScales.csv"))) {
+            String line;
+
+            // Skip the header line
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length < 2) {
+                    System.err.println("Invalid row format in FulltimeSalaryScales.csv: " + line);
+                    continue; // Skip invalid rows
+                }
+
+                String currentJobTitle = parts[0].trim();
+
+                try {
+                    int scalePoint = Integer.parseInt(parts[1].trim());
+
+                    if (currentJobTitle.equalsIgnoreCase(jobType)) {
+                        maxScalePoint = Math.max(maxScalePoint, scalePoint);
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid scale point format in FulltimeSalaryScales.csv: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading FulltimeSalaryScales.csv: " + e.getMessage());
+        }
+
+        if (maxScalePoint == Integer.MIN_VALUE) {
+            System.err.println("No salary scales found for job type: " + jobType);
+            return -1; // Indicates that the job type was not found
+        }
+
+        return maxScalePoint;
+    }
 
     public static List<String[]> readEmployeeInfo() throws IOException {
         List<String[]> employeeData = new ArrayList<>();
