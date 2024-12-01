@@ -42,5 +42,30 @@ public class FulltimeSalaryScalesReader {
 
         throw new IOException("Salary not found for Job Title: " + jobTitle + " and Scale Point: " + scalePoint);
     }
+
+    public double getHourlyRate(String jobTitle) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            // Skip the header row
+            reader.readLine();
+
+            // Read through each line to find the job title
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                // Check if the job title matches
+                if (fields.length >= 3 && fields[0].trim().equalsIgnoreCase(jobTitle)) {
+                    // Parse the salary and calculate the hourly rate
+                    double annualSalary = Double.parseDouble(fields[2].trim());
+                    return annualSalary / 2080; // Divide by 2080 working hours in a year
+                }
+            }
+        }
+
+        // Return 0.0 if the job title is not found
+        return 0.0;
+    }
+
 }
-//TESTING COMMITING3wertrwertwetwetwgnfgnfg34tr4tretger
+//testing commiting infdsfd43243

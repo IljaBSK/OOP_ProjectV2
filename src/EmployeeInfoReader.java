@@ -69,4 +69,25 @@ public class EmployeeInfoReader {
 
         throw new IOException("Employee with ID " + employeeId + " not found in EmployeeInfo.csv.");
     }
+    public String getJobTitleByUsername(String username) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            // Skip the header row
+            reader.readLine();
+
+            // Search for the username
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                // Check if the username matches
+                if (fields[1].trim().equalsIgnoreCase(username)) {
+                    return fields[6].trim(); // Job Title is in column 7 (index 6)
+                }
+            }
+        }
+
+        return null; // Return null if the username is not found
+    }
+
 }

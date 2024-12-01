@@ -1,11 +1,15 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
 
 public class LoginSystem {
     private HashMap<String, User> users;
+    private HashMap<String, String> employeeStatuses;
     public LoginSystem() {
         users = CSVManager.readValidUsers();
+        employeeStatuses = CSVManager.readEmployeeStatus();
+
     }
 
     public void loginFunction() {
@@ -59,11 +63,25 @@ public class LoginSystem {
                             System.out.println("Login successful as Admin.");
                             this.adminLoggedIn((Admin) validUser);
                             loggedIn = true;
-                        } else if (roleCommand.equalsIgnoreCase("E") && validUser instanceof Employee) {
-                            System.out.println("Login successful as Employee.");
-                            this.employeeLoggedIn((Employee) validUser);
-                            loggedIn = true;
-                        } else if (roleCommand.equalsIgnoreCase("H") && validUser instanceof HR) {
+                        }
+
+                        else if (roleCommand.equalsIgnoreCase("E") && validUser instanceof Employee) {
+                            String status = employeeStatuses.getOrDefault(usernameIn, "Unknown");
+                            if (status.equalsIgnoreCase("Full-Time")) {
+                                System.out.println("Login successful as Full-Time Employee.");
+                                this.FulltimeemployeeLoggedIn((Employee) validUser);
+                                loggedIn = true;
+                            } else if (status.equalsIgnoreCase("Part-Time")) {
+                                System.out.println("Login successful as Part-Time Employee.");
+                                this.ParttimeemployeeLoggedIn((Employee) validUser);
+                                loggedIn = true;
+                            } else {
+                                System.out.println("Unknown Employee Status. Please contact Admin.");
+                            }
+                        }
+
+
+                            else if (roleCommand.equalsIgnoreCase("H") && validUser instanceof HR) {
                             System.out.println("Login successful as HR.");
                             this.hrLoggedIn((HR) validUser);
                             loggedIn = true;
@@ -119,10 +137,10 @@ public class LoginSystem {
         }
     }
 
-    public void employeeLoggedIn(Employee employee) {
-        System.out.println("-------------------------------------------");
-        System.out.println("        Welcome to the Employee Menu       ");
-        System.out.println("-------------------------------------------");
+    public void FulltimeemployeeLoggedIn(Employee employee) {
+        System.out.println("----------------------------------------------");
+        System.out.println("  Welcome to the Full-time Employee Menu"      );
+        System.out.println("----------------------------------------------");
 
         // Fetch updated employee details from EmployeeInfo.csv
         Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
@@ -153,6 +171,70 @@ public class LoginSystem {
 
         if (command.equalsIgnoreCase("V")) {
             // Payslip logic
+
+        }
+
+    }
+
+
+    public void ParttimeemployeeLoggedIn(Employee employee) {
+        System.out.println("----------------------------------------------");
+        System.out.println("   Welcome to the Part-time Employee Menu     ");
+        System.out.println("----------------------------------------------");
+
+        // Fetch updated employee details from EmployeeInfo.csv
+        Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
+
+        if (updatedEmployee != null && updatedEmployee.hasPendingPromotionFlag()) {
+            System.out.println("You have a pending promotion to: " + updatedEmployee.getJobTitle() + " (Scale Point: " + updatedEmployee.getScalePoint() + ")");
+            System.out.println("Do you want to accept or reject the promotion?");
+            System.out.println("A) Accept    R) Reject");
+
+            Scanner input = new Scanner(System.in);
+            String promotionCommand = input.nextLine().trim();
+
+            if (promotionCommand.equalsIgnoreCase("A")) {
+                updatedEmployee.confirmPromotion(); // Accept promotion
+            } else if (promotionCommand.equalsIgnoreCase("R")) {
+                updatedEmployee.rejectPromotion(); // Reject promotion
+            } else {
+                System.out.println("Invalid input. No action taken.");
+            }
+        }
+
+        System.out.println("Please select an option:");
+        System.out.println("S) Submit Pay Claim");
+        System.out.println("V) View Payslips");
+        System.out.println("L) Log Out");
+
+        Scanner input = new Scanner(System.in);
+        String command = input.nextLine().trim();
+
+        if (command.equalsIgnoreCase("S")) {
+            // Initialize dependencies
+            String employeeInfoFile = "EmployeeInfo.csv";
+            String salaryScalesFile = "FulltimeSalaryScales.csv";
+
+            try {
+                EmployeeInfoReader employeeReader = new EmployeeInfoReader(employeeInfoFile);
+                FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader(salaryScalesFile);
+                PaySlipWriter writer = new PaySlipWriter("PayClaim.csv");
+
+                // Initialize PaySlipCalculator
+                PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, writer);
+
+                // Call the submit pay claim method
+                calculator.submitPayClaim(employee.getUsername(), employeeReader);
+            } catch (IOException e) {
+                System.err.println("Error during pay claim submission: " + e.getMessage());
+            }
+        } else if (command.equalsIgnoreCase("V")) {
+            // View Payslips logic (not implemented yet)
+            System.out.println("Feature not implemented yet.");
+        } else if (command.equalsIgnoreCase("L")) {
+            System.out.println("Logging out...");
+        } else {
+            System.out.println("Invalid option. Please try again.");
         }
     }
 
