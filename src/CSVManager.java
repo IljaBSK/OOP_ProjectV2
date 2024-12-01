@@ -332,7 +332,7 @@ public class CSVManager {
         return employeeStatusMap;
     }
 
-    public void readPayslips(){
+    public HashMap<String, String> readPayslips(){
         String filename = "PaySlips.csv";
         HashMap<String, String> payslipInfo = new HashMap<>();
 
@@ -350,18 +350,18 @@ public class CSVManager {
                     String date = details[2].trim();
                     String jobTitle = details[3].trim();
                     String scalePoint = details[4].trim();
-                    String grossSalary = details[5].trim();
+                    String grossPay = details[5].trim();
                     String incomeTax = details[6].trim();
                     String prsi = details[7].trim();
                     String usc = details[8].trim();
                     String unionFee = details[9].trim();
-                    String netSalary = details[10].trim();
-
+                    String netPay = details[10].trim();
 
                 }
             }
 
             reader.close();
+            return payslipInfo;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
