@@ -44,6 +44,7 @@ public class HR extends User {
         System.out.println("Name: " + employee.getName());
         System.out.println("Job Title: " + employee.getJobTitle());
         System.out.println("Scale Point: " + employee.getScalePoint());
+        System.out.println("Years at Top Scale Point: " + employee.getYearsAtTop());
 
         // Save current job title and scale point as previous values
         employee.setPreviousJobTitle(employee.getJobTitle());
@@ -78,11 +79,11 @@ public class HR extends User {
         // Update the employee with new promotion details
         employee.setJobTitle(newJobTitle);
         employee.setScalePoint(newScalePoint);
+        employee.setPendingPromotionFlag(1); // Explicitly set promotion flag to 1
 
-        // Set promotion flag and update the CSV
-        CSVManager.updateEmployeeDetails(employee, 1);
+        // Update the CSV with the changes
+        CSVManager.updateEmployeeDetails(employee);
 
         System.out.println("Employee's role updated successfully. Awaiting confirmation.");
     }
-
 }

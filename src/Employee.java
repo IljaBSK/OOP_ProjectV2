@@ -12,6 +12,7 @@ public class Employee extends User {
     private int id;
     private String jobTitle;
     private int scalePoint;
+    private int yearsAtTop;
 
     //Fields to track the promotion status
     private int pendingPromotionFlag;
@@ -65,6 +66,9 @@ public class Employee extends User {
      * @return the ID of the employee
      */
     public int getId(){return id;}
+    public int getYearsAtTop() {
+        return yearsAtTop;
+    }
     /**
      * Gets the current job title of the employee.
      *
@@ -180,20 +184,28 @@ public class Employee extends User {
      */
     public void confirmPromotion() {
         if (hasPendingPromotionFlag()) {
-            System.out.println("Your role has been updated to: " + getJobTitle());
-            System.out.println("Press Enter to acknowledge your promotion.");
-            Scanner input = new Scanner(System.in);
-            input.nextLine(); // Wait for acknowledgment
+            System.out.println("Promotion confirmed. Congratulations on your new position!");
 
-            // Reset the promotion flag in the CSV
-            CSVManager.updatePromotionFlag(this.getId(), 0);
+            // Update the job title and scale point
+            this.jobTitle = this.previousJobTitle;
+            this.scalePoint = this.previousScalePoint;
 
-            System.out.println("Promotion acknowledged. Thank you!");
+            // Reset yearsAtTop
+            this.yearsAtTop = 0;
+
+            // Clear pending promotion flag
+            this.pendingPromotionFlag = 0;
+
+            // Clear previous job details
+            this.previousJobTitle = null;
+            this.previousScalePoint = 0;
+
+            // Update the employee information in the CSV
+            CSVManager.updateEmployeeDetails(this); // Only pass the Employee object
         } else {
             System.out.println("No promotion to confirm.");
         }
     }
-
 
     public void viewPayslips() {
         int employeeId = this.getId();

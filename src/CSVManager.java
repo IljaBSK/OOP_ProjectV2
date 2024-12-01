@@ -175,37 +175,28 @@ public class CSVManager {
      * @param promotionFlag the promotion flag value to set (e.g., 1 for pending, 0 for none)
      * @throws IOException if an error occurs while reading or writing the file
      */
-    public static void updateEmployeeDetails(Employee employee, int promotionFlag) {
+    public static void updateEmployeeDetails(Employee employee) {
         try {
-            List<String[]> employeeData = readEmployeeInfo();
+            List<String[]> employeeData = readEmployeeInfo(); // Load all employee records
 
-            for (int i = 0; i < employeeData.size(); i++) {
-                String[] record = employeeData.get(i);
-
+            for (String[] record : employeeData) {
                 if (record[0].equals(String.valueOf(employee.getId()))) {
-                    // Ensure the record has all required fields
-                    if (record.length < 11) {
-                        record = Arrays.copyOf(record, 11);
-                    }
-
                     // Update job title and scale point
-                    record[6] = employee.getJobTitle(); // Current job title
-                    record[7] = String.valueOf(employee.getScalePoint()); // Current scale point
-                    record[8] = String.valueOf(promotionFlag); // Promotion flag
+                    record[6] = employee.getJobTitle();
+                    record[7] = String.valueOf(employee.getScalePoint());
 
-                    // Save previous job title and scale point
-                    record[9] = employee.getPreviousJobTitle(); // Previous job title
-                    record[10] = String.valueOf(employee.getPreviousScalePoint()); // Previous scale point
+                    // Set promotion flag to 1
+                    record[8] = "1";
 
-                    // Replace the updated record in the list
-                    employeeData.set(i, record);
-                    break;
+                    // Update previous job details
+                    record[9] = employee.getPreviousJobTitle() == null ? "" : employee.getPreviousJobTitle();
+                    record[10] = String.valueOf(employee.getPreviousScalePoint());
                 }
             }
 
-            // Write back to the CSV
+            // Write updated data back to the CSV file
             writeEmployeeInfo(employeeData);
-            System.out.println("Employee details written to CSV.");
+            System.out.println("Employee details updated successfully.");
         } catch (IOException e) {
             System.err.println("Error updating employee details: " + e.getMessage());
         }
@@ -271,8 +262,15 @@ public class CSVManager {
             List<String[]> employeeData = readEmployeeInfo(); // Read employee data
 
             for (String[] employee : employeeData) {
+                // Ensure the record has all required fields
+                if (employee.length < 12) {
+                    employee = Arrays.copyOf(employee, 12);
+                    employee[11] = "0"; // Initialize yearsAtTop if missing
+                }
+
                 String jobType = employee[6]; // Job title
                 int currentScalePoint = Integer.parseInt(employee[7]); // Scale point
+                int yearsAtTop = Integer.parseInt(employee[11]); // Years at top
 
                 // Get the maximum scale point for the job type
                 int maxScalePoint = getMaxScalePoint(jobType);
@@ -285,8 +283,10 @@ public class CSVManager {
                 // Increment scale point if it's within the limit
                 if (currentScalePoint < maxScalePoint) {
                     employee[7] = String.valueOf(currentScalePoint + 1); // Increment scale point
+                    employee[11] = "0"; // Reset years at top
                 } else {
                     System.out.println("Employee ID " + employee[0] + " has reached the maximum scale point for " + jobType);
+                    employee[11] = String.valueOf(yearsAtTop + 1); // Increment years at top
                 }
             }
 
@@ -299,6 +299,7 @@ public class CSVManager {
             System.err.println("Error parsing scale point in EmployeeInfo.csv.");
         }
     }
+
     /**
      * Retrieves the maximum scale point for a specific job type from the salary scales data.
      *
@@ -451,12 +452,18 @@ public class CSVManager {
     private static void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
             // Write the header
-            String header = "id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint";
+            String header = "id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint,yearsAtTop";
             writer.write(header);
             writer.newLine();
 
             // Write each record
             for (String[] record : employeeData) {
+                // Ensure all records have the correct length
+                if (record.length < 12) {
+                    record = Arrays.copyOf(record, 12);
+                    record[11] = "0"; // Initialize yearsAtTop if missing
+                }
+
                 String line = String.join(",", record);
                 writer.write(line);
                 writer.newLine();
@@ -467,10 +474,6 @@ public class CSVManager {
             System.err.println("Error writing to EmployeeInfo.csv: " + e.getMessage());
         }
     }
-
-
-
-
     /**
      * Reads the work status of employees from the "EmployeeStatus.csv" file.
      *
