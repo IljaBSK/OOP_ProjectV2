@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="Got view payslips back lol" />
+    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="Hope this works" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733059801347</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Hope this works">
+      <option name="closed" value="true" />
+      <created>1733060091576</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733060091576</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +170,7 @@
     <MESSAGE value="TESTING IF ITS COMMITING" />
     <MESSAGE value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
     <MESSAGE value="Got view payslips back lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got view payslips back lol" />
+    <MESSAGE value="Hope this works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hope this works" />
   </component>
 </project>

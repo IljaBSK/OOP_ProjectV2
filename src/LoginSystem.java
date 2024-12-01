@@ -295,8 +295,7 @@ public class LoginSystem {
                 System.err.println("Error during pay claim submission: " + e.getMessage());
             }
         } else if (command.equalsIgnoreCase("V")) {
-            // View Payslips logic (not implemented yet)
-            System.out.println("Feature not implemented yet.");
+           employee.viewPayslips();
         } else if (command.equalsIgnoreCase("L")) {
             System.out.println("Logging out...");
         } else {
