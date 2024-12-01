@@ -35,6 +35,7 @@ public class PaySlipCalculator {
             // Step 2: Get gross salary from FulltimeSalaryScales.csv
             double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
 
+
             // Step 3: Calculate deductions
             double incomeTax = calculateIncomeTax(grossSalary);
             double prsi = calculatePRSI(grossSalary);
