@@ -11,7 +11,13 @@ public class Admin extends User {
     private String[] loginData;
     // Array to store employee data: ID, username, name, DOB, PPS number, job title, and scale point
     private String[] employeeData;
-
+    /**
+     * Constructs an Admin user with the specified username, password, and job type.
+     *
+     * @param username the username for the Admin user
+     * @param password the password for the Admin user
+     * @param jobType  the job type associated with the Admin user
+     */
     public Admin(String username, String password, String jobType) {
         super(username, password, jobType);
     }
@@ -270,10 +276,29 @@ public class Admin extends User {
             return false;
         }
     }
-
+    /**
+     * Checks if a given year is a leap year.
+     *
+     * <p>A year is considered a leap year if it is divisible by 4 but not by 100,
+     * unless it is also divisible by 400.</p>
+     *
+     * @param year the year to check
+     * @return <code>true</code> if the year is a leap year, <code>false</code> otherwise
+     */
     private boolean isLeapYear(int year) {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
+
+    /**
+     * Checks if a given ID is unique in the "EmployeeInfo.csv" file.
+     *
+     * <p>This method reads the CSV file and compares the given ID with existing IDs
+     * to determine if it is unique.</p>
+     *
+     * @param id the ID to check
+     * @return <code>true</code> if the ID is unique, <code>false</code> otherwise
+     * @throws IOException if an error occurs while reading the file
+     */
     private boolean isUniqueID(String id) {
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;

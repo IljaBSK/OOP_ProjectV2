@@ -11,7 +11,21 @@ public class LoginSystem {
         employeeStatuses = CSVManager.readEmployeeStatus();
 
     }
-
+    /**
+     * Handles the login functionality and system navigation.
+     * <p>This method provides a login interface for different user roles (Admin, Employee, HR).
+     * It also allows users to simulate moving the system date forward by days, weeks, or months
+     * before logging in. Special functionality is triggered if the date moves to October, such as
+     * updating salary scales.</p>
+     * <h3>Features:</h3>
+     * <ul>
+     *     <li>Simulates date advancement (Day, Week, Month).</li>
+     *     <li>Updates salary scales in October.</li>
+     *     <li>Handles user login for Admins, Employees (Full-Time and Part-Time), and HR roles.</li>
+     *     <li>Performs role and password validation.</li>
+     * </ul>
+     * @throws IOException if an error occurs during salary scale updates or other file operations
+     */
     public void loginFunction() {
         Scanner input = new Scanner(System.in);
         boolean loggedIn = false;
@@ -98,7 +112,17 @@ public class LoginSystem {
         }
         input.close();
     }
-
+    /**
+     * Handles the admin login process and presents the admin menu options.
+     *
+     * <p>This method displays the admin menu and allows the admin to perform specific actions:</p>
+     * <ul>
+     *     <li>Create a new employee by invoking the {@code createEmployee} method with the file {@code FullTimeSalaryScales.csv}.</li>
+     *     <li>Log out by selecting the corresponding menu option.</li>
+     * </ul>
+     *
+     * @param adminUser the {@link Admin} object representing the logged-in admin
+     */
     public void adminLoggedIn(Admin adminUser){
 
         System.out.println("-------------------------------------------");
@@ -117,7 +141,16 @@ public class LoginSystem {
 
         }
     }
-
+    /**
+     * Displays the HR menu for the logged-in HR user and handles user actions.
+     *
+     * <p>This method provides a text-based menu interface for an HR user,
+     * allowing them to select options to promote an employee or log out.
+     * Invalid inputs are handled gracefully by prompting the user to try again.
+     * The menu continues to display until the user chooses to log out.</p>
+     *
+     * @param hrUser the logged-in HR user who will interact with the menu
+     */
     public void hrLoggedIn(HR hrUser){
 
         System.out.println("-------------------------------------------");
@@ -136,7 +169,22 @@ public class LoginSystem {
 
         }
     }
-
+    /**
+     * Handles the menu and actions for a logged-in full-time employee.
+     *
+     * <p>This method displays the menu for a full-time employee, including options to:
+     * <ul>
+     *     <li>Check for and respond to pending promotions</li>
+     *     <li>View payslips</li>
+     *     <li>Log out</li>
+     * </ul>
+     * </p>
+     *
+     * <p>If the employee has a pending promotion, they can accept or reject it.
+     * Additional functionality such as viewing payslips can be implemented as needed.</p>
+     *
+     * @param employee the full-time employee who has logged in
+     */
     public void FulltimeemployeeLoggedIn(Employee employee) {
         System.out.println("----------------------------------------------");
         System.out.println("  Welcome to the Full-time Employee Menu"      );
@@ -176,7 +224,24 @@ public class LoginSystem {
 
     }
 
-
+    /**
+     * Handles the menu and actions for a logged-in part-time employee.
+     *
+     * <p>This method displays the menu for a part-time employee, including options to:
+     * <ul>
+     *     <li>Check for and respond to pending promotions</li>
+     *     <li>Submit a pay claim</li>
+     *     <li>View payslips</li>
+     *     <li>Log out</li>
+     * </ul>
+     * </p>
+     *
+     * <p>If the employee has a pending promotion, they can accept or reject it.
+     * The method also facilitates the submission of a pay claim by integrating with
+     * external readers and writers for employee information and salary scales.</p>
+     *
+     * @param employee the part-time employee who has logged in
+     */
     public void ParttimeemployeeLoggedIn(Employee employee) {
         System.out.println("----------------------------------------------");
         System.out.println("   Welcome to the Part-time Employee Menu     ");

@@ -69,6 +69,17 @@ public class EmployeeInfoReader {
 
         throw new IOException("Employee with ID " + employeeId + " not found in EmployeeInfo.csv.");
     }
+
+    /**
+     * Gets the job title of an employee by their username.
+     *
+     * <p>This method reads a CSV file to find the employee with the given username
+     * and returns their job title.</p>
+     *
+     * @param username the username of the employee
+     * @return the job title of the employee, or <code>null</code> if not found
+     * @throws IOException if an error occurs while reading the file
+     */
     public String getJobTitleByUsername(String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;

@@ -2,6 +2,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class PaySlipCalculator {
@@ -110,6 +112,18 @@ public class PaySlipCalculator {
             return 12012 * 0.005 + (25760 - 12012) * 0.02 + (70044 - 25760) * 0.04 + (grossSalary - 70044) * 0.08;
         }
     }
+
+    /**
+     * Submits a pay claim for an employee based on hours worked and their hourly rate.
+     *
+     * <p>This method retrieves the employee's job title and hourly rate, prompts for the
+     * number of hours worked, calculates the total pay, and appends the pay claim to the
+     * "PayClaims.csv" file.</p>
+     *
+     * @param username the username of the employee submitting the pay claim
+     * @param employeeReader an {@link EmployeeInfoReader} to retrieve employee information
+     * @throws IOException if an error occurs while reading or writing files
+     */
     public void submitPayClaim(String username, EmployeeInfoReader employeeReader) throws IOException {
         // Step 1: Retrieve job title from EmployeeInfo.csv
         String jobTitle = employeeReader.getJobTitleByUsername(username);
@@ -130,8 +144,19 @@ public class PaySlipCalculator {
 
         // Step 3: Prompt for hours worked
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the number of hours worked:");
-        int hoursWorked = input.nextInt();
+        int hoursWorked = -1;
+        while (hoursWorked < 0 || hoursWorked > 160) {
+            System.out.println("Enter the number of hours worked (0-160):");
+            try {
+                hoursWorked = input.nextInt();
+                if (hoursWorked < 0 || hoursWorked > 160) {
+                    System.out.println("Invalid hours worked. Please enter a value between 0 and 160. If you want to get Paid");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                input.next(); // Clear the invalid input
+            }
+        }
 
         // Step 4: Calculate total pay
         double totalPay = hoursWorked * hourlyRate;
@@ -152,6 +177,7 @@ public class PaySlipCalculator {
             throw e;
         }
     }
-}
+    }
+
 
 

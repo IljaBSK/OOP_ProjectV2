@@ -11,6 +11,14 @@ public class SalaryScales {
         salaryScales = new ArrayList<>();
     }
 
+    /**
+     * Loads salary scales from the "Fulltime_Salary_scales.csv" file.
+     *
+     * <p>This method reads the CSV file, skips the header, and parses each line to extract
+     * job type, scale point, and salary. Valid entries are added to the `salaryScales` list.</p>
+     *
+     * @throws IOException if an error occurs while reading the file
+     */
     public void loadSalaryScales() {
         try (Scanner scanner = new Scanner(new File("Fulltime_Salary_scales.csv"))) {
             // Skip the header line
@@ -38,7 +46,16 @@ public class SalaryScales {
         }
     }
 
-    // Method to get the salary for an employee based on jobType and scalePoint
+    /**
+     * Retrieves the salary for an employee based on their job type and scale point.
+     *
+     * <p>This method searches the {@code salaryScales} list for a matching job type and
+     * scale point. If a match is found, the corresponding salary is returned. If no match
+     * is found, it prints an error message and returns {@code 0.0}.</p>
+     *
+     * @param employee the {@link Employee} object containing the job type and scale point
+     * @return the matching salary, or {@code 0.0} if no match is found
+     */
     public double getSalary(Employee employee) {
         String jobType = employee.getJobType();
         int scalePoint = employee.getScalePoint();
@@ -58,13 +75,27 @@ public class SalaryScales {
         return 0.0; // Default value if no matching entry is found
     }
 
-    // Optional debugging method to print all salary scales
+    /**
+     * Prints the loaded salary scales to the console.
+     *
+     * <p>This method iterates through the {@code salaryScales} list and displays
+     * each job type, scale point, and salary in a readable format.</p>
+     */
     public void printSalaryScales() {
         System.out.println("Loaded Salary Scales:");
         for (String[] entry : salaryScales) {
             System.out.println("Job Type: " + entry[0] + ", Scale Point: " + entry[1] + ", Salary: " + entry[2]);
         }
     }
+    /**
+     * Updates the salary scales by incrementing the scale point for all employees.
+     *
+     * <p>This method reads employee data from the "EmployeeInfo.csv" file, increments
+     * the scale point for each employee, and writes the updated data back to the file.</p>
+     *
+     * @throws IOException if an error occurs while reading or writing the file
+     * @throws NumberFormatException if a scale point cannot be parsed as an integer
+     */
     public void updateSalaryScales() {
         try {
             List<String[]> employeeData = readEmployeeInfo(); // Read current data
@@ -83,7 +114,15 @@ public class SalaryScales {
             System.err.println("Error parsing scale point: " + e.getMessage());
         }
     }
-
+    /**
+     * Reads employee information from the "EmployeeInfo.csv" file.
+     *
+     * <p>This method reads all rows from the file, skipping the header row, and
+     * returns the data as a list of string arrays where each array represents an employee's record.</p>
+     *
+     * @return a list of string arrays, each representing an employee's record
+     * @throws IOException if an error occurs while reading the file
+     */
     private List<String[]> readEmployeeInfo() throws IOException {
         List<String[]> employeeData = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
@@ -102,6 +141,16 @@ public class SalaryScales {
         }
         return employeeData;
     }
+
+    /**
+     * Writes updated employee information to the "EmployeeInfo.csv" file.
+     *
+     * <p>This method overwrites the file with the provided employee data, including
+     * the header row and all employee records.</p>
+     *
+     * @param employeeData a list of string arrays, where each array represents an employee's record
+     * @throws IOException if an error occurs while writing to the file
+     */
     private void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
             // Write the header

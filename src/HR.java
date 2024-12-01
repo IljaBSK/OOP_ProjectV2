@@ -1,10 +1,27 @@
 import java.util.Scanner;
 
 public class HR extends User {
-
+    /**
+     * Constructs an HR user with the specified username, password, and job type.
+     *
+     * @param username the username for the HR user
+     * @param password the password for the HR user
+     * @param jobType  the job type associated with the HR user
+     */
     public HR(String username, String password, String jobType) {
         super(username, password, jobType);
     }
+    /**
+     * Promotes an employee by updating their job title and scale point.
+     * <p>This method guides the user through the process of promoting an employee. It:
+     *     <li>Prompts the user to enter the employee's ID.</li>
+     *     <li>Validates the employee ID and fetches the employee's current details.</li>
+     *     <li>Asks for a new job title and scale point, validating both against the system's rules.</li>
+     *     <li>Updates the employee's job title and scale point, sets the promotion flag,
+     *         and saves the changes to the employee record.</li>
+     * </p>
+     * @throws NumberFormatException if the scale point input is invalid
+     */
     public void promoteEmployee() {
         Scanner input = new Scanner(System.in);
         Employee employee = null;
