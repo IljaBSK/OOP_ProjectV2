@@ -331,7 +331,45 @@ public class CSVManager {
 
         return employeeStatusMap;
     }
+
+    public HashMap<String, String> readPayslips(){
+        String filename = "PaySlips.csv";
+        HashMap<String, String> payslipInfo = new HashMap<>();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            reader.readLine();
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length == 11) {
+                    String id = details[0].trim();
+                    String name = details[1].trim();
+                    String date = details[2].trim();
+                    String jobTitle = details[3].trim();
+                    String scalePoint = details[4].trim();
+                    String grossPay = details[5].trim();
+                    String incomeTax = details[6].trim();
+                    String prsi = details[7].trim();
+                    String usc = details[8].trim();
+                    String unionFee = details[9].trim();
+                    String netPay = details[10].trim();
+
+                }
+            }
+
+            reader.close();
+            return payslipInfo;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
 //test for commit attempt since mine is not workingwq dqwd qw
 
 

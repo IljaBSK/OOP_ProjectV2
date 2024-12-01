@@ -36,6 +36,7 @@ public class PaySlipCalculator {
             double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
             double grossPay = grossSalary / 12; // Divide salary for monthly payslips
 
+
             // Step 3: Calculate deductions
             double incomeTax = calculateIncomeTax(grossPay);
             double prsi = calculatePRSI(grossPay);

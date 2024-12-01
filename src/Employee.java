@@ -106,4 +106,8 @@ public class Employee extends User {
             System.out.println("No promotion to confirm.");
         }
     }
+
+    public void viewPayslips(){
+
+    }
 }
