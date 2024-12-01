@@ -1,0 +1,81 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"d5f87640-7b81-40cf-8f39-405108a9a8d3\" name=\"Changes\" comment=\"TESTING IF ITS COMMITING\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;BriEnright&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2&quot;,\r\n    &quot;accountId&quot;: &quot;8ca0b801-ff71-4f0d-bde0-a4d54576fd7a&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2pRowOIHG48ME6Q9TSrT5Pqh78W\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"Application.MenuSimulation.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Project/OOP_ProjectV2\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\iljab\\My Documents\\OOPProjectV2\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d5f87640-7b81-40cf-8f39-405108a9a8d3\" name=\"Changes\" comment=\"\" />\r\n      <created>1732738491383</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1732738491383</updated>\r\n      <workItem from=\"1732738492402\" duration=\"1190000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"TESTING IF ITS COMMITING\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733012782840</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733012782840</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"TESTING IF ITS COMMITING\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733012916489</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733012916489</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"TESTING IF ITS COMMITING\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"TESTING IF ITS COMMITING\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e950d1bf0302edd720f5d730bba4c072369ac0b7)
++++ b/.idea/workspace.xml	(date 1733013459976)
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="TESTING IF ITS COMMITING" />
++    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -26,12 +26,12 @@
+     &quot;assignee&quot;: &quot;BriEnright&quot;
+   }
+ }</component>
+-  <component name="GithubPullRequestsUISettings">{
+-  &quot;selectedUrlAndAccountId&quot;: {
+-    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2&quot;,
+-    &quot;accountId&quot;: &quot;8ca0b801-ff71-4f0d-bde0-a4d54576fd7a&quot;
+-  }
+-}</component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/IljaBSK/OOP_ProjectV2.git",
++    "accountId": "a8d251c6-9856-4993-b866-d0e541dc1921"
++  }
++}]]></component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 1
+ }</component>
+@@ -95,7 +95,31 @@
+       <option name="project" value="LOCAL" />
+       <updated>1733012916489</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
++      <option name="closed" value="true" />
++      <created>1733013166503</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1733013166503</updated>
++    </task>
++    <task id="LOCAL-00004" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
++      <option name="closed" value="true" />
++      <created>1733013359353</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1733013359353</updated>
++    </task>
++    <task id="LOCAL-00005" summary="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING">
++      <option name="closed" value="true" />
++      <created>1733013457412</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1733013457412</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -103,6 +127,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="TESTING IF ITS COMMITING" />
+-    <option name="LAST_COMMIT_MESSAGE" value="TESTING IF ITS COMMITING" />
++    <MESSAGE value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
++    <option name="LAST_COMMIT_MESSAGE" value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
+   </component>
+ </project>
+\ No newline at end of file
