@@ -331,7 +331,7 @@ public class LoginSystem {
                 }
             }
         } else if (command.equalsIgnoreCase("V")) {
-            // View Payslips logic (not implemented yet)
+            employee.viewPayslips();
             System.out.println("Feature not implemented yet.");
         } else if (command.equalsIgnoreCase("L")) {
             System.out.println("Logging out...");

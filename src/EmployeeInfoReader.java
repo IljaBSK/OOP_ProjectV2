@@ -140,4 +140,23 @@ public class EmployeeInfoReader {
 
         return null; // Return null if not found
     }
+
+    public String[] getEmployeeDataByUsername(String username) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            reader.readLine(); // Skip the header row
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                // Match by username (assuming it's in column 2, index 1)
+                if (fields[1].trim().equalsIgnoreCase(username)) {
+                    return fields; // Return the entire row as an array
+                }
+            }
+        }
+
+        return null; // Return null if username is not found
+    }
+
 }

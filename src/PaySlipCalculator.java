@@ -23,7 +23,6 @@ public class PaySlipCalculator {
     /**
      * Calculates and writes a payslip for an employee.
      *
-     * @param employeeId     The ID of the employee.
      * @param employeeReader The reader for EmployeeInfo.csv.
      * @param today
      * @return The net salary of the employee.
@@ -31,19 +30,23 @@ public class PaySlipCalculator {
 
 
 
-    public double calculateAndWritePayslip(String employeeId, EmployeeInfoReader employeeReader, LocalDate today) {
+    public double calculateAndWritePayslip(String username, EmployeeInfoReader employeeReader, LocalDate today) {
         try {
+            // Step 1: Get employee details by username
+            String[] employeeData = employeeReader.getEmployeeDataByUsername(username);
 
+            if (employeeData == null) {
+                throw new IOException("Employee with username " + username + " not found.");
+            }
 
-            // Step 1: Get job title and scale point from EmployeeInfo.csv
-            String jobTitle = employeeReader.getJobTitle(employeeId);
-            String scalePoint = employeeReader.getScalePoint(employeeId);
-            String name = employeeReader.getName(employeeId);
+            String employeeId = employeeData[0].trim(); // Assuming ID is in the first column
+            String name = employeeData[2].trim();      // Assuming name is in the third column
+            String jobTitle = employeeData[6].trim(); // Assuming job title is in the 7th column
+            String scalePoint = employeeData[7].trim(); // Assuming scale point is in the 8th column
 
             // Step 2: Get gross salary from FulltimeSalaryScales.csv
             double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
             double grossPay = grossSalary / 12; // Divide salary for monthly payslips
-
 
             // Step 3: Calculate deductions
             double incomeTax = calculateIncomeTax(grossPay);
@@ -52,7 +55,6 @@ public class PaySlipCalculator {
             double unionFee = grossPay * 0.08; // 8% union fee
             double totalDeductions = incomeTax + prsi + usc + unionFee;
             double netPay = grossPay - totalDeductions;
-            double healthInsurance = 0.001;
 
             // Step 4: Prepare payslip data
             String[] payslipData = {
@@ -61,25 +63,26 @@ public class PaySlipCalculator {
                     today.toString(),
                     jobTitle,
                     scalePoint,
-                    String.format("%.2f", grossPay),        // Format to 2 decimal places
+                    String.format("%.2f", grossPay), // Format to 2 decimal places
                     String.format("%.2f", incomeTax),
                     String.format("%.2f", prsi),
                     String.format("%.2f", usc),
                     String.format("%.2f", unionFee),
-                    String.format("%.2f", netPay),
-
+                    String.format("%.2f", netPay)
             };
+
             // Step 5: Write payslip to PaySlips.csv
             writer.writePayslip(payslipData, today);
 
-            System.out.println("Payslip successfully generated for Employee ID: " + employeeId);
+            System.out.println("Payslip successfully generated for username: " + username);
             return netPay;
 
         } catch (IOException e) {
-            System.err.println("Error processing payslip for Employee ID " + employeeId + ": " + e.getMessage());
+            System.err.println("Error processing payslip for username " + username + ": " + e.getMessage());
             return 0.0;
         }
     }
+
 
     /**
      * Calculate income tax (20% for first 42k, 40% for the rest).
