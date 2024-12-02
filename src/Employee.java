@@ -162,10 +162,8 @@ public class Employee extends User {
         if (hasPendingPromotionFlag()) {
             System.out.println("Promotion rejected. Reverting to previous position...");
 
-            // Delegate to CSVManager to handle the reversion
             String[] revertedDetails = CSVManager.revertPromotion(this);
 
-            // Log the reverted details for confirmation
             System.out.println("Your position has been reverted to: " + revertedDetails[0] +
                     " (Scale Point: " + revertedDetails[1] + ")");
         } else {
@@ -186,22 +184,17 @@ public class Employee extends User {
         if (hasPendingPromotionFlag()) {
             System.out.println("Promotion confirmed. Congratulations on your new position!");
 
-            // Update the job title and scale point
             this.jobTitle = this.previousJobTitle;
             this.scalePoint = this.previousScalePoint;
 
-            // Reset yearsAtTop
             this.yearsAtTop = 0;
 
-            // Clear pending promotion flag
             this.pendingPromotionFlag = 0;
 
-            // Clear previous job details
             this.previousJobTitle = null;
             this.previousScalePoint = 0;
 
-            // Update the employee information in the CSV
-            CSVManager.updateEmployeeDetails(this); // Only pass the Employee object
+            CSVManager.updateEmployeeDetails(this);
         } else {
             System.out.println("No promotion to confirm.");
         }
@@ -219,11 +212,11 @@ public class Employee extends User {
         String inputDate = month + "/" + year;
 
         String filename = "PaySlips.csv";
-        boolean payslipFound = false; // Flag to track if payslip is found
+        boolean payslipFound = false;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
-            reader.readLine(); // Skip the header line
+            reader.readLine();
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -233,7 +226,6 @@ public class Employee extends User {
                     String date = details[2].trim();
 
                     if (id == employeeId && date.equals(inputDate)) {
-                        // Print payslip details
                         String name = details[1].trim();
                         String jobTitle = details[3].trim();
                         String scalePoint = details[4].trim();
@@ -264,7 +256,6 @@ public class Employee extends User {
 
             reader.close();
 
-            // Check if no payslip was found
             if (!payslipFound) {
                 System.out.println("No payslip found for the provided date.");
             }

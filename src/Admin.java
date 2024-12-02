@@ -29,15 +29,14 @@ public class Admin extends User {
      * @param salaryScalesFilePath Path to the CSV file containing job titles and their scale points.
      */
     public void createEmployee(String salaryScalesFilePath) {
-        Scanner scanner = new Scanner(System.in); // Create a scanner to take input from the user
+        Scanner scanner = new Scanner(System.in);
         String flag = "0";
-        // Collect Login Information
         String username;
         while (true) {
             System.out.println("Enter Username: ");
             username = scanner.nextLine();
             if (isUniqueUsername(username)) {
-                break; // Exit the loop if the username is unique
+                break;
             } else {
                 System.out.println("Username already exists. Please enter a unique username.");
             }
@@ -46,18 +45,16 @@ public class Admin extends User {
         System.out.println("Enter Password: ");
         String password = scanner.nextLine();
 
-        // Prompt the user to select a job type
         String jobType = "";
-        while (true) { // Loop until the user provides a valid job type
+        while (true) {
             System.out.println("Select Job Type:");
             System.out.println("1) Employee   2) HR   3) Admin");
             System.out.print("Enter corresponding number: ");
-            String command = scanner.nextLine(); // Read the user's choice
+            String command = scanner.nextLine();
 
-            // Check the input and assign the corresponding job type
             if (command.equals("1")) {
                 jobType = "Employee";
-                break; // Exit the loop if the input is valid
+                break;
             } else if (command.equals("2")) {
                 jobType = "HR";
                 break;
@@ -65,11 +62,10 @@ public class Admin extends User {
                 jobType = "Admin";
                 break;
             } else {
-                System.out.println("Invalid input. Enter 1, 2, or 3."); // Re-prompt on invalid input
+                System.out.println("Invalid input. Enter 1, 2, or 3.");
             }
         }
 
-        // Store the login data into the array
         loginData = new String[]{username, password, jobType};
 
         String id;
@@ -97,57 +93,51 @@ public class Admin extends User {
             }
         }
 
-        // Validate PPS number (must be 7 or 8 characters long)
         String ppsNo;
-        while (true) { // Loop until a valid PPS number is entered
+        while (true) {
             System.out.println("Enter PPS Number: ");
-            ppsNo = scanner.nextLine(); // Read the PPS number
+            ppsNo = scanner.nextLine();
 
-            if (ppsNo.length() == 7 || ppsNo.length() == 8) { // Check length
-                break; // Exit the loop if valid
+            if (ppsNo.length() == 7 || ppsNo.length() == 8) {
+                break;
             } else {
-                System.out.println("Invalid PPS Number. Must be 7 or 8 characters."); // Re-prompt on invalid input
+                System.out.println("Invalid PPS Number. Must be 7 or 8 characters.");
             }
         }
 
-        // Step 3: Read Job Titles and Scale Points from CSV
-        // This list will hold job titles and their scale points from the CSV file
         List<String[]> jobTitleData = readJobTitlesFromCSV(salaryScalesFilePath);
 
-        // Step 4: Select Job Title
-        String jobTitle = ""; // Variable to store the selected job title
-        List<Integer> validScalePoints = new ArrayList<>(); // List of valid scale points for the selected job title
+        String jobTitle = "";
+        List<Integer> validScalePoints = new ArrayList<>();
 
-        if (!jobTitleData.isEmpty()) { // Ensure there are job titles available
-            while (true) { // Loop until a valid job title is selected
+        if (!jobTitleData.isEmpty()) {
+            while (true) {
                 System.out.println("Select Job Title:");
-                Set<String> displayedTitles = new HashSet<>(); // Track displayed job titles
-                int displayIndex = 1; // Counter for options
+                Set<String> displayedTitles = new HashSet<>();
+                int displayIndex = 1;
 
-                // Display unique job titles
                 for (String[] data : jobTitleData) {
-                    String currentJobTitle = data[0]; // Get job title
+                    String currentJobTitle = data[0];
                     if (!displayedTitles.contains(currentJobTitle)) {
-                        displayedTitles.add(currentJobTitle); // Mark job title as displayed
-                        System.out.println(displayIndex + ") " + currentJobTitle); // Print unique job title
+                        displayedTitles.add(currentJobTitle);
+                        System.out.println(displayIndex + ") " + currentJobTitle);
                         displayIndex++;
                     }
                 }
 
                 System.out.print("Enter the number corresponding to the job title: ");
-                String command = scanner.nextLine(); // Read the user's choice
+                String command = scanner.nextLine();
 
                 try {
-                    int choice = Integer.parseInt(command); // Convert input to a number
-                    if (choice >= 1 && choice < displayIndex) { // Check valid range
-                        // Find the job title based on display order
+                    int choice = Integer.parseInt(command);
+                    if (choice >= 1 && choice < displayIndex) {
                         displayedTitles.clear();
-                        int selectedIndex = 1; // Counter to match the displayed order
+                        int selectedIndex = 1;
                         for (String[] data : jobTitleData) {
                             String currentJobTitle = data[0];
                             if (!displayedTitles.contains(currentJobTitle)) {
                                 if (selectedIndex == choice) {
-                                    jobTitle = currentJobTitle; // Assign the selected job title
+                                    jobTitle = currentJobTitle;
                                     break;
                                 }
                                 displayedTitles.add(currentJobTitle);
@@ -155,42 +145,39 @@ public class Admin extends User {
                             }
                         }
 
-                        validScalePoints.clear(); // Clear scale points
-                        // Populate scale points for the selected job title
+                        validScalePoints.clear();
                         for (String[] data : jobTitleData) {
                             if (data[0].equals(jobTitle)) {
-                                validScalePoints.add(Integer.parseInt(data[1])); // Add scale points
+                                validScalePoints.add(Integer.parseInt(data[1]));
                             }
                         }
-                        break; // Exit loop after valid selection
+                        break;
                     } else {
-                        System.out.println("Invalid choice. Please select a number from the list."); // Handle invalid input
+                        System.out.println("Invalid choice. Please select a number from the list.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a valid number."); // Handle non-numeric input
+                    System.out.println("Invalid input. Please enter a valid number.");
                 }
             }
         } else {
-            System.out.println("No job titles available in the file."); // Exit if the file is empty
-            return; // Exit the method
+            System.out.println("No job titles available in the file.");
+            return;
         }
 
-
-        // Step 5: Validate Scale Point
-        String scalePoint = ""; // Variable to store the scale point
-        while (true) { // Loop until a valid scale point is entered
+        String scalePoint = "";
+        while (true) {
             System.out.println("Enter Scale Point (" + validScalePoints + "): ");
-            scalePoint = scanner.nextLine(); // Read the scale point
+            scalePoint = scanner.nextLine();
 
             try {
-                int scalePointInt = Integer.parseInt(scalePoint); // Convert input to a number
-                if (validScalePoints.contains(scalePointInt)) { // Check if the scale point is valid
-                    break; // Exit the loop if valid
+                int scalePointInt = Integer.parseInt(scalePoint);
+                if (validScalePoints.contains(scalePointInt)) {
+                    break;
                 } else {
-                    System.out.println("Invalid Scale Point. Please enter a valid point for " + jobTitle + "."); // Re-prompt
+                    System.out.println("Invalid Scale Point. Please enter a valid point for " + jobTitle + ".");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Scale Point must be a number."); // Handle non-numeric input
+                System.out.println("Invalid input. Scale Point must be a number.");
             }
         }
 
@@ -212,7 +199,6 @@ public class Admin extends User {
             }
         }
 
-        // Step 6: Store Employee Data
         employeeData = new String[]{id, username, name, dob, ppsNo, password, jobTitle, scalePoint, flag};
 
         System.out.println("Data collected successfully.");
@@ -221,12 +207,10 @@ public class Admin extends User {
 
         try {
             if (getLoginData() != null) {
-                // Write login data to ValidLogins.csv
                 csvWriter.writeToCSV(getLoginData(), "ValidLogins.csv");
             }
 
             if (getEmployeeData() != null) {
-                // Write employee data to EmployeeInfo.csv
                 csvWriter.writeToCSV(getEmployeeData(), "EmployeeInfo.csv");
             }
             csvWriter.writeToCSV(new String[]{username, workStatus}, "EmployeeStatus.csv");
@@ -244,22 +228,21 @@ public class Admin extends User {
      * @return A list of job titles and their scale points.
      */
     private List<String[]> readJobTitlesFromCSV(String filePath) {
-        List<String[]> jobTitles = new ArrayList<>(); // List to store job titles and scale points
+        List<String[]> jobTitles = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
-            // Skip the header row
             reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(","); // Split each line into fields
+                String[] fields = line.split(",");
                 if (fields.length > 1) {
-                    jobTitles.add(new String[]{fields[0].trim(), fields[1].trim()}); // Add job title and scale point
+                    jobTitles.add(new String[]{fields[0].trim(), fields[1].trim()});
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading job titles from file: " + e.getMessage()); // Handle file read errors
+            System.out.println("Error reading job titles from file: " + e.getMessage());
         }
-        return jobTitles; // Return the list of job titles and scale points
+        return jobTitles;
     }
 
     /**
@@ -332,13 +315,13 @@ public class Admin extends User {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length > 0 && parts[0].equals(id)) {
-                    return false; // ID already exists
+                    return false;
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading EmployeeInfo.csv: " + e.getMessage());
         }
-        return true; // ID is unique
+        return true;
     }
 
     private boolean isUniqueUsername(String username) {
@@ -346,14 +329,14 @@ public class Admin extends User {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length > 1 && parts[1].equals(username)) { // Check if the username exists
-                    return false; // Username already exists
+                if (parts.length > 1 && parts[1].equals(username)) {
+                    return false;
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading EmployeeInfo.csv: " + e.getMessage());
         }
-        return true; // Username is unique
+        return true;
     }
 }
 

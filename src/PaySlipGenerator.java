@@ -7,36 +7,31 @@ import java.util.Map;
 
 public class PaySlipGenerator {
     public void payslipGenerator() {
-        // Load necessary readers and writers
+
         EmployeeInfoReader employeeReader = new EmployeeInfoReader("EmployeeInfo.csv");
         FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader("FulltimeSalaryScales.csv");
         PaySlipWriter paySlipWriter = new PaySlipWriter("PaySlips.csv");
         PayClaimsReader payClaimsReader = new PayClaimsReader("PayClaims.csv");
 
-        // Load work status data
         Map<String, String> workStatusMap = loadWorkStatus("EmployeeStatus.csv");
 
-        // Initialize the PaySlipCalculator
         PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, paySlipWriter);
 
-        // Load employee data
         try {
             for (String[] employeeData : CSVManager.readEmployeeInfo()) {
-                String username = employeeData[1].trim(); // Username is in the 2nd column
+                String username = employeeData[1].trim();
                 String workStatus = workStatusMap.get(username);
 
                 if (workStatus == null) {
                     System.out.println("Work status not found for username: " + username);
-                    continue; // Skip employees with no status
+                    continue;
                 }
 
                 LocalDate today = LocalDate.now();
 
                 if ("Full-Time".equalsIgnoreCase(workStatus)) {
-                    // Generate payslip for full-time employees
                     calculator.calculateAndWritePayslip(username, employeeReader, today);
                 } else if ("Part-Time".equalsIgnoreCase(workStatus)) {
-                    // Check if a pay claim exists for this employee
                     if (payClaimsReader.hasPayClaim(username)) {
                         calculator.calculateAndWritePayslip(username, employeeReader, today);
                     } else {
@@ -56,7 +51,7 @@ public class PaySlipGenerator {
     private Map<String, String> loadWorkStatus(String filePath) {
         Map<String, String> workStatusMap = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line = reader.readLine(); // Skip the header row
+            String line;
 
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");

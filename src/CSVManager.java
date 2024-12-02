@@ -21,7 +21,7 @@ public class CSVManager {
     public static boolean isValidJobTitle(String jobTitle) {
         String filename = "FulltimeSalaryScales.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line = reader.readLine(); // Skip the header
+            String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
                 if (details.length >= 1 && details[0].trim().equalsIgnoreCase(jobTitle)) {
@@ -54,14 +54,12 @@ public class CSVManager {
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
 
-                // Check if the job title matches
                 if (details[0].trim().equalsIgnoreCase(jobTitle)) {
                     int currentScalePoint = Integer.parseInt(details[1].trim());
-                    maxScalePoint = Math.max(maxScalePoint, currentScalePoint); // Track the max scale point
+                    maxScalePoint = Math.max(maxScalePoint, currentScalePoint);
                 }
             }
 
-            // Validate the scale point
             return scalePoint > 0 && scalePoint <= maxScalePoint;
         } catch (IOException e) {
             System.err.println("Error reading FulltimeSalaryScales.csv: " + e.getMessage());
@@ -69,7 +67,7 @@ public class CSVManager {
             System.err.println("Invalid number format in FulltimeSalaryScales.csv.");
         }
 
-        return false; // Return false if an error occurs or no matching job title is found
+        return false;
     }
     /**
      * Reads valid user details from the "ValidLogins.csv" file and creates a map of users.
@@ -113,7 +111,6 @@ public class CSVManager {
                     System.out.println("Too many details input");
                 }
             }
-
             reader.close();
             return users;
         } catch (FileNotFoundException e) {
@@ -177,24 +174,18 @@ public class CSVManager {
      */
     public static void updateEmployeeDetails(Employee employee) {
         try {
-            List<String[]> employeeData = readEmployeeInfo(); // Load all employee records
+            List<String[]> employeeData = readEmployeeInfo();
 
             for (String[] record : employeeData) {
                 if (record[0].equals(String.valueOf(employee.getId()))) {
-                    // Update job title and scale point
                     record[6] = employee.getJobTitle();
                     record[7] = String.valueOf(employee.getScalePoint());
-
-                    // Set promotion flag to 1
                     record[8] = "1";
-
-                    // Update previous job details
                     record[9] = employee.getPreviousJobTitle() == null ? "" : employee.getPreviousJobTitle();
                     record[10] = String.valueOf(employee.getPreviousScalePoint());
                 }
             }
 
-            // Write updated data back to the CSV file
             writeEmployeeInfo(employeeData);
             System.out.println("Employee details updated successfully.");
         } catch (IOException e) {
@@ -223,25 +214,20 @@ public class CSVManager {
                 String[] record = employeeData.get(i);
 
                 if (record[0].equals(String.valueOf(employee.getId()))) {
-                    // Ensure the record has all required fields
                     if (record.length < 11) {
                         record = Arrays.copyOf(record, 11);
                     }
 
-                    // Fetch previous job title and scale point
                     revertedJobTitle = record[9];
                     revertedScalePoint = record[10];
 
-                    // Revert current job title and scale point
-                    record[6] = revertedJobTitle; // Revert job title
-                    record[7] = revertedScalePoint; // Revert scale point
-                    record[8] = "0"; // Reset promotion flag
+                    record[6] = revertedJobTitle;
+                    record[7] = revertedScalePoint;
+                    record[8] = "0";
 
-                    // Clear previous job title and scale point
-                    record[9] = ""; // Clear previous job title
-                    record[10] = "0"; // Clear previous scale point
+                    record[9] = "";
+                    record[10] = "0";
 
-                    // Update the record in the list
                     employeeData.set(i, record);
                     break;
                 }
@@ -253,44 +239,40 @@ public class CSVManager {
             return new String[]{revertedJobTitle, revertedScalePoint};
         } catch (IOException e) {
             System.err.println("Error reverting promotion: " + e.getMessage());
-            return new String[]{"", "0"}; // Return empty details on error
+            return new String[]{"", "0"};
         }
     }
 
     public static void updateSalaryScales() {
         try {
-            List<String[]> employeeData = readEmployeeInfo(); // Read employee data
+            List<String[]> employeeData = readEmployeeInfo();
 
             for (String[] employee : employeeData) {
-                // Ensure the record has all required fields
                 if (employee.length < 12) {
                     employee = Arrays.copyOf(employee, 12);
-                    employee[11] = "0"; // Initialize yearsAtTop if missing
+                    employee[11] = "0";
                 }
 
-                String jobType = employee[6]; // Job title
-                int currentScalePoint = Integer.parseInt(employee[7]); // Scale point
-                int yearsAtTop = Integer.parseInt(employee[11]); // Years at top
+                String jobType = employee[6];
+                int currentScalePoint = Integer.parseInt(employee[7]);
+                int yearsAtTop = Integer.parseInt(employee[11]);
 
-                // Get the maximum scale point for the job type
                 int maxScalePoint = getMaxScalePoint(jobType);
 
                 if (maxScalePoint == -1) {
                     System.err.println("No salary scales found for job type: " + jobType);
-                    continue; // Skip this employee if no valid scale is found
+                    continue;
                 }
 
-                // Increment scale point if it's within the limit
                 if (currentScalePoint < maxScalePoint) {
-                    employee[7] = String.valueOf(currentScalePoint + 1); // Increment scale point
-                    employee[11] = "0"; // Reset years at top
+                    employee[7] = String.valueOf(currentScalePoint + 1);
+                    employee[11] = "0";
                 } else {
                     System.out.println("Employee ID " + employee[0] + " has reached the maximum scale point for " + jobType);
-                    employee[11] = String.valueOf(yearsAtTop + 1); // Increment years at top
+                    employee[11] = String.valueOf(yearsAtTop + 1);
                 }
             }
 
-            // Write updated data back to the CSV
             writeEmployeeInfo(employeeData);
             System.out.println("EmployeeInfo.csv updated successfully!");
         } catch (IOException e) {
@@ -316,14 +298,13 @@ public class CSVManager {
         try (BufferedReader reader = new BufferedReader(new FileReader("FulltimeSalaryScales.csv"))) {
             String line;
 
-            // Skip the header line
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length < 2) {
                     System.err.println("Invalid row format in FulltimeSalaryScales.csv: " + line);
-                    continue; // Skip invalid rows
+                    continue;
                 }
 
                 String currentJobTitle = parts[0].trim();
@@ -344,7 +325,7 @@ public class CSVManager {
 
         if (maxScalePoint == Integer.MIN_VALUE) {
             System.err.println("No salary scales found for job type: " + jobType);
-            return -1; // Indicates that the job type was not found
+            return -1;
         }
 
         return maxScalePoint;
@@ -355,12 +336,9 @@ public class CSVManager {
         try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
             String line;
 
-            // Skip the header row
             if ((line = reader.readLine()) != null && line.toLowerCase().contains("id")) {
-                line = reader.readLine(); // Move to the first data row
+                line = reader.readLine();
             }
-
-            // Read each row and split into columns
             while (line != null) {
                 employeeData.add(line.split(","));
                 line = reader.readLine();
@@ -420,7 +398,6 @@ public class CSVManager {
                 String[] details = line.split(",");
 
                 if (details.length >= 9 && details[1].trim().equalsIgnoreCase(username)) {
-                    // Map CSV fields to Employee object
                     int id = Integer.parseInt(details[0].trim());
                     String name = details[2].trim();
                     String dob = details[3].trim();
@@ -451,24 +428,19 @@ public class CSVManager {
      */
     private static void writeEmployeeInfo(List<String[]> employeeData) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
-            // Write the header
             String header = "id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint,yearsAtTop";
             writer.write(header);
             writer.newLine();
 
-            // Write each record
             for (String[] record : employeeData) {
-                // Ensure all records have the correct length
                 if (record.length < 12) {
                     record = Arrays.copyOf(record, 12);
-                    record[11] = "0"; // Initialize yearsAtTop if missing
+                    record[11] = "0";
                 }
-
                 String line = String.join(",", record);
                 writer.write(line);
                 writer.newLine();
             }
-
             System.out.println("CSV file updated successfully.");
         } catch (IOException e) {
             System.err.println("Error writing to EmployeeInfo.csv: " + e.getMessage());
@@ -489,7 +461,7 @@ public class CSVManager {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
-            reader.readLine(); // Skip the header row
+            reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
@@ -504,7 +476,6 @@ public class CSVManager {
         } catch (IOException e) {
             System.err.println("Error reading EmployeeStatus.csv: " + e.getMessage());
         }
-
         return employeeStatusMap;
     }
 }

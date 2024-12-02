@@ -34,14 +34,5 @@ public class User{
     public String getPassword() {
         return password;
     }
-    /**
-     * Retrieves the job type of the user.
-     *
-     * @return the job type of the user
-     */
 
-    public String getJobType() {
-        return jobType;
-    }
-    //
 }

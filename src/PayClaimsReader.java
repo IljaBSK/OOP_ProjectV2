@@ -11,20 +11,18 @@ public class PayClaimsReader {
 
     public boolean hasPayClaim(String employeeId) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            reader.readLine(); // Skip the header row
-
+            reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
                 if (fields.length >= 1) {
                     String id = fields[0].trim();
                     if (id.equals(employeeId)) {
-                        return true; // Pay claim found for the employee
+                        return true;
                     }
                 }
             }
         }
-
-        return false; // No pay claim found
+        return false;
     }
 }

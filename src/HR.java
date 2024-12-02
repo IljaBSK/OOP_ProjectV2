@@ -26,12 +26,10 @@ public class HR extends User {
         Scanner input = new Scanner(System.in);
         Employee employee = null;
 
-        // Prompt for Employee ID
         while (employee == null) {
             System.out.println("Enter the Employee ID to promote:");
             String empID = input.nextLine().trim();
 
-            // Fetch the employee data
             employee = CSVManager.getEmployeeByID(empID);
 
             if (employee == null) {
@@ -39,22 +37,18 @@ public class HR extends User {
             }
         }
 
-        // Display current details
         System.out.println("Current Details:");
         System.out.println("Name: " + employee.getName());
         System.out.println("Job Title: " + employee.getJobTitle());
         System.out.println("Scale Point: " + employee.getScalePoint());
         System.out.println("Years at Top Scale Point: " + employee.getYearsAtTop());
 
-        // Save current job title and scale point as previous values
         employee.setPreviousJobTitle(employee.getJobTitle());
         employee.setPreviousScalePoint(employee.getScalePoint());
 
-        // Prompt for new promotion details
         String newJobTitle = null;
         int newScalePoint = -1;
 
-        // Validate job title
         while (newJobTitle == null || !CSVManager.isValidJobTitle(newJobTitle)) {
             System.out.println("Enter new job title (must be valid):");
             newJobTitle = input.nextLine().trim();
@@ -63,7 +57,6 @@ public class HR extends User {
             }
         }
 
-        // Validate scale point
         while (newScalePoint == -1 || !CSVManager.isValidScalePoint(newJobTitle, newScalePoint)) {
             System.out.println("Enter new scale point (must be within the valid range for the job title):");
             try {
@@ -76,12 +69,10 @@ public class HR extends User {
             }
         }
 
-        // Update the employee with new promotion details
         employee.setJobTitle(newJobTitle);
         employee.setScalePoint(newScalePoint);
-        employee.setPendingPromotionFlag(1); // Explicitly set promotion flag to 1
+        employee.setPendingPromotionFlag(1);
 
-        // Update the CSV with the changes
         CSVManager.updateEmployeeDetails(employee);
 
         System.out.println("Employee's role updated successfully. Awaiting confirmation.");

@@ -35,13 +35,11 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         boolean loggedIn = false;
 
-        // Initialize the current date
         LocalDate today = LocalDate.now();
 
         CSVManager csvManager = new CSVManager();
 
         while (!loggedIn) {
-
 
             if (today.getDayOfMonth() == 25) {
                 System.out.println("Sending payslips out...");
@@ -53,8 +51,6 @@ public class LoginSystem {
                 }
             }
 
-
-            // Display the current date and day of the week
             System.out.println("-------------------------------------------");
             System.out.println("       Welcome to the UL System");
             System.out.println("       Current Date: " + today + " (" + today.getDayOfWeek() + ")");
@@ -62,11 +58,6 @@ public class LoginSystem {
             System.out.println("Enter D)ay, W)eek, or M)onth to move forward or press Enter to proceed with login:");
 
 
-
-
-
-
-            // Get user input
             String command = input.nextLine().trim();
 
             if (command.equalsIgnoreCase("D") || command.equalsIgnoreCase("D)ay")) {
@@ -79,14 +70,14 @@ public class LoginSystem {
                 // Move forward by 1 month
                 today = today.plusMonths(1);
 
-                // Check if it's October
+
                 if (today.getMonth() == Month.OCTOBER ) {
                     System.out.println("It's October! Updating everyone's salary scale...");
                     csvManager.updateSalaryScales();
                 }
 
             } else {
-                // Proceed with login
+
                 System.out.println("Select your role: A)dmin E)mployee H)R");
                 String roleCommand = input.nextLine().trim();
                 System.out.println("Enter your username:");
@@ -273,10 +264,8 @@ public class LoginSystem {
         System.out.println("   Welcome to the Part-time Employee Menu     ");
         System.out.println("----------------------------------------------");
 
-        // Fetch updated employee details from EmployeeInfo.csv
         Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
 
-        // Handle pending promotions
         if (updatedEmployee != null && updatedEmployee.hasPendingPromotionFlag()) {
             System.out.println("You have a pending promotion to: " + updatedEmployee.getJobTitle() +
                     " (Scale Point: " + updatedEmployee.getScalePoint() + ")");
@@ -287,9 +276,9 @@ public class LoginSystem {
             String promotionCommand = input.nextLine().trim();
 
             if (promotionCommand.equalsIgnoreCase("A")) {
-                updatedEmployee.confirmPromotion(); // Accept promotion
+                updatedEmployee.confirmPromotion();
             } else if (promotionCommand.equalsIgnoreCase("R")) {
-                updatedEmployee.rejectPromotion(); // Reject promotion
+                updatedEmployee.rejectPromotion();
             } else {
                 System.out.println("Invalid input. No action taken.");
             }
@@ -303,15 +292,14 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
 
-        // Calculate the second Friday of the current month
         LocalDate secondFriday = getSecondFriday(today);
 
         if (command.equalsIgnoreCase("S")) {
             if (today.isAfter(secondFriday)) {
                 System.out.println("Pay claims can only be submitted on or before the second Friday of the month.");
-                return; // Exit the method if the date is invalid
+                return;
             } else {
-                // Initialize dependencies
+
                 String employeeInfoFile = "EmployeeInfo.csv";
                 String salaryScalesFile = "FulltimeSalaryScales.csv";
 
@@ -320,12 +308,10 @@ public class LoginSystem {
                     FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader(salaryScalesFile);
                     PaySlipWriter writer = new PaySlipWriter("PayClaim.csv");
 
-                    // Initialize PaySlipCalculator
                     PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, writer);
 
-                    // Call the submit pay-claim method
                     calculator.submitPayClaim(employee.getUsername(), employeeReader);
-                    return; // Exit after successfully handling the pay-claim
+                    return;
                 } catch (IOException e) {
                     System.err.println("Error during pay claim submission: " + e.getMessage());
                 }
@@ -348,16 +334,8 @@ public class LoginSystem {
      * @return the LocalDate representing the second Friday
      */
     private LocalDate getSecondFriday(LocalDate date) {
-        // Get the first day of the current month
         LocalDate firstDayOfMonth = date.withDayOfMonth(1);
-
-        // Find the first Friday of the month
         LocalDate firstFriday = firstDayOfMonth.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY));
-
-        // Add 7 days to the first Friday to get the second Friday
         return firstFriday.plusDays(7);
     }
-
-
-
 }

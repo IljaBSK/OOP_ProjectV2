@@ -26,16 +26,13 @@ public class FulltimeSalaryScalesReader {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
-            // Skip the header row
             reader.readLine();
 
-            // Read each line in the file
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                // Validate and match the job title and scale point
                 if (fields[0].trim().equals(jobTitle) && fields[1].trim().equals(scalePoint)) {
-                    return Double.parseDouble(fields[2].trim()); // Salary is in column 3
+                    return Double.parseDouble(fields[2].trim());
                 }
             }
         }
@@ -59,25 +56,17 @@ public class FulltimeSalaryScalesReader {
     public double getHourlyRate(String jobTitle, int scalePoint) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-
-            // Skip the header row
             reader.readLine();
 
-            // Read through each line to find the job title
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                // Check if the job title matches
                 if (fields.length >= 3 && fields[0].trim().equalsIgnoreCase(jobTitle)) {
-                    // Parse the salary and calculate the hourly rate
                     double annualSalary = Double.parseDouble(fields[2].trim());
-                    return annualSalary / 2080; // Divide by 2080 working hours in a year
+                    return annualSalary / 2080;
                 }
             }
         }
-
-        // Return 0.0 if the job title is not found
         return 0.0;
     }
-
 }

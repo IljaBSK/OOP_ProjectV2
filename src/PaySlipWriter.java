@@ -13,12 +13,8 @@ public class PaySlipWriter {
         this.filePath = filePath;
     }
 
-
-
     public void writePayslip(String[] payslipData, LocalDate today) throws IOException {
         boolean fileExists = Files.exists(Paths.get(filePath));
-
-
 
         DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
 
@@ -28,14 +24,11 @@ public class PaySlipWriter {
                 writer.write("id,name,date,jobTitle,scalePoint,grossSalary,incomeTax,prsi,usc,unionFee,netSalary\n");
             }
 
-
             for (int i = 5; i <= 10; i++) {
                 payslipData[i] = String.valueOf(Double.parseDouble(payslipData[i]));
             }
 
-
             payslipData[2] = today.format(monthYearFormatter);
-
 
             String line = String.join(",", payslipData);
             writer.write(line + "\n");
@@ -44,9 +37,4 @@ public class PaySlipWriter {
             throw new IOException("Error writing payslip for ID: " + payslipData[0], e);
         }
     }
-
-
-
-
-
 }
