@@ -18,10 +18,6 @@ public class PaySlipCalculator {
         this.writer = writer;
     }
 
-
-
-
-
     /**
      * Calculates the payslip for a full-time employee based on their annual salary,
      * then writes the generated payslip data to a file.

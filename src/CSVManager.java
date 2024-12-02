@@ -169,7 +169,6 @@ public class CSVManager {
      * it updates the corresponding fields and writes the changes back to the file.</p>
      *
      * @param employee the employee whose details need to be updated
-     * @param promotionFlag the promotion flag value to set (e.g., 1 for pending, 0 for none)
      * @throws IOException if an error occurs while reading or writing the file
      */
     public static void updateEmployeeDetails(Employee employee) {
@@ -346,42 +345,7 @@ public class CSVManager {
         }
         return employeeData;
     }
-    /**
-     * Reads employee information from the "EmployeeInfo.csv" file.
-     *
-     * <p>This method reads all the rows from the CSV file, skipping the header row,
-     * and returns a list of string arrays where each array represents an employee's record.</p>
-     *
-     * @return a list of string arrays, where each array contains the data of one employee
-     * @throws IOException if an error occurs while reading the file
-     */
-    public static void updatePromotionFlag(int employeeId, int flag) {
-        List<String> lines = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] details = line.split(",");
-
-                if (details[0].trim().equals(String.valueOf(employeeId))) {
-                    details[8] = String.valueOf(flag); // Reset the promotion flag
-                }
-
-                lines.add(String.join(",", details));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: EmployeeInfo.csv", e);
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("EmployeeInfo.csv"))) {
-            for (String updatedLine : lines) {
-                writer.write(updatedLine);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to the file: EmployeeInfo.csv", e);
-        }
-    }
     /**
      * Updates the promotion flag of an employee in the "EmployeeInfo.csv" file.
      *
