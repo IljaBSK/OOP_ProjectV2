@@ -1,12 +1,11 @@
 import java.io.*;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PaySlipCalculator {
-    private FulltimeSalaryScalesReader salaryReader; // Reads salary data
-    private PaySlipWriter writer; // Writes payslip data to file
+    private FulltimeSalaryScalesReader salaryReader;
+    private PaySlipWriter writer;
 
     /**
      * Constructor to initialize Salary Reader and Payslip Writer.
@@ -19,68 +18,112 @@ public class PaySlipCalculator {
         this.writer = writer;
     }
 
+
+
+
+
     /**
-     * Calculates and writes a payslip for an employee.
+     * Calculates the payslip for a full-time employee based on their annual salary,
+     * then writes the generated payslip data to a file.
      *
-     * @param employeeReader The reader for EmployeeInfo.csv.
-     * @param today
-     * @return The net salary of the employee.
+     *
+     *
+     * @param username The username of the full-time employee.
+     * @param employeeReader The reader used to fetch employee details from EmployeeInfo.csv.
+     * @param today The current date for payslip generation.
+     * @throws IOException If an error occurs while fetching employee data or writing the payslip data to the file.
+     */
+
+    public void calculateAndWritePayslip(String username, EmployeeInfoReader employeeReader, LocalDate today) throws IOException {
+        String[] employeeData = employeeReader.getEmployeeDataByUsername(username);
+
+        if (employeeData == null) {
+            throw new IOException("Employee with username " + username + " not found.");
+        }
+
+        String employeeId = employeeData[0].trim();
+        String name = employeeData[2].trim();
+        String jobTitle = employeeData[6].trim();
+        String scalePoint = employeeData[7].trim();
+        double annualSalary = salaryReader.getSalary(jobTitle, String.valueOf(Integer.parseInt(scalePoint)));
+        double grossPay = annualSalary / 12;
+
+        double incomeTax = calculateIncomeTax(grossPay);
+        double prsi = calculatePRSI(grossPay);
+        double usc = calculateUSC(grossPay);
+        double unionFee = grossPay * 0.08;
+        double totalDeductions = incomeTax + prsi + usc + unionFee;
+        double netPay = grossPay - totalDeductions;
+
+        String[] payslipData = {
+                employeeId,
+                name,
+                today.toString(),
+                jobTitle,
+                scalePoint,
+                String.format("%.2f", grossPay),
+                String.format("%.2f", incomeTax),
+                String.format("%.2f", prsi),
+                String.format("%.2f", usc),
+                String.format("%.2f", unionFee),
+                String.format("%.2f", netPay)
+        };
+
+        writer.writePayslip(payslipData);
+    }
+
+
+
+
+    /**
+     * Calculates the payslip for a part-time employee based on hours worked and hourly pay,
+     * then writes the generated payslip data to a file.
+     *
+     * @param employeeId The unique ID of the employee.
+     * @param name The name of the employee.
+     * @param hoursWorked The total hours worked by the employee.
+     * @param hourlyPay The hourly pay rate for the employee.
+     * @param claimDate The date of the pay claim.
+     * @param today The current date for payslip generation.
+     * @throws IOException If an error occurs while writing the payslip data to the file.
      */
 
 
+    public void calculateAndWritePartTimePayslip(String employeeId, String name, double hoursWorked, double hourlyPay, LocalDate claimDate, LocalDate today) throws IOException {
 
-    public double calculateAndWritePayslip(String username, EmployeeInfoReader employeeReader, LocalDate today) {
-        try {
-            // Step 1: Get employee details by username
-            String[] employeeData = employeeReader.getEmployeeDataByUsername(username);
+        double grossPay = hoursWorked * hourlyPay;
+        double incomeTax = calculateIncomeTax(grossPay);
+        double prsi = calculatePRSI(grossPay);
+        double usc = calculateUSC(grossPay);
+        double unionFee = grossPay * 0.08;
+        double totalDeductions = incomeTax + prsi + usc + unionFee;
+        double netPay = grossPay - totalDeductions;
 
-            if (employeeData == null) {
-                throw new IOException("Employee with username " + username + " not found.");
-            }
 
-            String employeeId = employeeData[0].trim(); // Assuming ID is in the first column
-            String name = employeeData[2].trim();      // Assuming name is in the third column
-            String jobTitle = employeeData[6].trim(); // Assuming job title is in the 7th column
-            String scalePoint = employeeData[7].trim(); // Assuming scale point is in the 8th column
+        String[] payslipData = {
+                employeeId,
+                name,
+                claimDate.toString(),
+                String.format("%.2f", hoursWorked),
+                String.format("%.2f", hourlyPay),
+                String.format("%.2f", grossPay),
+                String.format("%.2f", incomeTax),
+                String.format("%.2f", prsi),
+                String.format("%.2f", usc),
+                String.format("%.2f", unionFee),
+                String.format("%.2f", netPay)
+        };
 
-            // Step 2: Get gross salary from FulltimeSalaryScales.csv
-            double grossSalary = salaryReader.getSalary(jobTitle, scalePoint);
-            double grossPay = grossSalary / 12; // Divide salary for monthly payslips
 
-            // Step 3: Calculate deductions
-            double incomeTax = calculateIncomeTax(grossPay);
-            double prsi = calculatePRSI(grossPay);
-            double usc = calculateUSC(grossPay);
-            double unionFee = grossPay * 0.08; // 8% union fee
-            double totalDeductions = incomeTax + prsi + usc + unionFee;
-            double netPay = grossPay - totalDeductions;
-
-            // Step 4: Prepare payslip data
-            String[] payslipData = {
-                    employeeId,
-                    name,
-                    today.toString(),
-                    jobTitle,
-                    scalePoint,
-                    String.format("%.2f", grossPay), // Format to 2 decimal places
-                    String.format("%.2f", incomeTax),
-                    String.format("%.2f", prsi),
-                    String.format("%.2f", usc),
-                    String.format("%.2f", unionFee),
-                    String.format("%.2f", netPay)
-            };
-
-            // Step 5: Write payslip to PaySlips.csv
-            writer.writePayslip(payslipData, today);
-
-            System.out.println("Payslip successfully generated for username: " + username);
-            return netPay;
-
-        } catch (IOException e) {
-            System.err.println("Error processing payslip for username " + username + ": " + e.getMessage());
-            return 0.0;
-        }
+        writer.writePayslip(payslipData);
     }
+
+
+
+
+
+
+
 
 
     /**
@@ -137,6 +180,7 @@ public class PaySlipCalculator {
      * @throws IOException if an error occurs while reading or writing files
      */
     public void submitPayClaim(String username, EmployeeInfoReader employeeReader) throws IOException {
+
         String jobTitle = employeeReader.getJobTitleByUsername(username);
         String scalePointStr = employeeReader.getScalePointForPartTime(username);
 
@@ -160,6 +204,7 @@ public class PaySlipCalculator {
             return;
         }
 
+
         double hourlyRate = salaryReader.getHourlyRate(jobTitle, scalePoint);
         if (hourlyRate <= 0) {
             System.out.println("Hourly rate not found for job title: " + jobTitle + " and scale point: " + scalePoint);
@@ -169,6 +214,7 @@ public class PaySlipCalculator {
         System.out.println("Your job title is: " + jobTitle);
         System.out.println("Your scale point is: " + scalePoint);
         System.out.println("Your hourly rate is: €" + hourlyRate);
+
 
         Scanner input = new Scanner(System.in);
         int hoursWorked = -1;
@@ -185,10 +231,13 @@ public class PaySlipCalculator {
             }
         }
 
+
         double totalPay = hoursWorked * hourlyRate;
+
 
         System.out.printf("Pay Claim Summary:\nDate: %s\nHours Worked: %d\nHourly Rate: %.2f\nTotal Pay: %.2f\n",
                 today, hoursWorked, hourlyRate, totalPay);
+
 
         try (BufferedWriter claimWriter = new BufferedWriter(new FileWriter("PayClaims.csv", true))) {
             String record = String.format("%s,%s,%d,%.2f,%.2f,%d", username, today, hoursWorked, hourlyRate, totalPay, scalePoint);
@@ -200,4 +249,10 @@ public class PaySlipCalculator {
             throw e;
         }
     }
+
+
+
 }
+
+
+

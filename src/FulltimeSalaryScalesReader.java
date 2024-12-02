@@ -56,17 +56,33 @@ public class FulltimeSalaryScalesReader {
     public double getHourlyRate(String jobTitle, int scalePoint) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+
+
             reader.readLine();
+
 
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                if (fields.length >= 3 && fields[0].trim().equalsIgnoreCase(jobTitle)) {
-                    double annualSalary = Double.parseDouble(fields[2].trim());
-                    return annualSalary / 2080;
+                if (fields.length >= 3) {
+                    String currentJobTitle = fields[0].trim();
+                    int currentScalePoint = Integer.parseInt(fields[1].trim());
+
+
+                    if (currentJobTitle.equalsIgnoreCase(jobTitle) && currentScalePoint == scalePoint) {
+
+                        double annualSalary = Double.parseDouble(fields[2].trim());
+                        return annualSalary / 2080;
+                    }
                 }
             }
         }
+
+
+        System.err.println("No match found for jobTitle: " + jobTitle + " and scalePoint: " + scalePoint);
         return 0.0;
     }
+
+
 }
+
