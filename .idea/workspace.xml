@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment=" Payslips can only be submitted once a month now">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PaySlipCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipCalculator.java" afterDir="false" />
-    </list>
+    <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="Got rid of class with no usages" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -160,7 +157,31 @@
       <option name="project" value="LOCAL" />
       <updated>1733110580105</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Trying to fix the code">
+      <option name="closed" value="true" />
+      <created>1733112195657</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733112195657</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Removing it">
+      <option name="closed" value="true" />
+      <created>1733112902269</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733112902269</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Got rid of class with no usages">
+      <option name="closed" value="true" />
+      <created>1733112978369</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733112978369</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +195,9 @@
     <MESSAGE value="IT WORKED : TESTING ONE MORE TIME TO MAKE SURE ITS WORKING" />
     <MESSAGE value="Got view payslips back lol" />
     <MESSAGE value=" Payslips can only be submitted once a month now" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Payslips can only be submitted once a month now" />
+    <MESSAGE value="Trying to fix the code" />
+    <MESSAGE value="Removing it" />
+    <MESSAGE value="Got rid of class with no usages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got rid of class with no usages" />
   </component>
 </project>
