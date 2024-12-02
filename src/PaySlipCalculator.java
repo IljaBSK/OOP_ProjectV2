@@ -143,28 +143,6 @@ public class PaySlipCalculator {
 
         LocalDate today = LocalDate.now();
 
-        YearMonth currentMonth = YearMonth.from(today);
-        try (BufferedReader reader = new BufferedReader(new FileReader("PayClaims.csv"))) {
-            String line;
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] record = line.split(",");
-                if (record.length >= 2) {
-                    String recordUsername = record[0].trim();
-                    LocalDate recordDate = LocalDate.parse(record[1].trim());
-
-                    if (recordUsername.equals(username) && YearMonth.from(recordDate).equals(currentMonth)) {
-                        System.out.println("Pay claim for this month already exists for username: " + username);
-                        return;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading PayClaims.csv: " + e.getMessage());
-            throw e;
-        }
-
-
         if (jobTitle == null || jobTitle.isEmpty()) {
             System.out.println("Job title not found for username: " + username);
             return;
@@ -194,7 +172,29 @@ public class PaySlipCalculator {
         System.out.println("Your scale point is: " + scalePoint);
         System.out.println("Your hourly rate is: €" + hourlyRate);
 
-        // Step 3: Prompt for hours worked with validation
+        // Step 3: Check for existing pay claim for the current month
+        YearMonth currentMonth = YearMonth.from(today);
+        try (BufferedReader reader = new BufferedReader(new FileReader("PayClaims.csv"))) {
+            String line;
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split(",");
+                if (record.length >= 2) {
+                    String recordUsername = record[0].trim();
+                    LocalDate recordDate = LocalDate.parse(record[1].trim());
+
+                    if (recordUsername.equals(username) && YearMonth.from(recordDate).equals(currentMonth)) {
+                        System.out.println("Pay claim for this month already exists for username: " + username);
+                        return;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading PayClaims.csv: " + e.getMessage());
+            throw e;
+        }
+
+        // Step 4: Prompt for hours worked with validation
         Scanner input = new Scanner(System.in);
         int hoursWorked = -1;
         while (hoursWorked < 0 || hoursWorked > 160) {
@@ -210,14 +210,14 @@ public class PaySlipCalculator {
             }
         }
 
-        // Step 4: Calculate total pay
+        // Step 5: Calculate total pay
         double totalPay = hoursWorked * hourlyRate;
 
-        // Step 5: Display pay claim summary
+        // Step 6: Display pay claim summary
         System.out.printf("Pay Claim Summary:\nDate: %s\nHours Worked: %d\nHourly Rate: %.2f\nTotal Pay: %.2f\n",
                 today, hoursWorked, hourlyRate, totalPay);
 
-        // Step 6: Append the claim to PayClaims.csv
+        // Step 7: Append the claim to PayClaims.csv
         try (BufferedWriter claimWriter = new BufferedWriter(new FileWriter("PayClaims.csv", true))) {
             String record = String.format("%s,%s,%d,%.2f,%.2f,%d", username, today, hoursWorked, hourlyRate, totalPay, scalePoint);
             claimWriter.write(record);
@@ -228,6 +228,7 @@ public class PaySlipCalculator {
             throw e;
         }
     }
+
 
 
 }
