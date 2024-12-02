@@ -32,8 +32,16 @@ public class Admin extends User {
         Scanner scanner = new Scanner(System.in); // Create a scanner to take input from the user
         String flag = "0";
         // Collect Login Information
-        System.out.println("Enter Username: ");
-        String username = scanner.nextLine();
+        String username;
+        while (true) {
+            System.out.println("Enter Username: ");
+            username = scanner.nextLine();
+            if (isUniqueUsername(username)) {
+                break; // Exit the loop if the username is unique
+            } else {
+                System.out.println("Username already exists. Please enter a unique username.");
+            }
+        }
 
         System.out.println("Enter Password: ");
         String password = scanner.nextLine();
@@ -333,6 +341,19 @@ public class Admin extends User {
         return true; // ID is unique
     }
 
-
+    private boolean isUniqueUsername(String username) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("EmployeeInfo.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length > 1 && parts[1].equals(username)) { // Check if the username exists
+                    return false; // Username already exists
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading EmployeeInfo.csv: " + e.getMessage());
+        }
+        return true; // Username is unique
+    }
 }
 
