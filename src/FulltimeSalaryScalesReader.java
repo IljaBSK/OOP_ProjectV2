@@ -50,12 +50,13 @@ public class FulltimeSalaryScalesReader {
      * job title. It calculates the hourly rate by dividing the annual salary by 2080
      * (the typical number of working hours in a year).</p>
      *
-     * @param jobTitle the job title for which to retrieve the hourly rate
+     * @param jobTitle   the job title for which to retrieve the hourly rate
+     * @param scalePoint
      * @return the calculated hourly rate, or <code>0.0</code> if the job title is not found
-     * @throws IOException if an error occurs while reading the file
+     * @throws IOException           if an error occurs while reading the file
      * @throws NumberFormatException if the salary field cannot be parsed as a double
      */
-    public double getHourlyRate(String jobTitle) throws IOException {
+    public double getHourlyRate(String jobTitle, int scalePoint) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 

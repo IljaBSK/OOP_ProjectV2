@@ -4,7 +4,11 @@ import java.io.IOException;
 
 public class EmployeeInfoReader {
     private String filePath;
-
+    private static final int ID_INDEX = 0;
+    private static final int USERNAME_INDEX = 1;
+    private static final int JOB_TITLE_INDEX = 6;
+    private static final int SCALE_POINT_INDEX = 7;
+    private static final int NAME_INDEX = 2;
     /**
      * Constructor to initialize the path to the EmployeeInfo.csv file.
      *
@@ -24,22 +28,19 @@ public class EmployeeInfoReader {
     public String getJobTitle(String employeeId) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            reader.readLine(); // Skip the header
 
-            // Skip the header row
-            reader.readLine();
-
-            // Read each line in the file
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                // Check if the employee ID matches
-                if (fields[0].trim().equals(employeeId)) {
-                    return fields[5].trim(); // Job Title is in column 6
+                if (fields.length < SCALE_POINT_INDEX + 1) continue; // Ensure enough fields
+                if (fields[ID_INDEX].trim().equals(employeeId)) {
+                    return fields[JOB_TITLE_INDEX].trim();
                 }
             }
         }
 
-        throw new IOException("Employee with ID " + employeeId + " not found in EmployeeInfo.csv.");
+        throw new IOException("Employee with ID " + employeeId + " not found.");
     }
 
     /**
@@ -62,12 +63,30 @@ public class EmployeeInfoReader {
 
                 // Check if the employee ID matches
                 if (fields[0].trim().equals(employeeId)) {
-                    return fields[6].trim(); // Scale Point is in column 7
+                    return fields[7].trim(); // Scale Point is in column 7 (index 6 in the file)
                 }
             }
         }
 
         throw new IOException("Employee with ID " + employeeId + " not found in EmployeeInfo.csv.");
+    }
+
+    public String getName(String employeeId) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            reader.readLine(); // Skip the header
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                if (fields.length < NAME_INDEX + 1) continue; // Ensure enough fields
+                if (fields[ID_INDEX].trim().equals(employeeId)) {
+                    return fields[NAME_INDEX].trim();
+                }
+            }
+        }
+
+        throw new IOException("Employee with ID " + employeeId + " not found.");
     }
 
     /**
@@ -87,18 +106,38 @@ public class EmployeeInfoReader {
             // Skip the header row
             reader.readLine();
 
-            // Search for the username
+            // Read each line in the file
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                // Check if the username matches
+                // Match by username
                 if (fields[1].trim().equalsIgnoreCase(username)) {
-                    return fields[6].trim(); // Job Title is in column 7 (index 6)
+                    return fields[6].trim(); // Job title is in column 7
                 }
             }
         }
 
-        return null; // Return null if the username is not found
+        return null; // Return null if not found
     }
 
+    public String getScalePointForPartTime(String username) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            // Skip the header row
+            reader.readLine();
+
+            // Read each line in the file
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                // Match by username
+                if (fields[1].trim().equalsIgnoreCase(username)) {
+                    return fields[7].trim(); // Scale point is in column 8
+                }
+            }
+        }
+
+        return null; // Return null if not found
+    }
 }

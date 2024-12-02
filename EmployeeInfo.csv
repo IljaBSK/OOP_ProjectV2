@@ -1,7 +1,7 @@
-id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint
-23521,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,Skywalker,Senior Administrative Officer II,2,1
-24457,joe,Joe Biden,01-01-1950,12345678,joePW,Senior Administrative Officer III,4,0,,0
-23563,mikeit,Mike Jones,12/10/2000,412356V,calmy,Senior Administrative Officer III,8,0
-25213,sam,Sam Micheals,12/01/2002,241353G,gahdamn,Full Professor,1,0,Clinical Tutor,3
-25624,dezaremydudes,James Gray,30/05/2000,362478V,myguy,Associate Professor B,4,0,,0
-13456,samsmith,Sam Smith,31/12/1955,2135345G,wakanada,Full Professor,3,0
+id,username,name,dob,ppsNumber,password,jobTitle,scalePoint,pendingPromotionFlag,previousJobTitle,previousScalePoint,yearsAtTop
+23521,iljaBSK,Ilja Blosenko,31/12/2005,1411721V,Skywalker,Senior Administrative Officer II,9,1,null,null,0
+24457,joe,Joe Biden,01-01-1950,12345678,joePW,Senior Administrative Officer III,6,0,,0,5
+23563,mikeit,Mike Jones,12/10/2000,412356V,calmy,Senior Administrative Officer III,8,0,null,null,7
+25213,sam,Sam Micheals,12/01/2002,241353G,gahdamn,Full Professor,6,0,Clinical Tutor,3,2
+25624,dezaremydudes,James Gray,30/05/2000,362478V,myguy,Associate Professor B,9,0,,0,2
+13456,samsmith,Sam Smith,31/12/1955,2135345G,wakanada,Full Professor,6,0,null,null,4

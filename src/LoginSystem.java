@@ -1,16 +1,20 @@
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 public class LoginSystem {
     private HashMap<String, User> users;
     private HashMap<String, String> employeeStatuses;
+
     public LoginSystem() {
         users = CSVManager.readValidUsers();
         employeeStatuses = CSVManager.readEmployeeStatus();
 
     }
+
     /**
      * Handles the login functionality and system navigation.
      * <p>This method provides a login interface for different user roles (Admin, Employee, HR).
@@ -24,6 +28,7 @@ public class LoginSystem {
      *     <li>Handles user login for Admins, Employees (Full-Time and Part-Time), and HR roles.</li>
      *     <li>Performs role and password validation.</li>
      * </ul>
+     *
      * @throws IOException if an error occurs during salary scale updates or other file operations
      */
     public void loginFunction() {
@@ -33,15 +38,33 @@ public class LoginSystem {
         // Initialize the current date
         LocalDate today = LocalDate.now();
 
-        CSVManager CSVManger = new CSVManager();
+        CSVManager csvManager = new CSVManager();
 
         while (!loggedIn) {
+
+
+            if (today.getDayOfMonth() == 25) {
+                System.out.println("Sending payslips out...");
+                try {
+                    PaySlipGenerator generator = new PaySlipGenerator();
+                    generator.payslipGenerator();
+                } catch (Exception e) {
+                    System.err.println("Error while sending payslips: " + e.getMessage());
+                }
+            }
+
+
             // Display the current date and day of the week
             System.out.println("-------------------------------------------");
             System.out.println("       Welcome to the UL System");
             System.out.println("       Current Date: " + today + " (" + today.getDayOfWeek() + ")");
             System.out.println("-------------------------------------------");
             System.out.println("Enter D)ay, W)eek, or M)onth to move forward or press Enter to proceed with login:");
+
+
+
+
+
 
             // Get user input
             String command = input.nextLine().trim();
@@ -57,10 +80,11 @@ public class LoginSystem {
                 today = today.plusMonths(1);
 
                 // Check if it's October
-                if (today.getMonth() == Month.OCTOBER) {
+                if (today.getMonth() == Month.OCTOBER ) {
                     System.out.println("It's October! Updating everyone's salary scale...");
-                    CSVManager.updateSalaryScales();
+                    csvManager.updateSalaryScales();
                 }
+
             } else {
                 // Proceed with login
                 System.out.println("Select your role: A)dmin E)mployee H)R");
@@ -77,9 +101,7 @@ public class LoginSystem {
                             System.out.println("Login successful as Admin.");
                             this.adminLoggedIn((Admin) validUser);
                             loggedIn = true;
-                        }
-
-                        else if (roleCommand.equalsIgnoreCase("E") && validUser instanceof Employee) {
+                        } else if (roleCommand.equalsIgnoreCase("E") && validUser instanceof Employee) {
                             String status = employeeStatuses.getOrDefault(usernameIn, "Unknown");
                             if (status.equalsIgnoreCase("Full-Time")) {
                                 System.out.println("Login successful as Full-Time Employee.");
@@ -89,15 +111,13 @@ public class LoginSystem {
                             } else if (status.equalsIgnoreCase("Part-Time")) {
                                 System.out.println("Login successful as Part-Time Employee.");
                                 Employee employee = CSVManager.getEmployeeByUsername(validUser.getUsername());
-                                this.ParttimeemployeeLoggedIn((Employee) employee);
+                                this.ParttimeemployeeLoggedIn((Employee) employee, today);
+
                                 loggedIn = true;
                             } else {
                                 System.out.println("Unknown Employee Status. Please contact Admin.");
                             }
-                        }
-
-
-                            else if (roleCommand.equalsIgnoreCase("H") && validUser instanceof HR) {
+                        } else if (roleCommand.equalsIgnoreCase("H") && validUser instanceof HR) {
                             System.out.println("Login successful as HR.");
                             this.hrLoggedIn((HR) validUser);
                             loggedIn = true;
@@ -114,6 +134,7 @@ public class LoginSystem {
         }
         input.close();
     }
+
     /**
      * Handles the admin login process and presents the admin menu options.
      *
@@ -125,7 +146,7 @@ public class LoginSystem {
      *
      * @param adminUser the {@link Admin} object representing the logged-in admin
      */
-    public void adminLoggedIn(Admin adminUser){
+    public void adminLoggedIn(Admin adminUser) {
 
         System.out.println("-------------------------------------------");
         System.out.println("        Welcome to the UL Admin Menu       ");
@@ -137,12 +158,13 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
 
-        if(command.equalsIgnoreCase("C")){
-            adminUser.createEmployee("FullTimeSalaryScales.csv" );
-        }else if(command.equalsIgnoreCase("L")){
+        if (command.equalsIgnoreCase("C")) {
+            adminUser.createEmployee("FullTimeSalaryScales.csv");
+        } else if (command.equalsIgnoreCase("L")) {
 
         }
     }
+
     /**
      * Displays the HR menu for the logged-in HR user and handles user actions.
      *
@@ -153,7 +175,7 @@ public class LoginSystem {
      *
      * @param hrUser the logged-in HR user who will interact with the menu
      */
-    public void hrLoggedIn(HR hrUser){
+    public void hrLoggedIn(HR hrUser) {
 
         System.out.println("-------------------------------------------");
         System.out.println("        Welcome to the UL HR Menu       ");
@@ -165,12 +187,13 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
 
-        if(command.equalsIgnoreCase("P")){
+        if (command.equalsIgnoreCase("P")) {
             hrUser.promoteEmployee();
-        }else if(command.equalsIgnoreCase("L")){
+        } else if (command.equalsIgnoreCase("L")) {
 
         }
     }
+
     /**
      * Handles the menu and actions for a logged-in full-time employee.
      *
@@ -189,7 +212,7 @@ public class LoginSystem {
      */
     public void FulltimeemployeeLoggedIn(Employee employee) {
         System.out.println("----------------------------------------------");
-        System.out.println("  Welcome to the Full-time Employee Menu"      );
+        System.out.println("  Welcome to the Full-time Employee Menu");
         System.out.println("----------------------------------------------");
 
         // Fetch updated employee details from EmployeeInfo.csv
@@ -243,7 +266,9 @@ public class LoginSystem {
      *
      * @param employee the part-time employee who has logged in
      */
-    public void ParttimeemployeeLoggedIn(Employee employee) {
+
+
+    public void ParttimeemployeeLoggedIn(Employee employee, LocalDate today) {
         System.out.println("----------------------------------------------");
         System.out.println("   Welcome to the Part-time Employee Menu     ");
         System.out.println("----------------------------------------------");
@@ -251,8 +276,10 @@ public class LoginSystem {
         // Fetch updated employee details from EmployeeInfo.csv
         Employee updatedEmployee = CSVManager.getEmployeeByUsername(employee.getUsername());
 
+        // Handle pending promotions
         if (updatedEmployee != null && updatedEmployee.hasPendingPromotionFlag()) {
-            System.out.println("You have a pending promotion to: " + updatedEmployee.getJobTitle() + " (Scale Point: " + updatedEmployee.getScalePoint() + ")");
+            System.out.println("You have a pending promotion to: " + updatedEmployee.getJobTitle() +
+                    " (Scale Point: " + updatedEmployee.getScalePoint() + ")");
             System.out.println("Do you want to accept or reject the promotion?");
             System.out.println("A) Accept    R) Reject");
 
@@ -276,23 +303,32 @@ public class LoginSystem {
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim();
 
+        // Calculate the second Friday of the current month
+        LocalDate secondFriday = getSecondFriday(today);
+
         if (command.equalsIgnoreCase("S")) {
-            // Initialize dependencies
-            String employeeInfoFile = "EmployeeInfo.csv";
-            String salaryScalesFile = "FulltimeSalaryScales.csv";
+            if (today.isAfter(secondFriday)) {
+                System.out.println("Pay claims can only be submitted on or before the second Friday of the month.");
+                return; // Exit the method if the date is invalid
+            } else {
+                // Initialize dependencies
+                String employeeInfoFile = "EmployeeInfo.csv";
+                String salaryScalesFile = "FulltimeSalaryScales.csv";
 
-            try {
-                EmployeeInfoReader employeeReader = new EmployeeInfoReader(employeeInfoFile);
-                FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader(salaryScalesFile);
-                PaySlipWriter writer = new PaySlipWriter("PayClaim.csv");
+                try {
+                    EmployeeInfoReader employeeReader = new EmployeeInfoReader(employeeInfoFile);
+                    FulltimeSalaryScalesReader salaryReader = new FulltimeSalaryScalesReader(salaryScalesFile);
+                    PaySlipWriter writer = new PaySlipWriter("PayClaim.csv");
 
-                // Initialize PaySlipCalculator
-                PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, writer);
+                    // Initialize PaySlipCalculator
+                    PaySlipCalculator calculator = new PaySlipCalculator(salaryReader, writer);
 
-                // Call the submit pay claim method
-                calculator.submitPayClaim(employee.getUsername(), employeeReader);
-            } catch (IOException e) {
-                System.err.println("Error during pay claim submission: " + e.getMessage());
+                    // Call the submit pay-claim method
+                    calculator.submitPayClaim(employee.getUsername(), employeeReader);
+                    return; // Exit after successfully handling the pay-claim
+                } catch (IOException e) {
+                    System.err.println("Error during pay claim submission: " + e.getMessage());
+                }
             }
         } else if (command.equalsIgnoreCase("V")) {
             // View Payslips logic (not implemented yet)
@@ -302,6 +338,26 @@ public class LoginSystem {
         } else {
             System.out.println("Invalid option. Please try again.");
         }
+        input.close();
     }
+
+    /**
+     * Calculates the second Friday of the current month.
+     *
+     * @param date the current date
+     * @return the LocalDate representing the second Friday
+     */
+    private LocalDate getSecondFriday(LocalDate date) {
+        // Get the first day of the current month
+        LocalDate firstDayOfMonth = date.withDayOfMonth(1);
+
+        // Find the first Friday of the month
+        LocalDate firstFriday = firstDayOfMonth.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY));
+
+        // Add 7 days to the first Friday to get the second Friday
+        return firstFriday.plusDays(7);
+    }
+
+
 
 }
