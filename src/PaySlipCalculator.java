@@ -1,7 +1,6 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -142,6 +141,30 @@ public class PaySlipCalculator {
         String jobTitle = employeeReader.getJobTitleByUsername(username);
         String scalePointStr = employeeReader.getScalePointForPartTime(username);
 
+        LocalDate today = LocalDate.now();
+
+        YearMonth currentMonth = YearMonth.from(today);
+        try (BufferedReader reader = new BufferedReader(new FileReader("PayClaims.csv"))) {
+            String line;
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split(",");
+                if (record.length >= 2) {
+                    String recordUsername = record[0].trim();
+                    LocalDate recordDate = LocalDate.parse(record[1].trim());
+
+                    if (recordUsername.equals(username) && YearMonth.from(recordDate).equals(currentMonth)) {
+                        System.out.println("Pay claim for this month already exists for username: " + username);
+                        return;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading PayClaims.csv: " + e.getMessage());
+            throw e;
+        }
+
+
         if (jobTitle == null || jobTitle.isEmpty()) {
             System.out.println("Job title not found for username: " + username);
             return;
@@ -189,7 +212,6 @@ public class PaySlipCalculator {
 
         // Step 4: Calculate total pay
         double totalPay = hoursWorked * hourlyRate;
-        LocalDate today = LocalDate.now();
 
         // Step 5: Display pay claim summary
         System.out.printf("Pay Claim Summary:\nDate: %s\nHours Worked: %d\nHourly Rate: %.2f\nTotal Pay: %.2f\n",

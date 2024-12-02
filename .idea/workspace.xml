@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5f87640-7b81-40cf-8f39-405108a9a8d3" name="Changes" comment="Got view payslips back lol">
-      <change beforePath="$PROJECT_DIR$/src/LoginSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PaySlipCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PaySlipCalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +29,12 @@
     &quot;assignee&quot;: &quot;BriEnright&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IljaBSK/OOP_ProjectV2.git&quot;,
-    &quot;accountId&quot;: &quot;a8d251c6-9856-4993-b866-d0e541dc1921&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IljaBSK/OOP_ProjectV2",
+    "accountId": "8ca0b801-ff71-4f0d-bde0-a4d54576fd7a"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
