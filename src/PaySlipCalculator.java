@@ -172,28 +172,6 @@ public class PaySlipCalculator {
         System.out.println("Your scale point is: " + scalePoint);
         System.out.println("Your hourly rate is: €" + hourlyRate);
 
-        // Step 3: Check for existing pay claim for the current month
-        YearMonth currentMonth = YearMonth.from(today);
-        try (BufferedReader reader = new BufferedReader(new FileReader("PayClaims.csv"))) {
-            String line;
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] record = line.split(",");
-                if (record.length >= 2) {
-                    String recordUsername = record[0].trim();
-                    LocalDate recordDate = LocalDate.parse(record[1].trim());
-
-                    if (recordUsername.equals(username) && YearMonth.from(recordDate).equals(currentMonth)) {
-                        System.out.println("Pay claim for this month already exists for username: " + username);
-                        return;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading PayClaims.csv: " + e.getMessage());
-            throw e;
-        }
-
         // Step 4: Prompt for hours worked with validation
         Scanner input = new Scanner(System.in);
         int hoursWorked = -1;
